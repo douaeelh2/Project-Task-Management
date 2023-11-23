@@ -101,7 +101,7 @@ export function DashboardNavbar() {
               <MenuItem className="flex items-center gap-3">
                   <UserIcon className="h-5 w-5 text-blue-gray-500" />
                 <div>
-                <Link to="/dashboard/users/profile">
+                <Link to="/dashboard/profile">
                   <Typography
                     variant="small"
                     color="text-blue-gray-500"

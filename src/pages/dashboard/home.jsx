@@ -25,7 +25,7 @@ import { StatisticsChart } from "@/widgets/charts";
 import {
   statisticsCardsData,
   statisticsChartsData,
-  projectsTableData,
+  projectsTableDataDash,
   ordersOverviewData,
 } from "@/data";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon  } from "@heroicons/react/24/solid";
@@ -95,10 +95,10 @@ export function Home() {
                 </tr>
               </thead>
               <tbody>
-                {projectsTableData.map(
+                {projectsTableDataDash.map(
                   ({project, members, duration, status , manage }, key) => {
                     const className = `py-4 px-5 ${
-                      key === projectsTableData.length - 1
+                      key === projectsTableDataDash.length - 1
                         ? ""
                         : "border-b border-blue-gray-50"
                     }`;
