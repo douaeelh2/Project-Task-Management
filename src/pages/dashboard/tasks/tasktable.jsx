@@ -5,13 +5,8 @@ import {
   CardHeader,
   CardBody,
   IconButton,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
   Avatar,
   Tooltip,
-  Progress,
   Input,
   Chip,
   Button
@@ -25,7 +20,7 @@ import { StatisticsChart } from "@/widgets/charts";
 import {
   statisticsCardsData,
   statisticsChartsData,
-  projectsTableData,
+  tasksTableData,
   ordersOverviewData,
 } from "@/data";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon  } from "@heroicons/react/24/solid";
@@ -44,7 +39,7 @@ export function TaskTable() {
           >
             <div className="flex items-center justify-between gap-4">
               <Typography variant="h5" color="blue-gray" className="mb-1">
-                Projects Table
+                Tasks Table
               </Typography>
             </div>
             <div className="flex items-center justify-between mr-5 gap-4">
@@ -79,10 +74,10 @@ export function TaskTable() {
                 </tr>
               </thead>
               <tbody>
-                {projectsTableData.map(
+                {tasksTableData.map(
                   ({project, members, duration, status , manage }, key) => {
                     const className = `py-4 px-5 ${
-                      key === projectsTableData.length - 1
+                      key === tasksTableData.length - 1
                         ? ""
                         : "border-b border-blue-gray-50"
                     }`;

@@ -1,6 +1,7 @@
 export const projectsTableData = [
   {
     project: "Material XD Version",
+    category : "Web Development",
     members: [
       { img: "/img/team-1.jpeg", project: "Romina Hadid" },
       { img: "/img/team-2.jpeg", project: "Ryan Tompson" },
@@ -8,10 +9,11 @@ export const projectsTableData = [
       { img: "/img/team-4.jpeg", project: "Alexander Smith" },
     ],
     duration: "2 weeks",
-    status: false,
+    status: true,
   },
   {
     project: "Add Progress Track",
+    category : "Mobile Development",
     members: [
       { img: "/img/team-2.jpeg", project: "Ryan Tompson" },
       { img: "/img/team-4.jpeg", project: "Alexander Smith" },
@@ -21,15 +23,17 @@ export const projectsTableData = [
   },
   {
     project: "Fix Platform Errors",
+    category : "Software Development",
     members: [
       { img: "/img/team-3.jpeg", project: "Jessica Doe" },
       { img: "/img/team-1.jpeg", project: "Romina Hadid" },
     ],
     duration: "5 days",
-    status: false,
+    status: true,
   },
   {
     project: "Launch our Mobile App",
+    category : "Web Mobile Application",
     members: [
       { img: "/img/team-4.jpeg", project: "Alexander Smith" },
       { img: "/img/team-3.jpeg", project: "Jessica Doe" },
@@ -41,12 +45,14 @@ export const projectsTableData = [
   },
   {
     project: "Add the New Pricing Page",
+    category : "Networking and Security",
     members: [{ img: "/img/team-4.jpeg", project: "Alexander Smith" }],
     duration: "3 weeks",
-    status: false,
+    status: true,
   },
   {
     project: "Redesign New Online Shop",
+    category : "Artificial Intelligence",
     members: [
       { img: "/img/team-1.jpeg", project: "Romina Hadid" },
       { img: "/img/team-4.jpeg", project: "Alexander Smith" },

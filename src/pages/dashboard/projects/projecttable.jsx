@@ -5,13 +5,8 @@ import {
   CardHeader,
   CardBody,
   IconButton,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
   Avatar,
   Tooltip,
-  Progress,
   Input,
   Chip,
   Button
@@ -61,7 +56,7 @@ export function ProjectTable() {
           <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["Projects", "Members", "Duration", "Status" , "Show", "Edit", "Delete"].map(
+                  {["Projects","Category", "Members", "Duration", "Status" , "Show", "Edit", "Delete"].map(
                     (el) => (
                       <th
                         key={el}
@@ -80,7 +75,7 @@ export function ProjectTable() {
               </thead>
               <tbody>
                 {projectsTableData.map(
-                  ({project, members, duration, status , manage }, key) => {
+                  ({project, category , members, duration, status , manage }, key) => {
                     const className = `py-4 px-5 ${
                       key === projectsTableData.length - 1
                         ? ""
@@ -100,6 +95,15 @@ export function ProjectTable() {
                             </Typography>
                           </div>
                         </td>
+                        <td className={className}>
+                          <Typography
+                            variant="h4"
+                            className="text-xs font-medium text-blue-gray-600"
+                          >
+                            {category}
+                          </Typography>
+                        </td>
+                        
                         <td className={className}>
                           {members.map(({ img, name }, key) => (
                             <Tooltip key={project} content={project}>
