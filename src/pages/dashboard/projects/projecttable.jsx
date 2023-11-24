@@ -43,6 +43,13 @@ export function ProjectTable() {
               </Typography>
             </div>
             <div className="flex items-center justify-between mr-5 gap-4">
+            <Link to="../projects/create">
+              <Button variant="gradient" className="rounded-full">
+                Create New Project
+              </Button>
+            </Link>
+            </div>
+            <div className="flex items-center justify-between mr-5 gap-4">
             <Input label="Search By Name"/>
             <Link to=".">
                 <IconButton variant="gradient" color="black">
