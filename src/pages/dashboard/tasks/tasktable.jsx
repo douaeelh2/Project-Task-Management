@@ -43,14 +43,6 @@ export function TaskTable() {
               </Typography>
             </div>
             <div className="flex items-center justify-between mr-5 gap-4">
-
-            <Link to="../tasks/create">
-              < Button variant="gradient" className="rounded-full">
-                  Create New Task
-                </Button>
-            </Link>
-            </div>
-            <div className="flex items-center justify-between mr-5 gap-4">
             <Input label="Search By Name"/>
             <Link to=".">
                 <IconButton variant="gradient" color="black">
