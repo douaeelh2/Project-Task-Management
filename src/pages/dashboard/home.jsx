@@ -28,7 +28,7 @@ import {
   projectsTableDataDash,
   ordersOverviewData,
 } from "@/data";
-import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon  } from "@heroicons/react/24/solid";
+import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
 export function Home() {
@@ -76,7 +76,7 @@ export function Home() {
           <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["Projects", "Members", "Duration", "Status" , "Show", "Edit", "Delete"].map(
+                  {["Projects", "Members", "Duration", "Status" , "Manage"].map(
                     (el) => (
                       <th
                         key={el}
@@ -147,29 +147,59 @@ export function Home() {
                         />
                       </td>
                       <td className={className}>
-                        <Link to=".">
-                          <IconButton variant="text" color="blue-gray">
-                          <EyeIcon className="h-5 w-5 text-black" />
-                          </IconButton>
-                        </Link>
-                      
-                      </td>
-                      <td className={className}>
-                        <Link to=".">
-                          <IconButton variant="text" color="blue-gray">
-                          <PencilSquareIcon className="h-5 w-5 text-black" />
-                          </IconButton>
-                        </Link>
-                      
-                      </td>
-                      <td className={className}>
-                        <Link to=".">
-                          <IconButton variant="text" color="blue-gray">
-                          <TrashIcon className="h-5 w-5 text-black" />
-                          </IconButton>
-                        </Link>
-                      
-                      </td>
+                        
+                        <Menu placement="bottom">
+                          <MenuHandler>
+                            <IconButton variant="text" color="blue-gray">
+                              <Cog6ToothIcon className="h-5 w-5 text-blue-gray-500" />
+                            </IconButton>
+                          </MenuHandler>
+                          <MenuList className="w-max border-0">
+                            <MenuItem className="flex items-center gap-3">
+                                <EyeIcon className="h-5 w-5 text-blue-gray-500" />
+                              <div>
+                              <Link to="../projects/show">
+                                <Typography
+                                  variant="small"
+                                  color="text-blue-gray-500"
+                                  className="font-normal"
+                                >
+                                  Show
+                                </Typography>
+                              </Link>
+                              </div>
+                            </MenuItem>
+                            <MenuItem className="flex items-center gap-3">
+                                <PencilSquareIcon className="h-5 w-5 text-blue-gray-500" />
+                              <div>
+                              <Link to="../projects/edit">
+                                <Typography
+                                  variant="small"
+                                  color="text-blue-gray-500"
+                                  className="font-normal"
+                                >
+                                  Edit
+                                </Typography>
+                                </Link>
+                              </div>
+                            </MenuItem>
+                            <MenuItem className="flex items-center gap-3">
+                              <Link to=".">
+                                <TrashIcon className="h-5 w-5 text-blue-gray-500" />
+                              </Link>
+                              <div>
+                                <Typography
+                                  variant="small"
+                                  color="text-blue-gray-500"
+                                  className="font-normal"
+                                >
+                                  Delete
+                                </Typography>
+                              </div>
+                            </MenuItem>
+                          </MenuList>
+                        </Menu>
+                    </td>
                         
                       </tr>
                       
