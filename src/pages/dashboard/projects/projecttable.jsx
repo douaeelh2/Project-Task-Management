@@ -9,27 +9,35 @@ import {
   Tooltip,
   Input,
   Chip,
-  Button
+  Button,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+
 } from "@material-tailwind/react";
 import {
   EllipsisVerticalIcon,
   ArrowUpIcon,
 } from "@heroicons/react/24/outline";
-import { StatisticsCard } from "@/widgets/cards";
-import { StatisticsChart } from "@/widgets/charts";
 import {
-  statisticsCardsData,
-  statisticsChartsData,
   projectsTableData,
-  ordersOverviewData,
 } from "@/data";
-import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon  } from "@heroicons/react/24/solid";
+import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
 export function ProjectTable() {
   return (
 
       <div className="mt-12 mb-8 flex flex-col gap-12">
+        <div class="flex justify-end mr-5">
+          <Link to="../projects/create" class="ml-2">
+              <Button variant="gradient" color="black">
+                 + New Project 
+              </Button>
+          </Link>
+      </div>
+
         <Card>
           <CardHeader
             floated={false}
@@ -56,7 +64,7 @@ export function ProjectTable() {
           <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["Projects","Category", "Members", "Duration", "Status" , "Show", "Edit", "Delete"].map(
+                  {["Projects","Category", "Members", "Duration", "Status" , "Manage"].map(
                     (el) => (
                       <th
                         key={el}
@@ -136,28 +144,58 @@ export function ProjectTable() {
                         />
                       </td>
                       <td className={className}>
-                        <Link to=".">
-                          <IconButton variant="text" color="blue-gray">
-                          <EyeIcon className="h-5 w-5 text-black" />
-                          </IconButton>
-                        </Link>
-                      
-                      </td>
-                      <td className={className}>
-                        <Link to=".">
-                          <IconButton variant="text" color="blue-gray">
-                          <PencilSquareIcon className="h-5 w-5 text-black" />
-                          </IconButton>
-                        </Link>
-                      
-                      </td>
-                      <td className={className}>
-                        <Link to=".">
-                          <IconButton variant="text" color="blue-gray">
-                          <TrashIcon className="h-5 w-5 text-black" />
-                          </IconButton>
-                        </Link>
-                      
+                        
+                          <Menu placement="bottom">
+                            <MenuHandler>
+                              <IconButton variant="text" color="blue-gray">
+                                <Cog6ToothIcon className="h-5 w-5 text-blue-gray-500" />
+                              </IconButton>
+                            </MenuHandler>
+                            <MenuList className="w-max border-0">
+                              <MenuItem className="flex items-center gap-3">
+                                  <EyeIcon className="h-5 w-5 text-blue-gray-500" />
+                                <div>
+                                <Link to="../projects/show">
+                                  <Typography
+                                    variant="small"
+                                    color="text-blue-gray-500"
+                                    className="font-normal"
+                                  >
+                                    Show
+                                  </Typography>
+                                </Link>
+                                </div>
+                              </MenuItem>
+                              <MenuItem className="flex items-center gap-3">
+                                  <PencilSquareIcon className="h-5 w-5 text-blue-gray-500" />
+                                <div>
+                                <Link to="../projects/edit">
+                                  <Typography
+                                    variant="small"
+                                    color="text-blue-gray-500"
+                                    className="font-normal"
+                                  >
+                                    Edit
+                                  </Typography>
+                                  </Link>
+                                </div>
+                              </MenuItem>
+                              <MenuItem className="flex items-center gap-3">
+                                <Link to=".">
+                                  <TrashIcon className="h-5 w-5 text-blue-gray-500" />
+                                </Link>
+                                <div>
+                                  <Typography
+                                    variant="small"
+                                    color="text-blue-gray-500"
+                                    className="font-normal"
+                                  >
+                                    Delete
+                                  </Typography>
+                                </div>
+                              </MenuItem>
+                            </MenuList>
+                          </Menu>
                       </td>
                         
                       </tr>

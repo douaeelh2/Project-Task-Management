@@ -200,22 +200,7 @@ export function Home() {
           />
         ))}
       </div>
-      <Menu placement="start" className="w-10">
-                        <MenuHandler>
-                          <IconButton size="sm" variant="text" color="blue-gray">
-                            <EllipsisVerticalIcon
-                              strokeWidth={3}
-                              fill="currenColor"
-                              className="h-6 w-6"
-                            />
-                          </IconButton>
-                        </MenuHandler>
-                        <MenuList style={{ width: '200px', height: '150px' }}>
-                          <MenuItem>Show</MenuItem>
-                          <MenuItem>Edit</MenuItem>
-                          <MenuItem>Delete</MenuItem>
-                        </MenuList>
-                      </Menu>
+
     </div>
   );
 }

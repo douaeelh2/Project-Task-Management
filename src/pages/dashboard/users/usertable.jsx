@@ -5,26 +5,57 @@ import {
     Typography,
     Avatar,
     Chip,
-    Tooltip,
-    Progress,
+    IconButton,
+    Input,
+    Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Button
   } from "@material-tailwind/react";
-  import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
+  import {PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
   import { authorsTableData } from "@/data";
+
   
+  import { Link } from "react-router-dom";
+
   export function UserTable() {
     return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
+        <div class="flex justify-end mr-5">
+          <Link to="../users/create" class="ml-2">
+              <Button variant="gradient" color="black">
+                 + New User 
+              </Button>
+          </Link>
+      </div>
         <Card>
-          <CardHeader variant="gradient" color="gray" className="mb-8 p-6">
-            <Typography variant="h6" color="white">
-              Authors Table
-            </Typography>
+        <CardHeader
+            floated={false}
+            shadow={false}
+            color="transparent"
+            className="m-0 flex items-center justify-between p-6"
+          >
+            <div className="flex items-center justify-between gap-4">
+              <Typography variant="h5" color="blue-gray" className="mb-1">
+                Users Table
+              </Typography>
+            </div>
+            <div className="flex items-center justify-between mr-5 gap-4">
+            <Input label="Search By Name"/>
+            <Link to=".">
+                <IconButton variant="gradient" color="black">
+                  <MagnifyingGlassIcon className="h-5 w-5 text-white" />
+                </IconButton>
+            </Link>
+            </div>
+            
           </CardHeader>
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["author", "function", "status", "employed", ""].map((el) => (
+                  {["author","project","task","email", "employed", "manage"].map((el) => (
                     <th
                       key={el}
                       className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -41,7 +72,7 @@ import {
               </thead>
               <tbody>
                 {authorsTableData.map(
-                  ({ img, name, email, job, status, date }, key) => {
+                  ({ img, name , project , task, email, job, date }, key) => {
                     const className = `py-3 px-5 ${
                       key === authorsTableData.length - 1
                         ? ""
@@ -62,41 +93,75 @@ import {
                                 {name}
                               </Typography>
                               <Typography className="text-xs font-normal text-blue-gray-500">
-                                {email}
+                                {job}
                               </Typography>
                             </div>
                           </div>
                         </td>
                         <td className={className}>
-                          <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {job[0]}
+                          <Typography className="text-xs font-bold text-blue-gray-600">
+                            {project}
                           </Typography>
-                          <Typography className="text-xs font-normal text-blue-gray-500">
-                            {job[1]}
-                          </Typography>
+                          
                         </td>
                         <td className={className}>
-                          <Chip
-                            variant="gradient"
-                            color={status ? "green" : "blue-gray"}
-                            value={status ? "Completed" : "In Progress"}
-                            className="py-0.5 px-2 text-[11px] font-medium w-fit"
-                          />
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {task}
+                          </Typography>
+                          
                         </td>
+                        <td className={className}>
+                          <Typography className="text-xs font-semibold text-blue-gray-600">
+                            {email}
+                          </Typography>
+                          
+                        </td>
+                        
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
                             {date}
                           </Typography>
                         </td>
                         <td className={className}>
-                          <Typography
-                            as="a"
-                            href="#"
-                            className="text-xs font-semibold text-blue-gray-600"
-                          >
-                            Edit
-                          </Typography>
-                        </td>
+                          <Menu placement="bottom">
+                            <MenuHandler>
+                              <IconButton variant="text" color="blue-gray">
+                                <Cog6ToothIcon className="h-5 w-5 text-blue-gray-500" />
+                              </IconButton>
+                            </MenuHandler>
+                            <MenuList className="w-max border-0">
+                              <MenuItem className="flex items-center gap-3">
+                                  <EyeIcon className="h-5 w-5 text-blue-gray-500" />
+                                <div>
+                                <Link to="../users/show">
+                                  <Typography
+                                    variant="small"
+                                    color="text-blue-gray-500"
+                                    className="font-normal"
+                                  >
+                                    Show
+                                  </Typography>
+                                </Link>
+                                </div>
+                              </MenuItem>
+                              <MenuItem className="flex items-center gap-3">
+                                <Link to=".">
+                                  <TrashIcon className="h-5 w-5 text-blue-gray-500" />
+                                </Link>
+                                <div>
+                                  <Typography
+                                    variant="small"
+                                    color="text-blue-gray-500"
+                                    className="font-normal"
+                                  >
+                                    Delete
+                                  </Typography>
+                                </div>
+                              </MenuItem>
+                            </MenuList>
+                          </Menu>
+                      </td>
+                       
                       </tr>
                     );
                   }
