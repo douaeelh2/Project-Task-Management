@@ -6,6 +6,7 @@ import {
   Avatar,
   Typography,
   Tabs,
+  Input,
   TabsHeader,
   Tab,
   Switch,
@@ -26,6 +27,7 @@ export function Profile() {
   return (
     <>
       <div class="grid grid-cols-1 px-4 pt-6 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+
       <div class="col-span-full xl:col-auto">
         
           <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
@@ -35,8 +37,12 @@ export function Profile() {
                   </a>
                   <img class="relative mb-4 rounded-full w-48 h-48 sm:mb-0 xl:mb-4 2xl:mb-0" src="../img/home-decor-1.jpeg" alt="Jese picture"/>
                   <div class="text-center mt-6">
-                    <h5 class="text-center text-xl font-semibold">EL hassnaoui Salma</h5>
-                    <p class="font-14 text-gray-700">web web web</p>
+                  <Typography variant="h5" color="blue-gray" >
+                    EL HASSNAOUI Salma
+                </Typography>   
+                <Typography variant="paragraph" class="text-gray-700">
+                    weeeeeeeeeeeb
+                </Typography>                         
                   </div>
               </div>
           </div>
@@ -57,62 +63,171 @@ export function Profile() {
                   </div>
           </div>
       </div>
+
+
+
+
+
+      
       <div class="col-span-2">
-          <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-              <h3 class="mb-4 text-xl font-semibold dark:text-white">General information</h3>
+        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+            <Typography variant="h4" color="blue-gray" className="mb-4 ">
+                General information
+            </Typography>
               <form action="#">
                   <div class="grid grid-cols-6 gap-6">
-                      <div class="col-span-6 sm:col-span-3">
-                          <label for="first-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
-                          <input type="text" name="first-name" id="first-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Bonnie" required/>
-                      </div>
-                      <div class="col-span-6 sm:col-span-3">
-                          <label for="last-name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
-                          <input type="text" name="last-name" id="last-name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Green" required/>
-                      </div>
-                      <div class="col-span-6 sm:col-span-3">
-                          <label for="phone-number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
-                          <input type="tel" name="phone-number" id="phone-number" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="e.g. +(12)3456 789" required/>
-                      </div>
-                  </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
+                                First name
+                            </Typography>                           
+                            <Input
+                                    type="email"
+                                    placeholder="Email Address"
+                                    className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                    labelProps={{
+                                    className: "hidden",
+                                    }} 
+                                    containerProps={{ className: "min-w-[100px]" }}
+                            />    
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                            <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
+                                Last name
+                            </Typography>    
+                            <Input
+                                    type="lastname"
+                                    placeholder="EL HASSNAOUI"
+                                    className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                    labelProps={{
+                                    className: "hidden",
+                                    }} 
+                                    containerProps={{ className: "min-w-[100px]" }}
+                                />                      
+                        </div>
+
+                        <div class="col-span-6 sm:col-span-3">
+                                <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
+                                    Phone number
+                                </Typography>                              
+                                <Input
+                                        type="tel"
+                                        placeholder="phone number"
+                                        className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                        labelProps={{
+                                        className: "hidden",
+                                        }} 
+                                        containerProps={{ className: "min-w-[100px]" }}
+                                />                      
+                            </div>
+                    </div> 
               </form>
-          </div>
-          <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-              <h3 class="mb-4 text-xl font-semibold dark:text-white">Updating social media URLs</h3>
+        </div>
+        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+            <Typography variant="h4" color="blue-gray" className="mb-4 ">
+                Updating social media URLs
+            </Typography>
               <form action="#">
-                  <div class="grid grid-cols-6 gap-6">
-                      <div class="col-span-6 ">
-                          <label for="Instagram" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Instagram</label>
-                          <input type="text" name="Instagram" id="Instagram" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required/>
-                      </div>
-                      <div class="col-span-6 ">
-                          <label for="Facebook" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Facebook</label>
-                          <input type="text" name="Facebook" id="Facebook" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required/>
-                      </div>
-                      <div class="col-span-6 ">
-                          <label for="Github" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Github</label>
-                          <input type="text" name="Github" id="Github" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required/>
-                      </div>
+                    <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 ">
+                            <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
+                                Instagram
+                            </Typography>                              
+                            <Input
+                                    type="text"
+                                    placeholder="insta"
+                                    className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                    labelProps={{
+                                    className: "hidden",
+                                    }} 
+                                    containerProps={{ className: "min-w-[100px]" }}
+                            />                      
+                        </div>
+
+                        <div class="col-span-6 ">
+                            <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
+                                Facebook
+                            </Typography>                              
+                            <Input
+                                type="text"
+                                placeholder="face"
+                                className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                labelProps={{
+                                className: "hidden",
+                                }} 
+                                containerProps={{ className: "min-w-[100px]" }}
+                            />                       
+                        </div>
+
+                        <div class="col-span-6 ">
+                            <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
+                                Github
+                            </Typography>                              
+                            <Input
+                                type="text"
+                                placeholder="github"
+                                className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                labelProps={{
+                                className: "hidden",
+                                }} 
+                                containerProps={{ className: "min-w-[100px]" }}
+                            />                       
+                        </div>
                       
-                      <div class="col-span-6 ">
-                          <label for="Linkedin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Linkedin</label>
-                          <input type="text" name="Linkedin" id="Linkedin" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required/>
-                      </div>
-                  </div>
+                        <div class="col-span-6 ">
+                            <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
+                                LinkedIn
+                            </Typography>                              
+                            <Input
+                                    type="text"
+                                placeholder="linkedin"
+                                className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                labelProps={{
+                                className: "hidden",
+                                }} 
+                                containerProps={{ className: "min-w-[100px]" }}
+                            />                       
+                        </div>
+                    </div>
               </form>
-          </div>
-          <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-              <h3 class="mb-4 text-xl font-semibold dark:text-white">Password information</h3>
-              <form action="#">
-                  <div class="grid grid-cols-6 gap-6">
-                      <div class="col-span-6 sm:col-span-3">
-                          <label for="current-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Current password</label>
-                          <input type="text" name="current-password" id="current-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="••••••••" required/>
-                      </div>
-                      <div class="col-span-6 sm:col-span-3">
-                          <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">New password</label>
-                          <input data-popover-target="popover-password" data-popover-placement="bottom" type="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="••••••••" required/>
-                          <div data-popover id="popover-password" role="tooltip" class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
+        </div>
+        <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+            <Typography variant="h4" color="blue-gray" className="mb-4 ">
+              Password information
+            </Typography>
+            <form action="#">
+                <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-6 sm:col-span-3">
+                        <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
+                            Current password
+                        </Typography>                           
+                        <Input
+                                type="password"
+                                placeholder="current"
+                                className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                labelProps={{
+                                className: "hidden",
+                                }} 
+                                containerProps={{ className: "min-w-[100px]" }}
+                            />                       
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                      <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
+                            New password
+                        </Typography>                           
+                        <Input
+                                type="password"
+                                placeholder="new"
+                                className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                labelProps={{
+                                className: "hidden",
+                                }} 
+                                containerProps={{ className: "min-w-[100px]" }}
+                            />                           
+                            {/* messages d'erreur consernant le password */}
+                            <div data-popover id="popover-password" role="tooltip" class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
                               <div class="p-3 space-y-2">
                                   <h3 class="font-semibold text-gray-900 dark:text-white">Must have at least 6 characters</h3>
                                   <div class="grid grid-cols-4 gap-2">
@@ -139,22 +254,38 @@ export function Profile() {
                           </div>
                           <div data-popper-arrow></div>
                           </div>
-                      </div>
-                      <div class="col-span-6 sm:col-span-3">
-                          <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                          <input type="text" name="confirm-password" id="confirm-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="••••••••" required/>
-                      </div>
-                  </div>
-              </form>
-          </div>
-          <div class="col-span-6 sm:col-full ml-4 ">
+                          {/* fin messages d'erreur consernant password */}
+                    </div>
+
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
+                            Confirm password
+                        </Typography>                           
+                        <Input
+                                type="password"
+                                placeholder="confirm the new one"
+                                className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                labelProps={{
+                                className: "hidden",
+                                }} 
+                                containerProps={{ className: "min-w-[100px]" }}
+                            />                       
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        <div class="col-span-6 sm:col-full ml-4 ">
             <Button variant="gradient" color="black" >
-                  save changes 
+                Save changes 
             </Button>          
-          </div>
+        </div>
       </div>
     
 </div>
+
     </>
   );
 }
