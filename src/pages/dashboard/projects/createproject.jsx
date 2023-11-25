@@ -11,12 +11,6 @@ import {
   Button,
 } from "@material-tailwind/react";
 
-import {
-  statisticsCardsData,
-  statisticsChartsData,
-  projectsTableData,
-  ordersOverviewData,
-} from "@/data";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon  } from "@heroicons/react/24/solid";
 
 
@@ -38,7 +32,7 @@ export function CreateProject() {
             </div>
             
           </CardHeader>
-          <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+          <CardBody className="overflow px-0 pt-0 pb-2">
             <form className="mx-auto max-w-xl ">
               <div className="mb-1 flex flex-col gap-6">
                 <Typography variant="h4" color="blue-gray">
@@ -55,6 +49,15 @@ export function CreateProject() {
                     className: "before:content-none after:content-none",
                   }}
                 />
+                <Typography variant="h6" color="blue-gray" className="-mb-3">
+                  Category
+                </Typography>
+                <Select size="md" label="Catagory">
+                  <Option>Web Development</Option>
+                  <Option>Network Security</Option>
+                  <Option>Graphic Design</Option>
+                  <Option>Mobile Development</Option>
+                </Select>
                 <Typography variant="h6" color="blue-gray" className="-mb-3">
                   Start Date
                 </Typography>
