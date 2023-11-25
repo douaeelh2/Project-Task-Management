@@ -130,10 +130,10 @@ import {
                               </IconButton>
                             </MenuHandler>
                             <MenuList className="w-max border-0">
+                            <Link to="../users/show">
                               <MenuItem className="flex items-center gap-3">
                                   <EyeIcon className="h-5 w-5 text-blue-gray-500" />
                                 <div>
-                                <Link to="../users/show">
                                   <Typography
                                     variant="small"
                                     color="text-blue-gray-500"
@@ -141,13 +141,12 @@ import {
                                   >
                                     Show
                                   </Typography>
-                                </Link>
                                 </div>
                               </MenuItem>
+                              </Link>
+                              <Link to=".">
                               <MenuItem className="flex items-center gap-3">
-                                <Link to=".">
                                   <TrashIcon className="h-5 w-5 text-blue-gray-500" />
-                                </Link>
                                 <div>
                                   <Typography
                                     variant="small"
@@ -158,6 +157,7 @@ import {
                                   </Typography>
                                 </div>
                               </MenuItem>
+                              </Link>
                             </MenuList>
                           </Menu>
                       </td>

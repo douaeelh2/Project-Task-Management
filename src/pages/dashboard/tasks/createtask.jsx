@@ -29,22 +29,24 @@ export function CreateTask() {
           </CardHeader>
           <CardBody className="overflow px-0 pt-0 pb-2">
             <form className="mx-auto max-w-xl ">
-              <div className="mb-1 flex flex-col gap-6">
-                <Typography variant="h4" color="blue-gray">
-                  Enter Informations
-                </Typography>
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+            <div class="grid grid-cols-6 gap-6">
+
+              <div class="col-span-6 sm:col-span-3">
+                <Typography variant="h6" color="blue-gray" className="mb-3">
                   Name
                 </Typography>
                 <Input
-                  size="lg"
+                  size="sm"
                   placeholder="TaskName"
                   className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                   labelProps={{
                     className: "before:content-none after:content-none",
                   }}
                 />
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <Typography variant="h6" color="blue-gray" className="mb-3">
                   Project
                 </Typography>
                 <Select size="md" label="Select Project">
@@ -54,7 +56,11 @@ export function CreateTask() {
                   <Option>Poject 4 </Option>
                   <Option>Poject 5 </Option>
                 </Select>
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+              </div>
+
+
+              <div class="col-span-6 sm:col-span-3">
+                <Typography variant="h6" color="blue-gray" className="mb-3">
                   Start Date
                 </Typography>
                 <Input
@@ -66,7 +72,10 @@ export function CreateTask() {
                     className: "before:content-none after:content-none",
                   }}
                 />
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+              </div>
+              
+              <div class="col-span-6 sm:col-span-3">
+                <Typography variant="h6" color="blue-gray" className="mb-3">
                   End Date
                 </Typography>
                 <Input
@@ -78,7 +87,10 @@ export function CreateTask() {
                     className: "before:content-none after:content-none",
                   }}
                 />
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <Typography variant="h6" color="blue-gray" className="mb-3">
                   User
                 </Typography>
                 <Select size="md" label="Select User">
@@ -88,27 +100,32 @@ export function CreateTask() {
                   <Option>UESR 4 Angular</Option>
                   <Option>USER 5 Svelte</Option>
                 </Select>
-                <Typography variant="h6" color="blue-gray" className="-mb-3">
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <Typography variant="h6" color="blue-gray" className="mb-3">
                   Status
                 </Typography>
                 <Select size="md" label="Stauts">
                   <Option>Pending</Option>
                   <Option>Completed</Option>
-                  
                 </Select>
-              <Typography variant="h6" color="blue-gray" className="-mb-3">
-                  Description 
-              </Typography>             
-                <Textarea label="Message" />              
               </div>
-              <Button className="mt-6" fullWidth>
-                Create a new task
-              </Button>
-            </form>
-          </CardBody>
-        </Card>
-        
-      </div>
+
+            </div>
+            <Typography variant="h6" color="blue-gray" className="mb-3">
+                  Description 
+            </Typography>             
+            <Textarea label="Message" /> 
+            <div class="col-span-6 sm:col-full ml-4 mt-4 mb-4">
+              <Button variant="gradient" color="black" >
+              Create the new task
+              </Button>          
+            </div>
+          </form>
+        </CardBody>
+      </Card> 
+    </div>
   )
 }
 export default CreateTask;

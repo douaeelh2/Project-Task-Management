@@ -155,10 +155,10 @@ export function Home() {
                             </IconButton>
                           </MenuHandler>
                           <MenuList className="w-max border-0">
+                          <Link to="../projects/show">
                             <MenuItem className="flex items-center gap-3">
                                 <EyeIcon className="h-5 w-5 text-blue-gray-500" />
                               <div>
-                              <Link to="../projects/show">
                                 <Typography
                                   variant="small"
                                   color="text-blue-gray-500"
@@ -166,13 +166,14 @@ export function Home() {
                                 >
                                   Show
                                 </Typography>
-                              </Link>
                               </div>
                             </MenuItem>
+                            </Link>
+
+                            <Link to="../projects/edit">
                             <MenuItem className="flex items-center gap-3">
                                 <PencilSquareIcon className="h-5 w-5 text-blue-gray-500" />
                               <div>
-                              <Link to="../projects/edit">
                                 <Typography
                                   variant="small"
                                   color="text-blue-gray-500"
@@ -180,13 +181,12 @@ export function Home() {
                                 >
                                   Edit
                                 </Typography>
-                                </Link>
                               </div>
                             </MenuItem>
+                            </Link>
+                            <Link to=".">
                             <MenuItem className="flex items-center gap-3">
-                              <Link to=".">
                                 <TrashIcon className="h-5 w-5 text-blue-gray-500" />
-                              </Link>
                               <div>
                                 <Typography
                                   variant="small"
@@ -197,6 +197,7 @@ export function Home() {
                                 </Typography>
                               </div>
                             </MenuItem>
+                            </Link>
                           </MenuList>
                         </Menu>
                     </td>
