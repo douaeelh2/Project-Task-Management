@@ -152,48 +152,51 @@ export function ProjectTable() {
                               </IconButton>
                             </MenuHandler>
                             <MenuList className="w-max border-0">
-                              <MenuItem className="flex items-center gap-3">
-                                  <EyeIcon className="h-5 w-5 text-blue-gray-500" />
-                                <div>
                                 <Link to="../projects/show">
-                                  <Typography
-                                    variant="small"
-                                    color="text-blue-gray-500"
-                                    className="font-normal"
-                                  >
-                                    Show
-                                  </Typography>
+                                  <MenuItem className="flex items-center gap-3">
+                                      <EyeIcon className="h-5 w-5 text-blue-gray-500" />
+                                    <div>
+                                      <Typography
+                                        variant="small"
+                                        color="text-blue-gray-500"
+                                        className="font-normal"
+                                      >
+                                        Show
+                                      </Typography>
+                                    </div>
+                                  </MenuItem>
                                 </Link>
-                                </div>
-                              </MenuItem>
-                              <MenuItem className="flex items-center gap-3">
-                                  <PencilSquareIcon className="h-5 w-5 text-blue-gray-500" />
-                                <div>
+
                                 <Link to="../projects/edit">
-                                  <Typography
-                                    variant="small"
-                                    color="text-blue-gray-500"
-                                    className="font-normal"
-                                  >
-                                    Edit
-                                  </Typography>
-                                  </Link>
-                                </div>
-                              </MenuItem>
-                              <MenuItem className="flex items-center gap-3">
-                                <Link to=".">
-                                  <TrashIcon className="h-5 w-5 text-blue-gray-500" />
+                                <MenuItem className="flex items-center gap-3">
+                                    <PencilSquareIcon className="h-5 w-5 text-blue-gray-500" />
+                                    <div>
+                                      <Typography
+                                        variant="small"
+                                        color="text-blue-gray-500"
+                                        className="font-normal"
+                                      >
+                                        Edit
+                                      </Typography>
+                                    </div>
+                                </MenuItem>
                                 </Link>
-                                <div>
-                                  <Typography
-                                    variant="small"
-                                    color="text-blue-gray-500"
-                                    className="font-normal"
-                                  >
-                                    Delete
-                                  </Typography>
-                                </div>
-                              </MenuItem>
+
+                                <Link to=".">
+                                  <MenuItem className="flex items-center gap-3">
+                                      <TrashIcon className="h-5 w-5 text-blue-gray-500" />
+                                    <div>
+                                      <Typography
+                                        variant="small"
+                                        color="text-blue-gray-500"
+                                        className="font-normal"
+                                      >
+                                        Delete
+                                      </Typography>
+                                    </div>
+                                  </MenuItem>
+                                </Link>
+                                
                             </MenuList>
                           </Menu>
                       </td>
