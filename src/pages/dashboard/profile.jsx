@@ -77,7 +77,7 @@ export function Profile() {
                             <Input
                                     type="email"
                                     placeholder="Email Address"
-                                    className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                    className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                     labelProps={{
                                     className: "hidden",
                                     }} 
@@ -92,7 +92,7 @@ export function Profile() {
                             <Input
                                     type="lastname"
                                     placeholder="EL HASSNAOUI"
-                                    className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                    className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                     labelProps={{
                                     className: "hidden",
                                     }} 
@@ -107,7 +107,7 @@ export function Profile() {
                                 <Input
                                         type="tel"
                                         placeholder="phone number"
-                                        className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                        className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                         labelProps={{
                                         className: "hidden",
                                         }} 
@@ -130,7 +130,7 @@ export function Profile() {
                             <Input
                                     type="text"
                                     placeholder="insta"
-                                    className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                    className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                     labelProps={{
                                     className: "hidden",
                                     }} 
@@ -145,7 +145,7 @@ export function Profile() {
                             <Input
                                 type="text"
                                 placeholder="face"
-                                className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                 labelProps={{
                                 className: "hidden",
                                 }} 
@@ -160,7 +160,7 @@ export function Profile() {
                             <Input
                                 type="text"
                                 placeholder="github"
-                                className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                 labelProps={{
                                 className: "hidden",
                                 }} 
@@ -175,7 +175,7 @@ export function Profile() {
                             <Input
                                     type="text"
                                 placeholder="linkedin"
-                                className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                 labelProps={{
                                 className: "hidden",
                                 }} 
@@ -198,7 +198,7 @@ export function Profile() {
                         <Input
                                 type="password"
                                 placeholder="current"
-                                className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                className="!bg-gray-50 !border !border-gray-300 text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                 labelProps={{
                                 className: "hidden",
                                 }} 
@@ -213,7 +213,7 @@ export function Profile() {
                         <Input
                                 type="password"
                                 placeholder="new"
-                                className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                 labelProps={{
                                 className: "hidden",
                                 }} 
@@ -258,7 +258,7 @@ export function Profile() {
                         <Input
                                 type="password"
                                 placeholder="confirm the new one"
-                                className="!bg-gray-50 !border !border-gray-300 bg-white text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                 labelProps={{
                                 className: "hidden",
                                 }} 
