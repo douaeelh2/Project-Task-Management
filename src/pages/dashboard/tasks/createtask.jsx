@@ -27,7 +27,7 @@ export function CreateTask() {
             </div>
             
           </CardHeader>
-          <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+          <CardBody className="overflow px-0 pt-0 pb-2">
             <form className="mx-auto max-w-xl ">
             <div class="grid grid-cols-6 gap-6">
 

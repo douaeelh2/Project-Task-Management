@@ -36,7 +36,7 @@ export function ProjectTable() {
                  + New Project 
               </Button>
           </Link>
-      </div>
+        </div>
 
         <Card>
           <CardHeader
