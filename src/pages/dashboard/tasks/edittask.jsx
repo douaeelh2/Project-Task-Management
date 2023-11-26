@@ -13,7 +13,7 @@ import {
 
 export function EditTask() {
   return (
-<div className="mt-12 mb-8 flex flex-col gap-12">
+<div className="mt-10 mb-8 flex flex-col gap-12">
         <Card>
           <CardHeader
             floated={false}
@@ -23,7 +23,7 @@ export function EditTask() {
           >
             <div className="flex items-center justify-between gap-4">
               <Typography variant="h5" color="blue-gray" className="mb-1">
-              Edit the Task
+              Edit Task
               </Typography>
             </div>
             
@@ -34,7 +34,7 @@ export function EditTask() {
 
               <div class="col-span-6 sm:col-span-3">
                 <Typography variant="h6" color="blue-gray" className="mb-3">
-                  Name
+                  Task Name
                 </Typography>
                 <Input
                   size="sm"
@@ -120,7 +120,7 @@ export function EditTask() {
             <Textarea label="Message" /> 
             <div class="col-span-6 sm:col-full ml-4 mt-4 mb-4">
               <Button variant="gradient" color="black" >
-              Edit the task
+              Edit
               </Button>          
             </div>
           </form>
