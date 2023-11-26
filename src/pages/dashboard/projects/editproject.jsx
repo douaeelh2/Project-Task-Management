@@ -22,9 +22,8 @@ import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,Magnifyi
 
 export function EditProject() {
   return (
-    <div className="mt-12 mb-8 flex flex-col gap-12">
 
-    <div className="mt-12 mb-8 flex flex-col gap-12">
+    <div className="mt-10 mb-8 flex flex-col gap-12">
             <Card>
               <CardHeader
                 floated={false}
@@ -34,7 +33,7 @@ export function EditProject() {
               >
                 <div className="flex items-center justify-between gap-4">
                   <Typography variant="h5" color="blue-gray" className="mb-1">
-                  Edit The Project
+                  Edit Project
                   </Typography>
                 </div>
                 
@@ -45,7 +44,7 @@ export function EditProject() {
 
                   <div class="col-span-6 sm:col-span-3">
                     <Typography variant="h6" color="blue-gray" className="mb-3">
-                      Name of project
+                      Project Name
                     </Typography>
                     <Input
                       size="sm"
@@ -104,20 +103,18 @@ export function EditProject() {
                     </Typography>
                     <Select size="md" >
                       <Option>Pending</Option>
-                      <Option>Preparing</Option>
-                      <Option>Processing</Option>
                       <Option>Completed</Option>
                     </Select>
                   </div>
 
                 </div>
                 <Typography variant="h6" color="blue-gray" className="mb-3 mt-4">
-                      Description of the project
+                     Project Description
                 </Typography>             
                 <Textarea label="Message" /> 
                 <div class="col-span-6 sm:col-full ml-4 mt-4 mb-4">
                   <Button variant="gradient" color="black" >
-                    Edit the Project
+                    Edit
                   </Button>          
                 </div>
               </form>
@@ -125,7 +122,6 @@ export function EditProject() {
           </Card> 
     </div>
 
-    </div>
   )
 }
 
