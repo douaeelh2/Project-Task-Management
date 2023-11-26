@@ -41,15 +41,17 @@ export function ShowTask() {
       </CardHeader>
       <CardBody className="overflow px-0 pt-0 pb-2">
       <div class="flex flex-wrap mx-5 mb-5">
-        <ShowDetails title={"Task Name"} taskdata={TaskName} className="w-1/2 mb-1 p-1rem h-20 " /> 
-        <ShowDetails title={"Project"} taskdata={TaskProject} className="w-1/2 mb-1  p-1rem h-20 "/> 
-        <ShowDetails title={"Duration"} taskdata={TaskDuration} className="w-1/2 mb-1 p-1rem h-20 "/> 
-        <ShowDetails title={"Member"} taskdata={TaskUesr} className="w-1/2 p-1rem mb-1 h-20 "/> 
-        <ShowDetails title={"Desciption"} taskdata={TaskProject} className="w-full mb-1 p-1rem h-40 border-b-2 mb-2"/> 
-        <ShowDetails title={"CreatedBy"} taskdata={"CreatedBy"} className="w-1/4 mb-1 px-10 h-20"/>
-        <ShowDetails title={"UpdateBy"} taskdata={"UpdateBy"} className="w-1/4 mb-1 px-10 h-20"/>
-        <ShowDetails title={"CreatedAt"} taskdata={"CreatedAt"} className="w-1/4 mb-1 px-10 h-20"/>
-        <ShowDetails title={"UpdatedAt"} taskdata={"UpdatedAt"} className="w-1/4 mb-1 px-10 h-20"/>
+        <ShowDetails title={"Task Name"} taskdata={TaskName} className="w-1/2 my-2 px-10 min-h-20" /> 
+        <ShowDetails title={"Project"} taskdata={TaskProject} className="w-1/2 my-2 px-10 min-h-20"/> 
+        <ShowDetails title={"Duration"} taskdata={TaskDuration} className="w-1/2 my-2 px-10 min-h-20"/> 
+        <ShowDetails title={"Member"} taskdata={TaskUesr} className="w-1/2 my-2 px-10 min-h-20"/> 
+        <ShowDetails title={"Desciption"} taskdata={TaskProject} className="w-full my-2 pb-4 px-10 min-h-40 border-b-2 mb-2"/> 
+        <ul className='flex flex-wrap w-full justify-around p-1'>
+            <li className='flex flex-col my-2'><ShowDetails title={"CreatedBy"} taskdata={"CreatedBy"} className="w-1/4 my-2 px-10 min-h-20"/></li>
+            <li className='flex flex-col my-2'><ShowDetails title={"UpdateBy"} taskdata={"UpdateBy"} className="w-1/4 my-2 px-10 min-h-20"/></li>
+            <li className='flex flex-col my-2'><ShowDetails title={"CreatedAt"} taskdata={"CreatedAt"} className="w-1/4 my-2 px-5 min-h-20"/></li>
+            <li className='flex flex-col my-2'><ShowDetails title={"UpdatedAt"} taskdata={"UpdatedAt"} className="w-1/4 my-2 px-5 min-h-20"/></li>
+        </ul>
       </div>
       </CardBody>
     </Card>
