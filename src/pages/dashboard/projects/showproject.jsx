@@ -21,9 +21,9 @@ const ProjectName = projectItem.project;
 const Members = () => {
   return (
     <div className='w-full'>
-      <ul className='flex justify-between p-5'>
+      <ul className='flex flex-wrap justify-between p-1'>
         {projectItem.members.map(member => (
-          <li key={member.project} className='flex flex-col'>
+          <li key={member.project} className='flex flex-col my-2'>
             <Avatar
                   src={member.img} 
                   alt={member.project}
@@ -68,16 +68,18 @@ export function ShowProject() {
         </div>      
       </CardHeader>
       <CardBody className="overflow px-0 pt-0 pb-2">
-      <div class="flex flex-wrap mx-5 mb-5">
-        <ShowDetails title={"Project Name"} taskdata={ProjectName} className="w-1/2 mb-1 px-10 h-20" /> 
-        <ShowDetails title={"category"} taskdata={category} className="w-1/2 mb-1  px-10 h-20"/> 
-        <ShowDetails title={"Duration"} taskdata={duration} className="w-1/2 mb-1 px-10 h-20"/> 
-        <ShowDetails title={"Desciption"} taskdata={Desciption} className="w-full mb-1 px-10 h-40 border-b-2 mb-2"/> 
-        <ShowDetails title={"Team members"} taskdata={<Members />} className="w-full mb-1 px-10 h-40 border-b-2 mb-2"/> 
-        <ShowDetails title={"CreatedBy"} taskdata={"CreatedBy"} className="w-1/4 mb-1 px-10 h-20"/>
-        <ShowDetails title={"UpdateBy"} taskdata={"UpdateBy"} className="w-1/4 mb-1 px-10 h-20"/>
-        <ShowDetails title={"CreatedAt"} taskdata={"CreatedAt"} className="w-1/4 mb-1 px-10 h-20"/>
-        <ShowDetails title={"UpdatedAt"} taskdata={"UpdatedAt"} className="w-1/4 mb-1 px-10 h-20"/>
+      <div className="flex flex-wrap mx-5 mb-5">
+        <ShowDetails title={"Project Name"} taskdata={ProjectName} className="w-1/2 my-2 px-10 min-min-h-20" /> 
+        <ShowDetails title={"category"} taskdata={category} className="w-1/2 my-2 px-10 min-h-20"/> 
+        <ShowDetails title={"Duration"} taskdata={duration} className="w-1/2 my-2 px-10 min-h-20"/> 
+        <ShowDetails title={"Desciption"} taskdata={Desciption} className="w-full my-2 pb-4 px-10 min-h-40 border-b-2 mb-2"/> 
+        <ShowDetails title={"Team members"} taskdata={<Members />} className="w-full my-2 px-10 border-b-2 mb-2"/> 
+        <ul className='flex flex-wrap w-full justify-around p-1'>
+            <li className='flex flex-col my-2'><ShowDetails title={"CreatedBy"} taskdata={"CreatedBy"} className="w-1/4 my-2 px-10 min-h-20"/></li>
+            <li className='flex flex-col my-2'><ShowDetails title={"UpdateBy"} taskdata={"UpdateBy"} className="w-1/4 my-2 px-10 min-h-20"/></li>
+            <li className='flex flex-col my-2'><ShowDetails title={"CreatedAt"} taskdata={"CreatedAt"} className="w-1/4 my-2 px-5 min-h-20"/></li>
+            <li className='flex flex-col my-2'><ShowDetails title={"UpdatedAt"} taskdata={"UpdatedAt"} className="w-1/4 my-2 px-5 min-h-20"/></li>
+        </ul>
       </div>
       </CardBody>
     </Card>
