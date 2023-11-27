@@ -86,21 +86,23 @@ export const routes = [
         path: "/users/show",
         element: <ShowUser />,
       },
+      {
+        path: "/sign-in",
+        element: <SignIn />,
+      },
       
     ],
   },
   {
-    title: "auth pages",
     layout: "auth",
     pages: [
       {
-        icon: <ServerStackIcon {...icon} />,
-        name: "sign in",
         path: "/sign-in",
         element: <SignIn />,
       },
     ],
   },
+  
   
 ];
 
