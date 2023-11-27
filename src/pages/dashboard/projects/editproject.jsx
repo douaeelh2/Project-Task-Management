@@ -25,6 +25,7 @@ export function EditProject() {
 
     <div className="mt-10 mb-8 flex flex-col gap-12">
             <Card>
+            <div class="ml-6 mr-6">
               <CardHeader
                 floated={false}
                 shadow={false}
@@ -119,6 +120,7 @@ export function EditProject() {
                 </div>
               </form>
             </CardBody>
+            </div>
           </Card> 
     </div>
 
