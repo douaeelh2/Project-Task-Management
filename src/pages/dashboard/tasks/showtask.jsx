@@ -15,12 +15,11 @@ import {
   tasksTableData,
 } from "@/data";
 
-const TaskItem = tasksTableData.find(Task=> Task.task === "Building applications for iOS");
+const TaskItem = tasksTableData.find(Task => Task.task === "Building applications for iOS");
 const TaskName = TaskItem.task;
 const TaskProject = TaskItem.project;
 const TaskDuration= TaskItem.duration;
 const TaskUesr = TaskItem.user;
-
 
 export function ShowTask() {
 

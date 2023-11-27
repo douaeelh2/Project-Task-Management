@@ -34,11 +34,11 @@ export function CreateUser() {
 
               <div class="col-span-6 sm:col-span-3">
                 <Typography variant="h6" color="blue-gray" className="mb-3">
-                  Name of user
+                  User Name
                 </Typography>
                 <Input
                   size="sm"
-                  placeholder="User name"
+                  placeholder="User Name"
                   className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                   labelProps={{
                     className: "before:content-none after:content-none",
@@ -48,11 +48,11 @@ export function CreateUser() {
 
               <div class="col-span-6 sm:col-span-3">
                 <Typography variant="h6" color="blue-gray" className="mb-3">
-                  Email of user
+                  User Email
                 </Typography>
                 <Input
                   size="sm"
-                  placeholder="email"
+                  placeholder="Email"
                   className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                   labelProps={{
                     className: "before:content-none after:content-none",
@@ -62,11 +62,11 @@ export function CreateUser() {
 
               <div class="col-span-6 sm:col-span-3">
                 <Typography variant="h6" color="blue-gray" className="mb-3">
-                  Password of user
+                  User Password
                 </Typography>
                 <Input
                   size="sm"
-                  placeholder="password"
+                  placeholder="Password"
                   className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                   labelProps={{
                     className: "before:content-none after:content-none",
@@ -76,11 +76,11 @@ export function CreateUser() {
 
               <div class="col-span-6 sm:col-span-3">
                 <Typography variant="h6" color="blue-gray" className="mb-3">
-                  Designation of user
+                   User Designation
                 </Typography>
                 <Input
                   size="sm"
-                  placeholder="designation"
+                  placeholder="Designation"
                   className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                   labelProps={{
                     className: "before:content-none after:content-none",

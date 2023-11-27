@@ -81,7 +81,7 @@ export function ShowProject() {
         <ShowDetails title={"Project Name"} taskdata={ProjectName} className="w-1/2 mb-1 px-3 py-3" /> 
         <ShowDetails title={"Category"} taskdata={category} className="w-1/2 mb-1 px-3 py-3"/> 
         <ShowDetails title={"Duration"} taskdata={duration} className="w-1/2 mb-1 px-3 py-3"/> 
-        <ShowDetails title={"Desciption"} taskdata={Description} className="w-1/2 mb-1 px-3 py-3"/> 
+        <ShowDetails title={"Description"} taskdata={Description} className="w-1/2 mb-1 px-3 py-3"/> 
         <ShowDetails title={"Team members"} taskdata={<Members />} className="w-full border-b-2 border-t-2 px-3 py-4"/> 
         <ShowDetails title={"CreatedBy"} taskdata={"CreatedBy"} className="w-1/4 mt-4 mb-1 px-3 py-3"/>
         <ShowDetails title={"UpdateBy"} taskdata={"UpdateBy"} className="w-1/4 mt-4 mb-1 px-3 py-3"/>

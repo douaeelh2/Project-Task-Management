@@ -45,15 +45,13 @@ export function CreateProject() {
                   <div class="grid grid-cols-6 gap-6">
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
-                        Name of project
+                        Name
                       </Typography>
                       <Input
                         size="sm"
-                        placeholder="Project name"
+                        placeholder="Project Name"
                         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-                        labelProps={{
-                          className: "before:content-none after:content-none",
-                        }}
+                        
                       />
                     </div>
 
@@ -64,11 +62,9 @@ export function CreateProject() {
                       <Input
                         size="md"
                         type="date"
-                        placeholder="name@mail.com"
+                        placeholder="Date"
                         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-                        labelProps={{
-                          className: "before:content-none after:content-none",
-                        }}
+                        
                       />
                     </div>
                     
@@ -79,11 +75,9 @@ export function CreateProject() {
                       <Input
                         size="md"
                         type="date"
-                        placeholder="name@mail.com"
+                        placeholder="Date"
                         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-                        labelProps={{
-                          className: "before:content-none after:content-none",
-                        }}
+                        
                       />
                     </div>
 
@@ -104,20 +98,18 @@ export function CreateProject() {
                       </Typography>
                       <Select size="md" >
                         <Option>Pending</Option>
-                        <Option>Preparing</Option>
-                        <Option>Processing</Option>
                         <Option>Completed</Option>
                       </Select>
                     </div>
 
                   </div>
                   <Typography variant="h6" color="blue-gray" className="mb-3 mt-6">
-                        Description of the project
+                       Description
                   </Typography>             
-                  <Textarea label="Message" /> 
+                  <Textarea label="Project Description" /> 
                   <div class="col-span-6 sm:col-full ml-4 mt-4 mb-4">
                     <Button variant="gradient" color="black" >
-                      Create the new Project
+                      Create Project
                     </Button>          
                   </div>
                 </form>

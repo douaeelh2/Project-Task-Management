@@ -32,19 +32,17 @@ export function CreateTask() {
             <form className="mx-auto max-w-xl ">
             <div class="grid grid-cols-6 gap-6">
 
-              <div class="col-span-6 sm:col-span-3">
-                <Typography variant="h6" color="blue-gray" className="mb-3">
-                  Name
-                </Typography>
-                <Input
-                  size="sm"
-                  placeholder="TaskName"
-                  className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
-                />
-              </div>
+            <div class="col-span-6 sm:col-span-3">
+                      <Typography variant="h6" color="blue-gray" className="mb-3">
+                        Name
+                      </Typography>
+                      <Input
+                        size="sm"
+                        placeholder="Task Name"
+                        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+                        
+                      />
+             </div>
 
               <div class="col-span-6 sm:col-span-3">
                 <Typography variant="h6" color="blue-gray" className="mb-3">
@@ -68,10 +66,7 @@ export function CreateTask() {
                   size="md"
                   type="date"
                   placeholder="name@mail.com"
-                  className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
+                  
                 />
               </div>
               
@@ -82,11 +77,7 @@ export function CreateTask() {
                 <Input
                   size="md"
                   type="date"
-                  placeholder="name@mail.com"
-                  className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-                  labelProps={{
-                    className: "before:content-none after:content-none",
-                  }}
+                  
                 />
               </div>
 
@@ -107,20 +98,20 @@ export function CreateTask() {
                 <Typography variant="h6" color="blue-gray" className="mb-3">
                   Status
                 </Typography>
-                <Select size="md" label="Stauts">
+                <Select size="md" label="Status">
                   <Option>Pending</Option>
                   <Option>Completed</Option>
                 </Select>
               </div>
 
             </div>
-            <Typography variant="h6" color="blue-gray" className="mb-3">
+            <Typography variant="h6" color="blue-gray" className=" mt-4 mb-3">
                   Description 
             </Typography>             
-            <Textarea label="Message" /> 
+            <Textarea label="Task Description" /> 
             <div class="col-span-6 sm:col-full ml-4 mt-4 mb-4">
               <Button variant="gradient" color="black" >
-              Create the new task
+              Create task
               </Button>          
             </div>
           </form>

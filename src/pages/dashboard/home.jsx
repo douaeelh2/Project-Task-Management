@@ -59,7 +59,7 @@ export function Home() {
           >
             <div className="flex items-center justify-between gap-4">
               <Typography variant="h5" color="blue-gray" className="mb-1">
-                Projects Table
+                In Progress Projects
               </Typography>
             </div>
             <div className="flex items-center justify-between mr-5 gap-4">
@@ -76,7 +76,7 @@ export function Home() {
           <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["Projects", "Members", "Duration", "Status" , "Manage"].map(
+                  {["Projects", "Members", "Duration", "Status" , "Show"].map(
                     (el) => (
                       <th
                         key={el}
@@ -147,59 +147,12 @@ export function Home() {
                         />
                       </td>
                       <td className={className}>
-                        
-                        <Menu placement="bottom">
-                          <MenuHandler>
-                            <IconButton variant="text" color="blue-gray">
-                              <Cog6ToothIcon className="h-5 w-5 text-blue-gray-500" />
-                            </IconButton>
-                          </MenuHandler>
-                          <MenuList className="w-max border-0">
-                          <Link to="../projects/show">
-                            <MenuItem className="flex items-center gap-3">
-                                <EyeIcon className="h-5 w-5 text-blue-gray-500" />
-                              <div>
-                                <Typography
-                                  variant="small"
-                                  color="text-blue-gray-500"
-                                  className="font-normal"
-                                >
-                                  Show
-                                </Typography>
-                              </div>
-                            </MenuItem>
-                            </Link>
+                      <Link to="../projects/show">
 
-                            <Link to="../projects/edit">
-                            <MenuItem className="flex items-center gap-3">
-                                <PencilSquareIcon className="h-5 w-5 text-blue-gray-500" />
-                              <div>
-                                <Typography
-                                  variant="small"
-                                  color="text-blue-gray-500"
-                                  className="font-normal"
-                                >
-                                  Edit
-                                </Typography>
-                              </div>
-                            </MenuItem>
-                            </Link>
-                            <Link to=".">
-                            <MenuItem className="flex items-center gap-3">
-                                <TrashIcon className="h-5 w-5 text-blue-gray-500" />
-                              <div>
-                                <Typography
-                                  variant="small"
-                                  color="text-blue-gray-500"
-                                  className="font-normal"
-                                >
-                                  Delete
-                                </Typography>
-                              </div>
-                            </MenuItem>
-                            </Link>
-                          </MenuList>
-                        </Menu>
+                            <IconButton variant="text" color="blue-gray">
+                            <EyeIcon className="h-5 w-5 text-black" />
+                            </IconButton>
+                      </Link>
                     </td>
                         
                       </tr>

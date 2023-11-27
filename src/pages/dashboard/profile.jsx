@@ -28,13 +28,13 @@ export function Profile() {
                   <a href="modal" class="absolute xl:top-32 lg:top-32 md:top-32 sm:top-48  z-10 left-54 shadow h-10 w-10 rounded-full bg-white ml-40 hover:shadow-lg">
                     <i class="fa fa-pencil ml-3 mt-3 text-gray-600 hover:text-gray-900"></i>
                   </a>
-                  <img class="relative mb-4 rounded-full w-48 h-48 sm:mb-0 xl:mb-4 2xl:mb-0" src="../img/home-decor-1.jpeg" alt="Jese picture"/>
+                  <img class="relative mb-4 rounded-full w-48 h-48 sm:mb-0 xl:mb-4 2xl:mb-0" src="/img/team-2.jpeg" alt="Jese picture"/>
                   <div class="text-center mt-6">
                   <Typography variant="h5" color="blue-gray" >
-                    EL HASSNAOUI Salma
+                  John Michael
                 </Typography>   
                 <Typography variant="paragraph" class="text-gray-700">
-                    weeeeeeeeeeeb
+                    UI Developper
                 </Typography>                         
                   </div>
               </div>
@@ -65,18 +65,18 @@ export function Profile() {
       <div class="col-span-2">
         <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
             <Typography variant="h4" color="blue-gray" className="mb-4 ">
-                General information
+               Settings
             </Typography>
               <form action="#">
                   <div class="grid grid-cols-6 gap-6">
 
                         <div class="col-span-6 sm:col-span-3">
                             <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
-                                First name
+                                First Name
                             </Typography>                           
                             <Input
                                     type="email"
-                                    placeholder="Email Address"
+                                    placeholder="First Name"
                                     className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                     labelProps={{
                                     className: "hidden",
@@ -87,11 +87,11 @@ export function Profile() {
 
                         <div class="col-span-6 sm:col-span-3">
                             <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
-                                Last name
+                                Last Name
                             </Typography>    
                             <Input
-                                    type="lastname"
-                                    placeholder="EL HASSNAOUI"
+                                    type="lastName"
+                                    placeholder="Last Name"
                                     className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                     labelProps={{
                                     className: "hidden",
@@ -102,17 +102,17 @@ export function Profile() {
 
                         <div class="col-span-6 sm:col-span-3">
                                 <Typography variant="h6" color="blue-gray" class="mb-3 text-sm font-medium">
-                                    Phone number
+                                   Email Address
                                 </Typography>                              
                                 <Input
-                                        type="tel"
-                                        placeholder="phone number"
-                                        className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
-                                        labelProps={{
-                                        className: "hidden",
-                                        }} 
-                                        containerProps={{ className: "min-w-[100px]" }}
-                                />                      
+                                    type="email"
+                                    placeholder="Email Address"
+                                    className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
+                                    labelProps={{
+                                    className: "hidden",
+                                    }} 
+                                    containerProps={{ className: "min-w-[100px]" }}
+                            />            
                             </div>
                     </div> 
               </form>
@@ -129,7 +129,7 @@ export function Profile() {
                             </Typography>                              
                             <Input
                                     type="text"
-                                    placeholder="insta"
+                                    placeholder="Instagram"
                                     className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                     labelProps={{
                                     className: "hidden",
@@ -144,7 +144,7 @@ export function Profile() {
                             </Typography>                              
                             <Input
                                 type="text"
-                                placeholder="face"
+                                placeholder="Facebook"
                                 className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                 labelProps={{
                                 className: "hidden",
@@ -159,7 +159,7 @@ export function Profile() {
                             </Typography>                              
                             <Input
                                 type="text"
-                                placeholder="github"
+                                placeholder="Github"
                                 className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                 labelProps={{
                                 className: "hidden",
@@ -174,7 +174,7 @@ export function Profile() {
                             </Typography>                              
                             <Input
                                     type="text"
-                                placeholder="linkedin"
+                                placeholder="Linkedin"
                                 className="!bg-gray-50 !border !border-gray-300  text-gray-900 shadow-lg shadow-gray-900/5 ring-4 ring-transparent placeholder:text-gray-500 focus:!border-gray-900 "
                                 labelProps={{
                                 className: "hidden",
