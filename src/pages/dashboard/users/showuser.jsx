@@ -49,7 +49,7 @@ const userDate = UserItem.date;
 export function ShowUser() {
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
-    <Card>
+    <Card className='overflow-x-scroll'>
       <CardHeader
         floated={false}
         shadow={false}
@@ -64,7 +64,7 @@ export function ShowUser() {
       </CardHeader>
       <CardBody className="overflow px-0 pt-0 pb-2">
       <div className="flex flex-wrap">
-        <div className="w-1/5 min-w-100px">
+        <div className="w-1/5">
           <div className="w-full pl-10">
             <Avatar
               src={userImg} 

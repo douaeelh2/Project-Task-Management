@@ -25,13 +25,13 @@ const TaskUesr = TaskItem.user;
 export function ShowTask() {
 
   return (
-    <div className="mt-12 mb-8 flex flex-col gap-12">
-    <Card>
+    <div className="mt-10 mb-8 flex flex-col gap-12">
+<Card>
     <CardHeader
         floated={false}
         shadow={false}
         color="transparent"
-        className="m-0 flex items-center justify-between p-6 border-b-2 mb-2"
+        className="flex items-center justify-between p-4 border-b-2 mb-2"
       >
         <div className="flex items-center justify-between w-full">
           <Typography variant="h5" color="blue-gray" className="mb-1">
@@ -54,17 +54,17 @@ export function ShowTask() {
           </div>   
         </div>      
       </CardHeader>
-      <CardBody className="overflow px-4 py-4">
-      <div class="flex flex-wrap mx-5 mb-5">
-        <ShowDetails title={"Task Name"} taskdata={TaskName} className="w-1/2 mb-1 px-10 h-20" /> 
-        <ShowDetails title={"Project"} taskdata={TaskProject} className="w-1/2 mb-1 px-10 h-20"/> 
-        <ShowDetails title={"Duration"} taskdata={TaskDuration} className="w-1/2 mb-1 px-10 h-20"/> 
-        <ShowDetails title={"Member"} taskdata={TaskUesr} className="w-1/2 mb-1 px-10"/> 
-        <ShowDetails title={"Desciption"} taskdata={TaskProject} className="w-full px-10 h-40 border-b-2"/> 
-        <ShowDetails title={"CreatedBy"} taskdata={"CreatedBy"} className="w-1/4 mt-4 mb-1 px-10 h-20"/>
-        <ShowDetails title={"UpdateBy"} taskdata={"UpdateBy"} className="w-1/4 mt-4 mb-1 px-10 h-20"/>
-        <ShowDetails title={"CreatedAt"} taskdata={"CreatedAt"} className="w-1/4 mt-4 mb-1 px-10 h-20"/>
-        <ShowDetails title={"UpdatedAt"} taskdata={"UpdatedAt"} className="w-1/4 mt-4 mb-1 px-10 h-20"/>
+    <CardBody className="overflow-x-auto px-0 sm:px-6 py-4">
+      <div class="flex flex-wrap mx-5 mb-5 px-6 md:px-10">
+        <ShowDetails title={"Task Name"} taskdata={TaskName} className="w-1/2 mb-1 px-3 py-3" /> 
+        <ShowDetails title={"Project"} taskdata={TaskProject} className="w-1/2 mb-1 px-3 py-3"/> 
+        <ShowDetails title={"Duration"} taskdata={TaskDuration} className="w-1/2 mb-1 px-3 py-3"/> 
+        <ShowDetails title={"Member"} taskdata={TaskUesr} className="w-1/2 mb-1 px-3 py-3"/> 
+        <ShowDetails title={"Description"} taskdata={TaskProject} className="w-full border-b-2 px-3 py-4"/> 
+        <ShowDetails title={"CreatedBy"} taskdata={"CreatedBy"} className="w-1/4 mt-4 mb-1 px-3 py-3"/>
+        <ShowDetails title={"UpdateBy"} taskdata={"UpdateBy"} className="w-1/4 mt-4 mb-1 px-3 py-3"/>
+        <ShowDetails title={"CreatedAt"} taskdata={"CreatedAt"} className="w-1/4 mt-4 mb-1 px-3 py-3"/>
+        <ShowDetails title={"UpdatedAt"} taskdata={"UpdatedAt"} className="w-1/4 mt-4 mb-1 px-3 py-3"/>
       </div>
       </CardBody>
     </Card>
