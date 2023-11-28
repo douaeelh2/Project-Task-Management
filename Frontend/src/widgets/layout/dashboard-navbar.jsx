@@ -97,10 +97,10 @@ export function DashboardNavbar() {
               </IconButton>
             </MenuHandler>
             <MenuList className="w-max border-0">
+            <Link to="/dashboard/profile">
               <MenuItem className="flex items-center gap-3">
                   <UserIcon className="h-5 w-5 text-blue-gray-500" />
                 <div>
-                <Link to="/dashboard/profile">
                   <Typography
                     variant="small"
                     color="text-blue-gray-500"
@@ -108,13 +108,12 @@ export function DashboardNavbar() {
                   >
                     Profile
                   </Typography>
-                </Link>
                 </div>
               </MenuItem>
+              </Link>
+              <Link to="/logout">
               <MenuItem className="flex items-center gap-3">
-                <Link to="/logout">
                   <ArrowRightOnRectangleIcon className="h-5 w-5 text-blue-gray-500" />
-                </Link>
                 <div>
                   <Typography
                     variant="small"
@@ -125,6 +124,7 @@ export function DashboardNavbar() {
                   </Typography>
                 </div>
               </MenuItem>
+              </Link>
             </MenuList>
           </Menu>
           <IconButton
