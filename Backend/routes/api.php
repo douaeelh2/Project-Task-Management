@@ -18,7 +18,7 @@ use App\Http\Controllers\UserController;
 */
 
 
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/signin', [AuthController::class, 'signin']);
 
 Route::post('/create-users', [UserController::class, 'create']);
 

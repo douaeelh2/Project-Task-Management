@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function signin(Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password'))) {
             return response([
-                'message' => 'Email or Password Invalid'
-            ], Response::HTTP_UNAUTHORIZED);
+                'error' => 'Email or Password Invalid'
+            ]);
         }
 
         $user = Auth::user();
@@ -26,7 +26,7 @@ class AuthController extends Controller
         $cookie = cookie('jwt', $token, 60 * 24); // 1 day
 
         return response([
-            'message' => $token
+            'success' => $token
         ])->withCookie($cookie);
     }
 
