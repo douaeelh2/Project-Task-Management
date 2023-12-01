@@ -86,22 +86,9 @@ export const routes = [
         path: "/users/show",
         element: <ShowUser />,
       },
-      {
-        path: "/sign-in",
-        element: <SignIn />,
-      },
-      
     ],
   },
-  {
-    layout: "auth",
-    pages: [
-      {
-        path: "/sign-in",
-        element: <SignIn />,
-      },
-    ],
-  },
+  
   
   
 ];

@@ -1,4 +1,6 @@
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Cookies from 'js-cookie';
 
 import {
   Navbar,
@@ -33,6 +35,31 @@ export function DashboardNavbar() {
   const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const token = Cookies.get('jwt');
+      console.log(token);
+  
+      // Include the token in the headers
+      const response = await axios.post("http://localhost:8000/api/logout", {}, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      if (response.status === 200) {
+        Cookies.remove('jwt');
+        navigate("/", { replace: true });
+      } 
+    
+    } catch (error) {
+      // Gérez les erreurs de déconnexion
+      console.error("Logout failed:", error);
+    }
+  };
+  
 
   return (
     <Navbar
@@ -111,20 +138,19 @@ export function DashboardNavbar() {
                 </div>
               </MenuItem>
               </Link>
-              <Link to="/logout">
-              <MenuItem className="flex items-center gap-3">
+              <MenuItem className="flex items-center gap-3" onClick={handleLogout}>
                   <ArrowRightOnRectangleIcon className="h-5 w-5 text-blue-gray-500" />
-                <div>
+                  <div>
                   <Typography
                     variant="small"
                     color="text-blue-gray-500"
                     className="font-normal"
+                    
                   >
                     Logout
                   </Typography>
                 </div>
               </MenuItem>
-              </Link>
             </MenuList>
           </Menu>
           <IconButton
