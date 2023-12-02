@@ -29,7 +29,7 @@ public function up()
         $table->string('facebook_url')->nullable();
         $table->string('linkedin_url')->nullable();
         $table->string('github_url')->nullable();
-        $table->boolean('is_admin')->default(false);
+        $table->string('role')->default('user');
         $table->timestamps();
     });
     

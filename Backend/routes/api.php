@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 
 /*
@@ -22,8 +23,31 @@ Route::post('/signin', [AuthController::class, 'signin']);
 
 Route::post('/create-users', [UserController::class, 'create']);
 
+// Routes nécessitant une authentification avec Sanctum
+
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/user', [AuthController::class, 'user']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // Routes spécifiques à l'administration (utilisant le middleware 'admin')
+    Route::middleware('admin')->group(function () {
+        // Admin peut lister tous les utilisateurs
+        Route::get('/admin/users', [AdminController::class, 'listUsers']);
+
+        // Admin peut créer un utilisateur
+        Route::get('/admin/user/create', [AdminController::class, 'create']);
+
+        // Admin peut afficher un utilisateur par son ID
+        Route::get('/admin/user/show/{id}', [AdminController::class, 'show']);
+
+        // Admin peut supprimer un utilisateur
+        Route::delete('/admin/user/delete/{id}', [AdminController::class, 'delete']);
+
+    // Route pour permettre à un utilisateur admin / non-admin de modifier son propre profil
+    Route::put('/user/profile', [AuthController::class, 'updateProfile']);
 });
+
+});
+
+

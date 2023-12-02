@@ -43,4 +43,25 @@ class AuthController extends Controller
             'message' => 'Success'
         ])->withCookie($cookie);
     }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        // Validez les données du formulaire selon vos besoins
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+            // Ajoutez d'autres règles de validation au besoin
+        ]);
+
+        // Mettez à jour les informations du profil
+        $user->update([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            // Mettez à jour d'autres champs au besoin
+        ]);
+
+        return response()->json(['message' => 'Profile updated successfully', 'user' => $user]);
+    }
 }
