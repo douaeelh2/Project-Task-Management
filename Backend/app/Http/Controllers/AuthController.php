@@ -44,7 +44,7 @@ class AuthController extends Controller
         ])->withCookie($cookie);
     }
 
-    public function updateProfile(Request $request)
+    public function edit(Request $request)
     {
         $user = Auth::user();
 

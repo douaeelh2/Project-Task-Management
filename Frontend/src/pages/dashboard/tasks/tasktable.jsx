@@ -19,16 +19,18 @@ import { tasksTableData } from "@/data";
 
 import { Link } from "react-router-dom";
 
-export function TaskTable() {
+export function TaskTable({ isAuthenticated, user, isAdmin }) {
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
-      <div class="flex justify-end mr-5">
-          <Link to="../tasks/create" class="ml-2">
-              <Button variant="gradient" color="black">
-                 + New Task 
-              </Button>
+      {isAdmin && (
+        <div className="flex justify-end mr-5">
+          <Link to="../tasks/create" className="ml-2">
+            <Button variant="gradient" color="black">
+              + New Task
+            </Button>
           </Link>
-      </div>
+        </div>
+      )}
       <Card>
       <CardHeader
           floated={false}
@@ -149,6 +151,7 @@ export function TaskTable() {
                               </div>
                             </MenuItem>
                             </Link>
+                            {isAdmin && (
                             <Link to=".">
                             <MenuItem className="flex items-center gap-3">
                                 <TrashIcon className="h-5 w-5 text-blue-gray-500" />
@@ -163,6 +166,7 @@ export function TaskTable() {
                               </div>
                             </MenuItem>
                             </Link>
+                            )}
                           </MenuList>
                         </Menu>
                     </td>

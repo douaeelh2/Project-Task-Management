@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AdminController extends Controller
 {
-    public function create(Request $request)
+    public function createUsers(Request $request)
     {
         $UsersData = [
             [
@@ -125,7 +126,7 @@ class AdminController extends Controller
         return response()->json(['users' => $users]);
     }
 
-    public function createUser(UserRequest $request)
+    public function create(UserRequest $request)
     {
         $data = $request->validated();
 
@@ -134,14 +135,14 @@ class AdminController extends Controller
         return response()->json(['message' => 'User created successfully', 'user' => $user]);
     }
 
-    public function showUser($id)
+    public function show($id)
     {
         $user = User::findOrFail($id);
 
         return response()->json(['user' => $user]);
     }
 
-    public function deleteUser($id)
+    public function delete($id)
     {
         $user = User::findOrFail($id);
         $user->delete();

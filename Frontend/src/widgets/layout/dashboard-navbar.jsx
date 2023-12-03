@@ -1,11 +1,10 @@
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from 'js-cookie';
-
 import {
   Navbar,
   Typography,
-  Button,
   IconButton,
   Breadcrumbs,
   Menu,
@@ -15,51 +14,42 @@ import {
   Avatar,
 } from "@material-tailwind/react";
 import {
-  UserIcon,
-  Cog6ToothIcon,
-  ClockIcon,
-  CreditCardIcon,
-  Bars3Icon,
   ChevronDownIcon,
-  ArrowRightOnRectangleIcon
-  
+  ArrowRightOnRectangleIcon,
+  Bars3Icon,
+  UserIcon
 } from "@heroicons/react/24/solid";
-import {
-  useMaterialTailwindController,
-  setOpenSidenav,
-} from "@/context";
+import { useMaterialTailwindController, setOpenSidenav } from "@/context";
+import fetchUserData from "@/api/fetchUserData";
 
 
-export function DashboardNavbar() {
+export function DashboardNavbar({user}) {
   const [controller, dispatch] = useMaterialTailwindController();
   const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
   const navigate = useNavigate();
 
+
   const handleLogout = async () => {
     try {
       const token = Cookies.get('jwt');
-      console.log(token);
-  
+
       // Include the token in the headers
       const response = await axios.post("http://localhost:8000/api/logout", {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-  
+
       if (response.status === 200) {
         Cookies.remove('jwt');
         navigate("/", { replace: true });
-      } 
-    
+      }
     } catch (error) {
-      // Gérez les erreurs de déconnexion
       console.error("Logout failed:", error);
     }
   };
-  
 
   return (
     <Navbar
@@ -103,7 +93,7 @@ export function DashboardNavbar() {
         </div>
         <div className="flex items-center">
           <Avatar
-                  src="https://demos.creative-tim.com/material-dashboard/assets/img/team-2.jpg"
+                  src={user?.img}
                   alt="item-1"
                   size="sm"
                   variant="circular"
@@ -114,7 +104,7 @@ export function DashboardNavbar() {
                     color="blue-gray"
                     className="mb-1 ml-2 font-normal"
                   >
-                    <strong>David Henry</strong>
+                  <strong>{user?.firstname}{' '} {user?.lastname} </strong>
                   </Typography>
                 </div>
           <Menu>
