@@ -21,7 +21,7 @@ use App\Http\Controllers\AdminController;
 
 Route::post('/signin', [AuthController::class, 'signin']);
 
-Route::post('/create-users', [UserController::class, 'createUsers']);
+Route::get('/create-users', [AdminController::class, 'createUsers']);
 
 // Routes nécessitant une authentification avec Sanctum
 
