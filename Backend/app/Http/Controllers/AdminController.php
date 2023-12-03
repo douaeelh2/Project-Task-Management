@@ -13,7 +13,7 @@ class AdminController extends Controller
     {
         $UsersData = [
             [
-                "img" => null,
+                "img" => "/img/team-2.jpeg",
                 "firstname" => "John",
                 "lastname" => "Doe",
                 "designation" => "Developer",
@@ -29,7 +29,7 @@ class AdminController extends Controller
                 "role" => "user"
             ],
             [
-                "img" => null,
+                "img" => "/img/team-4.jpeg",
                 "firstname" => "Jane",
                 "lastname" => "Smith",
                 "designation" => "Systems Analyst",
@@ -42,26 +42,10 @@ class AdminController extends Controller
                 "facebook_url" => null,
                 "linkedin_url" => "https://www.linkedin.com/in/janesmith",
                 "github_url" => "https://github.com/janesmith",
-                "role" => "user"
+                "role" => "admin"
             ],
             [
-                "img" => null,
-                "firstname" => "Robert",
-                "lastname" => "Johnson",
-                "designation" => "Software Engineer",
-                "email" => "robert@example.com",
-                "phone" => "5551234567",
-                "password" => "robertrobert",
-                "graduation_university" => "IT Solutions Inc.",
-                "graduate_at" => "2022-02-28",
-                "employed_at" => "2022-05-20",
-                "facebook_url" => null,
-                "linkedin_url" => "https://www.linkedin.com/in/robertjohnson",
-                "github_url" => "https://github.com/robertjohnson",
-                "role" => "user"
-            ],
-            [
-                "img" => null,
+                "img" => "/img/team-3.jpeg",
                 "firstname" => "Emily",
                 "lastname" => "White",
                 "designation" => "Project Manager",
@@ -77,7 +61,7 @@ class AdminController extends Controller
                 "role" => "user"
             ],
             [
-                "img" => null,
+                "img" => "/img/team-1.jpeg",
                 "firstname" => "Michael",
                 "lastname" => "Brown",
                 "designation" => "Front-end Developer",
