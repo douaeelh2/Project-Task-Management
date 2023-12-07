@@ -2,10 +2,6 @@ import {
   HomeIcon,
   UserCircleIcon,
   TableCellsIcon,
-  InformationCircleIcon,
-  ServerStackIcon,
-  RectangleStackIcon,
-  Cog6ToothIcon,
   UsersIcon,
   ClipboardDocumentListIcon 
 } from "@heroicons/react/24/solid";
@@ -13,7 +9,6 @@ import { Home, Profile, UserTable , ProjectTable , TaskTable, CreateProject, Edi
 
   ShowProject , CreateTask , EditTask , ShowTask , CreateUser , ShowUser
   } from "@/pages/dashboard";
-import { SignIn} from "@/pages/auth";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -86,22 +81,9 @@ export const routes = [
         path: "/users/show",
         element: <ShowUser />,
       },
-      {
-        path: "/sign-in",
-        element: <SignIn />,
-      },
-      
     ],
   },
-  {
-    layout: "auth",
-    pages: [
-      {
-        path: "/sign-in",
-        element: <SignIn />,
-      },
-    ],
-  },
+  
   
   
 ];

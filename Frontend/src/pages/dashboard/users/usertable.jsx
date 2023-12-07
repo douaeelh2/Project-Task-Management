@@ -14,12 +14,12 @@ import {
   Button
   } from "@material-tailwind/react";
   import {PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
-  import { authorsTableData } from "@/data";
-
-  
+  import { useState , useEffect } from "react";
   import { Link } from "react-router-dom";
+  import authorsTableData from "@/data/authors-table-data";
 
   export function UserTable() {
+
     return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
         <div class="flex justify-end mr-5">
@@ -55,7 +55,7 @@ import {
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["author","project","task","email", "employed", "manage"].map((el) => (
+                  {["user","email", "employed", "manage"].map((el) => (
                     <th
                       key={el}
                       className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -71,55 +71,33 @@ import {
                 </tr>
               </thead>
               <tbody>
-                {authorsTableData.map(
-                  ({ img, name , project , task, email, job, date }, key) => {
-                    const className = `py-3 px-5 ${
-                      key === authorsTableData.length - 1
-                        ? ""
-                        : "border-b border-blue-gray-50"
-                    }`;
-  
+              {authorsTableData.map((user, key) => {
+              const className = `py-3 px-5 ${
+              key === authorsTableData.length - 1 ? '' : 'border-b border-blue-gray-50'
+              }`;
                     return (
-                      <tr key={name}>
+                      <tr key={key}>
                         <td className={className}>
                           <div className="flex items-center gap-4">
-                            <Avatar src={img} alt={name} size="sm" variant="rounded" />
+                            <Avatar src={user.img} alt={`${user.firstname} ${user.lastname}`} size="sm" variant="rounded" />
                             <div>
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-semibold"
-                              >
-                                {name}
+                              <Typography variant="small" color="blue-gray" className="font-semibold">
+                                {`${user.firstname} ${user.lastname}`}
                               </Typography>
-                              <Typography className="text-xs font-normal text-blue-gray-500">
-                                {job}
-                              </Typography>
+                              <Typography className="text-xs font-normal text-blue-gray-500">{user.designation}</Typography>
                             </div>
                           </div>
                         </td>
                         <td className={className}>
-                          <Typography className="text-xs font-bold text-blue-gray-600">
-                            {project}
-                          </Typography>
-                          
-                        </td>
-                        <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {task}
-                          </Typography>
-                          
-                        </td>
-                        <td className={className}>
-                          <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {email}
+                            {user.email}
                           </Typography>
                           
                         </td>
                         
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {date}
+                            {user.employed_at}
                           </Typography>
                         </td>
                         <td className={className}>
@@ -167,7 +145,8 @@ import {
                   }
                 )}
               </tbody>
-            </table>
+              </table>
+            
           </CardBody>
         </Card>
         
