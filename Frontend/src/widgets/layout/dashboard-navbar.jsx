@@ -41,8 +41,7 @@ export function DashboardNavbar({isAuthenticated ,user}) {
 
       if (response.status === 200) {
         Cookies.remove('jwt');
-        navigate("/", {replace : true});
-        window.location.reload();
+        navigate("/");
       }
     } catch (error) {
       console.error("Logout failed:", error);

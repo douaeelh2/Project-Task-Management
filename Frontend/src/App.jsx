@@ -1,24 +1,22 @@
-import { Routes, Route , useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { Dashboard, Auth } from "@/layouts";
 import { useState, useEffect } from "react";
 import { SignIn } from "./pages/auth";
+import { Navigate } from "react-router-dom";
 import fetchUserData from "./api/fetchUserData";
 
-
 function App() {
-
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    const fetchUserDataAsync = async () => {
+    const fetchAuthUser = async () => {
       try {
         const { isAuthenticated, user, isAdmin } = await fetchUserData();
         setUser(user);
-        console.log("user" + user.role);
         setIsAuthenticated(isAuthenticated);
         setIsAdmin(isAdmin);
 
@@ -29,25 +27,51 @@ function App() {
         console.error('Error fetching user data', error);
       }
     };
-
-    fetchUserDataAsync();
+    fetchAuthUser();
   }, [navigate]);
-
- 
 
   return (
     <Routes>
-      {isAuthenticated && isAdmin ?  (
-        <Route path="/admin/*" element={<Dashboard isAuthenticated={isAuthenticated} user={user} isAdmin={isAdmin} />}
+      <Route
+        path="/admin/*"
+        element={
+          isAuthenticated && isAdmin ? (
+            <Dashboard
+              isAuthenticated={isAuthenticated}
+              user={user}
+              isAdmin={isAdmin}
+            />
+          ) : (
+            <Navigate to="/" />
+          )
+        }
       />
-      ) 
-      : isAuthenticated && !isAdmin ?  (
-        <Route path="/user/*" element={<Dashboard isAuthenticated={isAuthenticated} user={user} isAdmin={isAdmin} />} 
+      <Route
+        path="/user/*"
+        element={
+          isAuthenticated && !isAdmin ? (
+            <Dashboard
+              isAuthenticated={isAuthenticated}
+              user={user}
+              isAdmin={isAdmin}
+            />
+          ) : (
+            <Navigate to="/" />
+          )
+        }
       />
-      ) 
-      : (
-        <Route path="/" element={<SignIn/>} />
-      )}
+      <Route
+        path="/"
+        element={
+          !isAuthenticated ? (
+            <SignIn />
+          ) : isAdmin ? (
+            <Navigate to="/admin/home" />
+          ) : (
+            <Navigate to="/user/tasks/table" />
+          )
+        }
+      />
     </Routes>
   );
 }
