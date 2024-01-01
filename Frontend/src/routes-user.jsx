@@ -17,7 +17,7 @@ import {
   
   export const routesUser = [
     {
-      layout: "dashboard",
+      layout: "user",
       pages: [
         {
           icon: <ClipboardDocumentListIcon  {...icon} />,

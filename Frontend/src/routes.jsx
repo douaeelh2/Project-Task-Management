@@ -16,11 +16,11 @@ const icon = {
 
 export const routes = [
   {
-    layout: "dashboard",
+    layout: "admin",
     pages: [
       {
         icon: <HomeIcon {...icon} />,
-        name: "dashboard",
+        name: "home",
         path: "/home",
         element: <Home />,
       },

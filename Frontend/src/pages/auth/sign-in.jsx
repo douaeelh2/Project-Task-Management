@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Input, Button, Typography, Alert } from "@material-tailwind/react";
 import axios from "axios";
+import fetchUserData from '@/api/fetchUserData';
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import fetchUserData from '@/api/fetchUserData';
 
 export function SignIn() {
   const [email, setEmail] = useState("");
@@ -20,19 +20,17 @@ export function SignIn() {
       });
 
       if (response.data.success) {
-        // Stocker le token dans les cookies
         setCookie("jwt", response.data.success, { path: "/", maxAge: 60 * 60 * 24 }); // 1 day
 
-        // Fetch user data and determine the role
         const { isAdmin, isAuthenticated } = await fetchUserData();
 
         if (isAdmin && isAuthenticated) {
-          // If admin, navigate to /dashboard/home
-          navigate("/dashboard/home", { replace: true });
-        } else if (!isAdmin && isAuthenticated) {
-          // If user, navigate to /dashboard/tasks/table
-          navigate("/dashboard/tasks/table", { replace: true });
+          navigate("/admin/home", { replace: true });
+        } 
+        else if (!isAdmin && isAuthenticated) {
+          navigate("/user/tasks/table", { replace: true });
         }
+        
       } else {
         setError(response.data.error);
       }

@@ -1,4 +1,5 @@
 import fetchData from "@/api/fetchData";
+import { useEffect } from "react";
 
 const fetchUsersData = async () => {
   try {
@@ -8,8 +9,10 @@ const fetchUsersData = async () => {
     console.error('Error fetching user data', error);
     return []; 
   }
+  
 };
 
 const authorsTableData = await fetchUsersData();
+
 export default authorsTableData;
   

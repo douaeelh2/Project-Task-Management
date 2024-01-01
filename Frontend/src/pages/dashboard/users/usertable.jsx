@@ -16,9 +16,26 @@ import {
   import {PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
   import { useState , useEffect } from "react";
   import { Link } from "react-router-dom";
-  import authorsTableData from "@/data/authors-table-data";
+  import fetchData from "@/api/fetchData";
 
   export function UserTable() {
+
+    const [authorsTableData, setAuthorsTableData] = useState([]);
+
+  useEffect(() => {
+    const fetchUsersData = async () => {
+      try {
+        const usersData = await fetchData({ object: "users" });
+        setAuthorsTableData(usersData.users);
+      } catch (error) {
+        console.error("Error fetching user data", error);
+        setAuthorsTableData([]);
+      }
+    };
+
+    fetchUsersData();
+  }, []);
+
 
     return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
@@ -71,7 +88,7 @@ import {
                 </tr>
               </thead>
               <tbody>
-              {authorsTableData.map((user, key) => {
+              {authorsTableData?.map((user, key) => {
               const className = `py-3 px-5 ${
               key === authorsTableData.length - 1 ? '' : 'border-b border-blue-gray-50'
               }`;

@@ -8,29 +8,9 @@ import routesUser from '@/routes-user';
 import { useMaterialTailwindController } from '@/context';
 import { Spinner } from '@material-tailwind/react';
 
-export function Dashboard() {
+export function Dashboard({ isAuthenticated, user, isAdmin }) {
   const [controller] = useMaterialTailwindController();
   const { sidenavType } = controller;
-  const [user, setUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { isAuthenticated, user, isAdmin } = await fetchUserData();
-        setUser(user);
-        setIsAuthenticated(isAuthenticated);
-        setIsAdmin(isAdmin);
-      } catch (error) {
-        // Handle error, e.g., redirect to login page
-        console.error('Error fetching user data', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
 
   return (
     <div className="w-full bg-blue-gray-50/50 ml-2">
@@ -47,7 +27,7 @@ export function Dashboard() {
         <Routes>
           {isAdmin
             ? routes
-                .filter(({ layout }) => layout === 'dashboard')
+                .filter(({ layout }) => layout === 'admin')
                 .map(({ pages }) =>
                   pages.map(({ path, element }) => (
                     <Route
@@ -58,7 +38,7 @@ export function Dashboard() {
                   />))
                 )
             : routesUser
-                .filter(({ layout }) => layout === 'dashboard')
+                .filter(({ layout }) => layout === 'user')
                 .map(({ pages }) =>
                   pages.map(({ path, element }) => (
                     <Route

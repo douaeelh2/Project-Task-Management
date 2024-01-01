@@ -20,22 +20,19 @@ import {
   UserIcon
 } from "@heroicons/react/24/solid";
 import { useMaterialTailwindController, setOpenSidenav } from "@/context";
-import fetchUserData from "@/api/fetchUserData";
 
 
-export function DashboardNavbar({user}) {
+export function DashboardNavbar({isAuthenticated ,user}) {
   const [controller, dispatch] = useMaterialTailwindController();
   const { fixedNavbar, openSidenav } = controller;
   const { pathname } = useLocation();
   const [layout, page] = pathname.split("/").filter((el) => el !== "");
   const navigate = useNavigate();
 
-
+  
   const handleLogout = async () => {
     try {
       const token = Cookies.get('jwt');
-
-      // Include the token in the headers
       const response = await axios.post("http://localhost:8000/api/logout", {}, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -44,7 +41,8 @@ export function DashboardNavbar({user}) {
 
       if (response.status === 200) {
         Cookies.remove('jwt');
-        navigate("/", { replace: true });
+        navigate("/", {replace : true});
+        window.location.reload();
       }
     } catch (error) {
       console.error("Logout failed:", error);
