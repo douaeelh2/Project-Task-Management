@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { SignIn } from "./pages/auth";
 import { Navigate } from "react-router-dom";
 import fetchUserData from "./api/fetchUserData";
+import Loading from "./layouts/loading";
 
 function App() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   useEffect(() => {
     const fetchAuthUser = async () => {
@@ -19,16 +21,22 @@ function App() {
         setUser(user);
         setIsAuthenticated(isAuthenticated);
         setIsAdmin(isAdmin);
+        setDataLoaded(true);
 
         if (!isAuthenticated) {
           navigate('/');
         }
       } catch (error) {
         console.error('Error fetching user data', error);
+        setDataLoaded(true); 
       }
     };
     fetchAuthUser();
   }, [navigate]);
+
+  if (!dataLoaded) {
+    return <Loading />;
+  }
 
   return (
     <Routes>

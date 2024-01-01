@@ -1,42 +1,29 @@
 import {
-    Card,
-    CardHeader,
-    CardBody,
-    Typography,
-    Avatar,
-    Chip,
-    IconButton,
-    Input,
-    Menu,
+  Card,
+  CardHeader,
+  CardBody,
+  Typography,
+  Avatar,
+  Chip,
+  IconButton,
+  Input,
+  Menu,
   MenuHandler,
   MenuList,
   MenuItem,
-  Button
-  } from "@material-tailwind/react";
-  import {PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
-  import { useState , useEffect } from "react";
-  import { Link } from "react-router-dom";
-  import fetchData from "@/api/fetchData";
+  Button,
+} from "@material-tailwind/react";
+import { EyeIcon, TrashIcon, MagnifyingGlassIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
+import AuthorsTableData from "@/data/authors-table-data";
+import Loading from "@/layouts/loading";
 
-  export function UserTable() {
-
-    const [authorsTableData, setAuthorsTableData] = useState([]);
-
-  useEffect(() => {
-    const fetchUsersData = async () => {
-      try {
-        const usersData = await fetchData({ object: "users" });
-        setAuthorsTableData(usersData.users);
-      } catch (error) {
-        console.error("Error fetching user data", error);
-        setAuthorsTableData([]);
-      }
-    };
-
-    fetchUsersData();
-  }, []);
-
-
+export function UserTable() {
+  
+  const { authorsTableData, dataLoaded } = AuthorsTableData();
+  if (!dataLoaded) {
+    return <Loading />;
+  }
     return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
         <div class="flex justify-end mr-5">

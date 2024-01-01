@@ -61,7 +61,8 @@ export function SignIn() {
           <Alert variant="ghost" className="bg-red-500 bg-opacity-20 text-red-700">
           <span>{error}</span>
           </Alert>
-          )} 
+          )}
+
             <Typography
               variant="small"
               color="blue-gray"
