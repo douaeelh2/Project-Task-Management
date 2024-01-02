@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -104,11 +104,13 @@ class AdminController extends Controller
     }
 
     public function listUsers()
-    {
-        $users = User::all();
+{
+    $loggedInUser = Auth::user();
 
-        return response()->json(['users' => $users]);
-    }
+    $users = User::where('id', '!=', $loggedInUser->id)->get();
+
+    return response()->json(['users' => $users]);
+}
 
     public function create(UserRequest $request)
     {
