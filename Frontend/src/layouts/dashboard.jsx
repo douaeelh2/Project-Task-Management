@@ -10,6 +10,7 @@ import { Spinner } from '@material-tailwind/react';
 export function Dashboard({ isAuthenticated, user, isAdmin }) {
   const [controller] = useMaterialTailwindController();
   const { sidenavType } = controller;
+  
 
   return (
     <div className="w-full bg-blue-gray-50/50 ml-2">

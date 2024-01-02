@@ -57,7 +57,7 @@ export const routes = [
         element: <EditProject />,
       },
       {
-        path: "/projects/show",
+        path: "/projects/show/:id",
         element: <ShowProject />,
       },
 
@@ -70,7 +70,7 @@ export const routes = [
         element: <EditTask />,
       },
       {
-        path: "/tasks/show",
+        path: "/tasks/show/:id",
         element: <ShowTask />,
       },
       {
@@ -78,7 +78,7 @@ export const routes = [
         element: <CreateUser />,
       },
       {
-        path: "/users/show",
+        path: "/users/show/:id",
         element: <ShowUser />,
       },
     ],

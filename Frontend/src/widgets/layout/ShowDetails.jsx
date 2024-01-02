@@ -3,15 +3,15 @@ import {
   Typography,
 } from "@material-tailwind/react";
 
-export function ShowDetails(props){
+export function ShowDetails({title , data , className}){
     return(
-      <div className={props.className}>
+      <div className={className}>
         <Typography variant="h6" color="blue-gray" className="mb-1">
-          {props.title}
+          {title}
         </Typography>
         <div className='flex'>
             
-            {props.taskdata}
+            {data}
           
         </div>
       </div>

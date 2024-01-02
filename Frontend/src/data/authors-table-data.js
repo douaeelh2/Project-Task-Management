@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import fetchData from '@/api/fetchData';
+import fetchTableData from '@/api/fetchTableData';
 import Loading from '@/layouts/loading';
 
 export default function AuthorsTableData() {
@@ -9,7 +9,7 @@ export default function AuthorsTableData() {
   useEffect(() => {
     const fetchUsersData = async () => {
       try {
-        const usersData = await fetchData({ object: "users" });
+        const usersData = await fetchTableData({ object: "users" });
         setAuthorsTableData(usersData.users);
         setDataLoaded(true);
       } catch (error) {

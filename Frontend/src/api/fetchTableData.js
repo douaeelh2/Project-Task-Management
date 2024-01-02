@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const fetchData = async ({object}) => {
+const fetchTableData = async ({object}) => {
   try {
     const jwtCookie = Cookies.get('jwt');
     if (jwtCookie) {
@@ -19,4 +19,4 @@ const fetchData = async ({object}) => {
   }
 };
 
-export default fetchData;
+export default fetchTableData;

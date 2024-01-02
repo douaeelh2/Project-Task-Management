@@ -21,6 +21,8 @@ import Loading from "@/layouts/loading";
 export function UserTable() {
   
   const { authorsTableData, dataLoaded } = AuthorsTableData();
+  
+
   if (!dataLoaded) {
     return <Loading />;
   }
@@ -112,9 +114,9 @@ export function UserTable() {
                               </IconButton>
                             </MenuHandler>
                             <MenuList className="w-max border-0">
-                            <Link to="../users/show">
+                            <Link to={`../users/show/${user.id}`}>
                               <MenuItem className="flex items-center gap-3">
-                                  <EyeIcon className="h-5 w-5 text-blue-gray-500" />
+                                <EyeIcon className="h-5 w-5 text-blue-gray-500" />
                                 <div>
                                   <Typography
                                     variant="small"
@@ -125,7 +127,7 @@ export function UserTable() {
                                   </Typography>
                                 </div>
                               </MenuItem>
-                              </Link>
+                            </Link>
                               <Link to=".">
                               <MenuItem className="flex items-center gap-3">
                                   <TrashIcon className="h-5 w-5 text-blue-gray-500" />
