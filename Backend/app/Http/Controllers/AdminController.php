@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
 
 class AdminController extends Controller
 {
@@ -112,14 +114,22 @@ class AdminController extends Controller
     return response()->json(['users' => $users]);
 }
 
-    public function create(UserRequest $request)
-    {
-        $data = $request->validated();
+public function create(UserRequest $request)
+{
+    $validator = validator($request->all(), $request->rules());
 
+    if ($validator->fails()) {
+        $errorMessage = $validator->messages()->first();
+
+        return response()->json(['error' => $errorMessage]);
+    } else {
+        $data = $validator->validated();
+        $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
 
         return response()->json(['message' => 'User created successfully', 'user' => $user]);
     }
+}
 
     public function show($id)
     {

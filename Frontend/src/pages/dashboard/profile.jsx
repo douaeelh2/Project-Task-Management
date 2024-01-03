@@ -15,6 +15,7 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { platformSettingsData, conversationsData, projectsData } from "@/data";
+import { FaPhone, FaEnvelope, FaMapMarker,FaGraduationCap,FaBriefcase } from 'react-icons/fa';
 
 export function Profile({ isAuthenticated, user, isAdmin }) {
   return (
@@ -39,15 +40,42 @@ export function Profile({ isAuthenticated, user, isAdmin }) {
                   </div>
               </div>
           </div>
+          <div class="p-3 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
+            <div className=" items-center gap-2 ">
+            <div className="text-center flex items-center gap-6 mb-3">
+                <FaPhone className="text-md" style={{ transform: 'scaleX(-1)', color: 'gray' }} />
+                <a href={`tel:${user?.phone}`}>{user?.phone}</a>
+            </div>
+
+                
+                <div className="text-center fl flex gap-6 items-center mb-3">
+                    <FaEnvelope className="text-md" style={{ color: 'gray' }} />
+                    <a href={`mailto:${user?.email}`}>{user?.email}</a>
+                </div>
+
+                <div className="text-center  fl flex gap-6 items-center mb-3 ">
+                    <FaBriefcase className="text-md " style={{ color: 'gray' }}/>
+                    <p>{user?.employed_at}</p>
+                </div>    
+                
+                <div className="text-center  fl flex gap-6 items-center mb-3 ">
+                    <FaGraduationCap className="text-xl " style={{ color: 'gray' }}/>
+                    <p>{user?.graduation_university} </p>                    
+                </div>
+                
+                           
+            </div>
+
+          </div>
           <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
-                  <div class="flex space-x-4 gap-6 justify-center">
-                      <a href="https://www.facebook.com/" target="_blank" class="text-gray-600 hover:text-gray-800">
+          <div class="flex space-x-4 gap-6 justify-center">
+                      <a  href={`${user?.facebook_url}`} target="_blank" class="text-gray-600 hover:text-gray-800">
                           <i class="fab fa-facebook fa-2x"></i>
                       </a>
-                      <a href="https://github.com/" target="_blank" class="text-gray-600 hover:text-gray-800">
+                      <a href={`${user?.github_url}`} target="_blank" class="text-gray-600 hover:text-gray-800">
                           <i class="fab fa-github fa-2x"></i>
                       </a>
-                      <a href="https://linkedin.com/" target="_blank" class="text-gray-600 hover:text-gray-800">
+                      <a  href={`${user?.linkedin_url}`} target="_blank" class="text-gray-600 hover:text-gray-800">
                           <i class="fab fa-linkedin fa-2x"></i>
                       </a>
                   </div>

@@ -25,8 +25,12 @@ import {
 } from "@/data";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import react from "@heroicons/react";
+
 
 export function ProjectTable() {
+  const [filter,setfilter]=React.useState('');
+  var projectsdatanew=projectsTableData.filter(project=>project.project.toLowerCase().includes(filter.toLowerCase()))
   return (
 
       <div className="mt-12 mb-8 flex flex-col gap-12">
@@ -51,12 +55,16 @@ export function ProjectTable() {
               </Typography>
             </div>
             <div className="flex items-center justify-between mr-5 gap-4">
-            <Input label="Search By Name"/>
-            <Link to=".">
-                <IconButton variant="gradient" color="black">
-                  <MagnifyingGlassIcon className="h-5 w-5 text-white" />
-                </IconButton>
-            </Link>
+              <Input 
+                  label="Search By Name" 
+                  value={filter}
+                  onChange={e=>setfilter(e.target.value)}
+                      />
+              <Link to=".">
+                  <IconButton variant="gradient" color="black">
+                    <MagnifyingGlassIcon className="h-5 w-5 text-white" />
+                  </IconButton>
+              </Link>
             </div>
             
           </CardHeader>
@@ -82,10 +90,10 @@ export function ProjectTable() {
                 </tr>
               </thead>
               <tbody>
-                {projectsTableData.map(
+                {projectsdatanew.map(
                   ({project, category , members, duration, status , manage }, key) => {
                     const className = `py-4 px-5 ${
-                      key === projectsTableData.length - 1
+                      key === projectsdatanew.length - 1
                         ? ""
                         : "border-b border-blue-gray-50"
                     }`;

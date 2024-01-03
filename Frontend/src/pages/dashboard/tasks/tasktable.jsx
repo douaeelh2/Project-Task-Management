@@ -16,10 +16,13 @@ MenuItem,
 import {PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
 import { tasksTableData } from "@/data";
 
-
 import { Link } from "react-router-dom";
+import React from "react";
 
 export function TaskTable({ isAuthenticated, user, isAdmin }) {
+  const [filter,setfilter]=React.useState('');
+  var tasksdatanew=tasksTableData.filter(task=>task.task.toLowerCase().includes(filter.toLowerCase()))
+console.log(tasksdatanew)
   return (
     <div className="mt-12 mb-8 flex flex-col gap-12">
       {isAdmin && (
@@ -44,14 +47,17 @@ export function TaskTable({ isAuthenticated, user, isAdmin }) {
             </Typography>
           </div>
           <div className="flex items-center justify-between mr-5 gap-4">
-          <Input label="Search By Name"/>
-          <Link to=".">
-              <IconButton variant="gradient" color="black">
-                <MagnifyingGlassIcon className="h-5 w-5 text-white" />
-              </IconButton>
-          </Link>
-          </div>
-          
+              <Input 
+                  label="Search By Name" 
+                  value={filter}
+                  onChange={e=>setfilter(e.target.value)}
+                      />
+              <Link to=".">
+                  <IconButton variant="gradient" color="black">
+                    <MagnifyingGlassIcon className="h-5 w-5 text-white" />
+                  </IconButton>
+              </Link>
+            </div>        
         </CardHeader>
         <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
           <table className="w-full min-w-[640px] table-auto">
@@ -73,10 +79,10 @@ export function TaskTable({ isAuthenticated, user, isAdmin }) {
               </tr>
             </thead>
             <tbody>
-              {tasksTableData.map(
+              {tasksdatanew.map(
                 ({ task , project , user, duration, status }, key) => {
                   const className = `py-3 px-5 ${
-                    key === tasksTableData.length - 1
+                    key === tasksdatanew.length - 1
                       ? ""
                       : "border-b border-blue-gray-50"
                   }`;

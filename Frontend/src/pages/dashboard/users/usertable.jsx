@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Card,
   CardHeader,
@@ -19,13 +20,19 @@ import AuthorsTableData from "@/data/authors-table-data";
 import Loading from "@/layouts/loading";
 
 export function UserTable() {
-  
+  const [filter,setfilter]=React.useState('');
+
   const { authorsTableData, dataLoaded } = AuthorsTableData();
   
-
   if (!dataLoaded) {
     return <Loading />;
   }
+
+  var usersnewdata=authorsTableData.filter(user=>{
+  return (user.firstname.toLowerCase().includes(filter.toLowerCase())  ||
+    user.lastname.toLowerCase().includes(filter.toLowerCase()) )
+  })
+  console.log(usersnewdata)
     return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
         <div class="flex justify-end mr-5">
@@ -48,12 +55,16 @@ export function UserTable() {
               </Typography>
             </div>
             <div className="flex items-center justify-between mr-5 gap-4">
-            <Input label="Search By Name"/>
-            <Link to=".">
-                <IconButton variant="gradient" color="black">
-                  <MagnifyingGlassIcon className="h-5 w-5 text-white" />
-                </IconButton>
-            </Link>
+              <Input 
+                  label="Search By Name" 
+                  value={filter}
+                  onChange={e=>setfilter(e.target.value)}
+                      />
+              <Link to=".">
+                  <IconButton variant="gradient" color="black">
+                    <MagnifyingGlassIcon className="h-5 w-5 text-white" />
+                  </IconButton>
+              </Link>
             </div>
             
           </CardHeader>
@@ -61,7 +72,7 @@ export function UserTable() {
             <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["user","email", "employed", "manage"].map((el) => (
+                  {["user","email", "phone number", "manage"].map((el) => (
                     <th
                       key={el}
                       className="border-b border-blue-gray-50 py-3 px-5 text-left"
@@ -77,7 +88,7 @@ export function UserTable() {
                 </tr>
               </thead>
               <tbody>
-              {authorsTableData?.map((user, key) => {
+              {usersnewdata?.map((user, key) => {
               const className = `py-3 px-5 ${
               key === authorsTableData.length - 1 ? '' : 'border-b border-blue-gray-50'
               }`;
@@ -103,7 +114,7 @@ export function UserTable() {
                         
                         <td className={className}>
                           <Typography className="text-xs font-semibold text-blue-gray-600">
-                            {user.employed_at}
+                            {user.phone}
                           </Typography>
                         </td>
                         <td className={className}>
@@ -161,4 +172,3 @@ export function UserTable() {
   }
   
   export default UserTable;
-  

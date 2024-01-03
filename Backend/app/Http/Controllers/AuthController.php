@@ -13,22 +13,34 @@ class AuthController extends Controller
 {
     public function signin(Request $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return response([
-                'error' => 'Email or Password Invalid'
-            ]);
+        $validatedData = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ], [
+            'email.required' => 'Email is required.',
+            'email.email' => 'Invalid email format.',
+            'password.required' => 'Password is required.',
+        ]);
+    
+        if (!Auth::attempt($validatedData)) {
+            $errors = $validator->errors()->all();
+            
+            return response()->json([
+                'error' => 'Email or Password Invalid',
+            ], 422);
         }
-
+    
         $user = Auth::user();
-
+    
         $token = $user->createToken('token')->plainTextToken;
-
+    
         $cookie = cookie('jwt', $token, 60 * 24); // 1 day
-
-        return response([
+    
+        return response()->json([
             'success' => $token
         ])->withCookie($cookie);
     }
+    
 
     public function user()
     {
@@ -48,11 +60,9 @@ class AuthController extends Controller
     {
         $user = Auth::user();
 
-        // Validez les données du formulaire selon vos besoins
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            // Ajoutez d'autres règles de validation au besoin
         ]);
 
         // Mettez à jour les informations du profil

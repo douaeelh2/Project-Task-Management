@@ -18,26 +18,29 @@ export function SignIn() {
         email,
         password,
       });
-
+  
       if (response.data.success) {
         setCookie("jwt", response.data.success, { path: "/", maxAge: 60 * 60 * 24 }); // 1 day
-
+  
         const { isAdmin, isAuthenticated } = await fetchUserData();
-
+  
         if (isAdmin && isAuthenticated) {
           navigate("/admin/home", { replace: true });
-        } 
-        else if (!isAdmin && isAuthenticated) {
+        } else if (!isAdmin && isAuthenticated) {
           navigate("/user/tasks/table", { replace: true });
         }
-        
-      } else {
-        setError(response.data.error);
       }
     } catch (error) {
-      console.error("Authentication failed:", error);
+      if (error.response && error.response.data && error.response.data.errors) {
+        const errorMessages = Object.values(error.response.data.errors);
+        setError(errorMessages[0]);
+      } else {
+        console.error('Failed to create user:', error);
+        setError("Email or Password Invalid");
+      }
     }
   };
+  
 
   return (
     <section className="m-8 flex gap-4">
