@@ -31,48 +31,55 @@ Project-Task-Management is developed using the following technologies:
 ### Run the following commands to install all dependencies
 
 Install node_modules command in your first terminal : 
-
+```
 cd Frontend
+```
 
-
+```
 npm install
-
+```
 
 Install Laravel Composer command in your second terminal : 
 
+```
 cd Backend
+```
 
-
+```
 composer install
-
+```
 
 Create .env file just command in your second terminal :
 
+```
 cp .env.example .env
-
+```
 
 Configure your database settings in the .env file:
 
-DB_DATABASE=laravel
+```
+DB_DATABASE=db_Project_Task_Management
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
-
+```
 
 Run the database migration command in your second terminal : 
 
-
+```
 php artisan migrate
-
+```
 
 Start running the server command in your second terminal :
- 
-php artisan serve
 
+ ```
+php artisan serve
+```
 
 Compiles and reloads front-end resources command in your first terminal : 
- 
-npm run dev
 
+ ```
+npm run dev
+```
 
 # Usage
    ## Sign In and Home Screenshots
