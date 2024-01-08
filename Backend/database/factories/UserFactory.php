@@ -28,7 +28,6 @@ class UserFactory extends Factory
             'facebook_url' => $this->faker->url,
             'linkedin_url' => $this->faker->url,
             'github_url' => $this->faker->url,
-            'is_admin' => false,
         ];
     }
 }

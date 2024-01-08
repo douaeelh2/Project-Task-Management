@@ -160,13 +160,6 @@ export function ShowUser() {
                   <Typography variant="p"  className="mb-4 ">
                     {userData.graduate_at}
                   </Typography>
-                  
-                  <Typography variant="h6" color="blue-gray" className="mb-4 " >
-                    Employed At
-                  </Typography>
-                  <Typography variant="p"  className="mb-4 ">
-                    {userData.employed_at}
-                  </Typography>
             </div>
             
         </div>

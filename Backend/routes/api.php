@@ -18,10 +18,11 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-
 Route::post('/signin', [AuthController::class, 'signin']);
 
 Route::get('/create-users', [AdminController::class, 'createUsers']);
+Route::get('/create-projects', [AdminController::class, 'createProjects']);
+
 
 // Routes nécessitant une authentification avec Sanctum
 
@@ -31,7 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/user', [AuthController::class, 'user']);
 
-    // Route pour permettre à un utilisateur admin / non-admin de modifier son propre profil
     Route::put('/user/profile/edit', [AuthController::class, 'edit']);
 
     // Routes spécifiques à l'administration (utilisant le middleware 'admin')

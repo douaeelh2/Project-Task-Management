@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Project;
 
 class User extends Authenticatable
 {
@@ -21,7 +22,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'img', 'firstname', 'lastname', 'designation', 'email', 'phone', 'password',
-        'graduation_university', 'graduate_at', 'employed_at', 'facebook_url', 'linkedin_url', 'github_url',
+        'graduation_university', 'graduate_at', 'facebook_url', 'linkedin_url', 'github_url',
         'role',
     ];
     
@@ -37,10 +38,10 @@ class User extends Authenticatable
     ];
 
 
-    // public function projects()
-    // {
-    //     return $this->belongsToMany(Project::class);
-    // }
+     public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
 
     // public function tasks()
     // {
