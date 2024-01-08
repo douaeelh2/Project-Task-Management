@@ -37,7 +37,7 @@ class AdminController extends Controller
                 "lastname" => "Smith",
                 "designation" => "Systems Analyst",
                 "email" => "jane@example.com",
-                "phone" => "9876543210",
+                "phone" => "9876543215",
                 "password" => "janejane",
                 "graduation_university" => "XYZ Software",
                 "graduate_at" => "2019-08-15",
