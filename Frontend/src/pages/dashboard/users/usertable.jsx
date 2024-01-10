@@ -43,6 +43,7 @@ export function UserTable() {
     handlePageChange,
     currentPage,
     totalPages,
+    totalUsers
   } = AuthorsTableData();  
 
   const Pagination = ({ currentPage, totalPages, onPageChange }) => {

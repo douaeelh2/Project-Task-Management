@@ -6,6 +6,7 @@ export default function AuthorsTableData() {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [totalUsers, setTotalUsers] = useState(0);
 
   useEffect(() => {
     const fetchUsersData = async () => {
@@ -13,6 +14,7 @@ export default function AuthorsTableData() {
         const response = await fetchTableData("users", currentPage);
         setAuthorsTableData(response.data);
         setTotalPages(response.last_page);
+        setTotalUsers(response.total);
         setDataLoaded(true);
       } catch (error) {
         console.error("Error fetching user data", error);
@@ -32,5 +34,5 @@ export default function AuthorsTableData() {
     return { authorsTableData: {}, dataLoaded: false, handlePageChange };
   }
 
-  return { authorsTableData, dataLoaded, handlePageChange, currentPage, totalPages };
+  return { authorsTableData, dataLoaded, handlePageChange, currentPage, totalPages,totalUsers };
 }

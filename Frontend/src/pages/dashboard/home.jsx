@@ -34,12 +34,15 @@ import Loading from "@/layouts/loading";
 
 export function Home() {
   const {projects , loader}= ProjectsTabledata()
-  const { authorsTableData, dataLoaded } = AuthorsTableData();
+  const {
+    authorsTableData,
+    totalUsers
+  } = AuthorsTableData();
   const [filter,setfilter]=React.useState('');
   
   const CompletedProjectstotal=projects.filter(project=>project.status==="completed").length;
   const InProgressProjects=projects.filter(project=>project.status==="in progress").length;
-  const TotalUsers=authorsTableData.length;
+  const TotalUsers = totalUsers;
   const Totalgrps=projects.length;
   const CompletedProjects=projects.filter(project=>project.status==="completed")
 
