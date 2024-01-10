@@ -23,28 +23,64 @@ import {
 import { StatisticsCard } from "@/widgets/cards";
 import { StatisticsChart } from "@/widgets/charts";
 import {
-  statisticsCardsData,
   statisticsChartsData,
-  projectsTableDataDash,
   ordersOverviewData,
 } from "@/data";
-import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
+import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon, UsersIcon, UserGroupIcon  } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import AuthorsTableData from "@/data/authors-table-data";
+import ProjectsTabledata from "@/data/projects-table-data";
+import Loading from "@/layouts/loading";
 
 export function Home() {
+  const {projects , loader}= ProjectsTabledata()
+  const { authorsTableData, dataLoaded } = AuthorsTableData();
+  const [filter,setfilter]=React.useState('');
+  
+  const CompletedProjectstotal=projects.filter(project=>project.status==="completed").length;
+  const InProgressProjects=projects.filter(project=>project.status==="in progress").length;
+  const TotalUsers=authorsTableData.length;
+  const Totalgrps=projects.length;
+  const CompletedProjects=projects.filter(project=>project.status==="completed")
+
+  var projectsdatanew=CompletedProjects.filter(project=>project.name.toLowerCase().includes(filter.toLowerCase()))
+
+  const statisticsCardsData = [
+    {
+      icon: UsersIcon,
+      title: "Total Users",
+      value: TotalUsers,
+    },
+    {
+      icon: CheckCircleIcon,
+      title: "Completed Projects",
+      value:CompletedProjectstotal ,
+    },
+    {
+      icon: ClockIcon,
+      title: "In Progress Projects",
+      value: InProgressProjects,
+    },
+    {
+      icon: UserGroupIcon,
+      title: "Total Groups",
+      value: Totalgrps,
+    },
+  ];
+  
+  if(loader) return <Loading />
   return (
     <div className="mt-12">
-
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
         {statisticsCardsData.map(({ icon, title, ...rest }) => (
           <StatisticsCard
             key={title}
             {...rest}
-            title={title}
+            title={title} 
+            color="gray"
             icon={React.createElement(icon, {
               className: "w-6 h-6 text-white",
             })}
-            
           />
         ))}
       </div>
@@ -59,24 +95,28 @@ export function Home() {
           >
             <div className="flex items-center justify-between gap-4">
               <Typography variant="h5" color="blue-gray" className="mb-1">
-                In Progress Projects
+                Completed Projects
               </Typography>
             </div>
             <div className="flex items-center justify-between mr-5 gap-4">
-            <Input label="Search By Name"/>
-            <Link to=".">
-                <IconButton variant="gradient" color="black">
-                  <MagnifyingGlassIcon className="h-5 w-5 text-white" />
-                </IconButton>
-            </Link>
+              <Input 
+                  label="Search By Name" 
+                  value={filter}
+                  onChange={e=>setfilter(e.target.value)}
+                      />
+              <Link to=".">
+                  <IconButton variant="gradient" color="black">
+                    <MagnifyingGlassIcon className="h-5 w-5 text-white" />
+                  </IconButton>
+              </Link>
             </div>
-            
           </CardHeader>
-          <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+         
+        <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
           <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["Projects", "Members", "Duration", "Status" , "Show"].map(
+                  {["Projects", "Members", "Date Start" , "Date End" , "Status" , "show"].map(
                     (el) => (
                       <th
                         key={el}
@@ -94,16 +134,15 @@ export function Home() {
                 </tr>
               </thead>
               <tbody>
-                {projectsTableDataDash.map(
-                  ({project, members, duration, status , manage }, key) => {
-                    const className = `py-4 px-5 ${
-                      key === projectsTableDataDash.length - 1
-                        ? ""
-                        : "border-b border-blue-gray-50"
-                    }`;
+                {projectsdatanew
+                .map(
+                  ({id ,name , datestart , dateend ,status,users }) => {
+                    const className = `py-4 px-5`;
+                    const reversedstartDate = datestart.split("-").reverse().join("-");
+                    const reversedendDate = dateend.split("-").reverse().join("-");
 
                     return (
-                      <tr key={project}>
+                      <tr>
                         <td className={className}>
                           <div className="flex items-center gap-4">
                             <Typography
@@ -111,41 +150,56 @@ export function Home() {
                               color="blue-gray"
                               className="font-bold"
                             >
-                              {project}
+                              {name}
                             </Typography>
                           </div>
                         </td>
-                        <td className={className}>
-                          {members.map(({ img, name }, key) => (
-                            <Tooltip key={project} content={project}>
-                              <Avatar
-                                src={img}
-                                alt={project}
-                                size="xs"
-                                variant="circular"
-                                className={`cursor-pointer border-2 border-white ${
-                                  key === 0 ? "" : "-ml-2.5"
-                                }`}
-                              />
-                            </Tooltip>
-                          ))}
+
+                        <td className="py-4 px-5">
+                          {users
+                                .map(({ id,img, firstname,lastname }, key) => (
+                                  <Tooltip key={id} content={`${firstname} ${lastname}`}>
+                                    <Avatar
+                                      key={id}
+                                      src={img}
+                                      alt={`${firstname} ${lastname}`}
+                                      size="xs"
+                                      variant="circular"
+                                      className={`cursor-pointer border-2 border-white ${
+                                        "-ml-2.5"
+                                      }`}
+                                    />
+                                  </Tooltip>
+                            ))}
                         </td>
+                                          
                         <td className={className}>
                           <Typography
                             variant="small"
                             className="text-xs font-medium text-blue-gray-600"
                           >
-                            {duration}
+                            {reversedstartDate} 
                           </Typography>
                         </td>
+                  
+                        <td className={className}>
+                          <Typography
+                            variant="small"
+                            className="text-xs font-medium text-blue-gray-600"
+                          >
+                            {reversedendDate} 
+                          </Typography>
+                        </td>
+
                         <td className={className}>
                         <Chip
                           variant="gradient"
-                          color={status ? "green" : "blue-gray"}
-                          value={status ? "Completed" : "In Progress"}
+                          color={status=="completed" ?  "green" : "blue-gray"}
+                          value={status}
                           className="py-0.5 px-2 text-[11px] font-medium w-fit"
                         />
                       </td>
+                      
                       <td className={className}>
                       <Link to="../projects/show">
 

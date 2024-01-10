@@ -31,8 +31,8 @@ export function Profile({ isAuthenticated, user, isAdmin }) {
         const file = e.target.files[0];
         setSelectedFile(file);
         const imageURL = URL.createObjectURL(file);
+        console.log(file);
         setUserImage(imageURL);
-        formData.add('img', selectedFile);
       };
 
 
