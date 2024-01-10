@@ -23,6 +23,7 @@ use App\Http\Controllers\ProjectUserController;
 Route::post('/signin', [AuthController::class, 'signin']);
 
 Route::get('/create-users', [AdminController::class, 'createUsers']);
+Route::get('/create-projects', [AdminController::class, 'createProjects']);
 
 // Routes nécessitant une authentification avec Sanctum
 

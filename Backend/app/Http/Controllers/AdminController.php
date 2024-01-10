@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Project;
 
 
 class AdminController extends Controller
@@ -79,7 +80,7 @@ class AdminController extends Controller
                 "role" => "user"
             ]
         ];
-        
+
         foreach ($UsersData as $userData) {
             // Créer un nouvel utilisateur avec les données fournies
             $user = new User([
@@ -104,6 +105,63 @@ class AdminController extends Controller
 
         return response()->json(['message' => 'Utilisateurs fictifs créés avec succès'], 201);
     }
+
+
+    public function createProjects(Request $request)
+{
+    $projectsData = [
+        [
+            "name" => "E-commerce Platform",
+            "category" => "Web Development",
+            "datestart" => "2022-02-15",
+            "dateend" => "2022-08-30",
+            "description" => "Develop a feature-rich e-commerce platform with secure payment integration.",
+            "status" => "In Progress",
+        ],
+        [
+            "name" => "Mobile App Redesign",
+            "category" => "Mobile App Development",
+            "datestart" => "2022-03-10",
+            "dateend" => "2022-06-30",
+            "description" => "Redesign the user interface and improve performance for our mobile app.",
+            "status" => "Completed",
+        ],
+        [
+            "name" => "Database Optimization",
+            "category" => "Database Management",
+            "datestart" => "2022-01-05",
+            "dateend" => "2022-04-15",
+            "description" => "Optimize and improve the efficiency of our database system.",
+            "status" => "Pending",
+        ],
+        [
+            "name" => "AI Chatbot Integration",
+            "category" => "Artificial Intelligence",
+            "datestart" => "2022-04-20",
+            "dateend" => "2022-09-30",
+            "description" => "Integrate an AI-powered chatbot to enhance customer support.",
+            "status" => "Planned",
+        ],
+    ];
+
+    foreach ($projectsData as $projectData) {
+        // Create a new project with the provided data
+        $project = new Project([
+            'name' => $projectData['name'],
+            'category' => $projectData['category'],
+            'datestart' => $projectData['datestart'],
+            'dateend' => $projectData['dateend'],
+            'description' => $projectData['description'],
+            'status' => $projectData['status'],
+        ]);
+
+        $project->save();
+         $users = User::inRandomOrder()->take(3)->get();
+         $project->users()->attach($users);
+    }
+
+    return response()->json(['message' => 'Fictional computer projects created successfully'], 201);
+}
 
     public function listUsers()
 {

@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Validator;
+
+
 
 class AuthController extends Controller
 {
@@ -24,7 +28,7 @@ class AuthController extends Controller
 
         if (!Auth::attempt($validatedData)) {
             $errors = $validator->errors()->all();
-            
+
             return response()->json([
                 'error' => 'Email or Password Invalid',
             ], 422);
@@ -57,21 +61,67 @@ class AuthController extends Controller
     }
 
     public function edit(Request $request)
-    {
-        $user = Auth::user();
+{
+    try {
+        $authenticatedUser = Auth::user();
 
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        ]);
+        if ($request->file('img')) {
+            try {
+                $uploadedFile = $request->file('img');
+                $fileName = $uploadedFile->getClientOriginalName();
 
-        // Mettez à jour les informations du profil
-        $user->update([
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
-            // Mettez à jour d'autres champs au besoin
-        ]);
+                $uploadedFile->storeAs('public/img', $fileName);
 
-        return response()->json(['message' => 'Profile updated successfully', 'user' => $user]);
+                $authenticatedUser->update(['img' => '/storage/img/'.$fileName]);
+
+                return response()->json(['success' => 'Image updated successfully', 'user' => $authenticatedUser]);
+            } catch (\Exception $e) {
+                return response()->json(['error' => 'An error occurred during profile image update', 'details' => $e->getMessage()], 500);
+            }
+        }
+
+
+
+        if ($request->filled('newPassword') && $request->input('newPassword') !== $request->input('confirmPassword')) {
+            return response()->json(['error' => 'New password and confirm password do not match'], 422);
+        }
+
+        if ($request->filled('newPassword')) {
+            if (Hash::check($request->input('currentPassword'), $authenticatedUser->password)) {
+                $authenticatedUser->update([
+                    'firstname' => $request->input('firstname'),
+                    'lastname' => $request->input('lastname'),
+                    'phone' => $request->input('phone'),
+                    'designation' => $request->input('designation'),
+                    'graduation_university' => $request->input('graduation_university'),
+                    'graduate_at' => $request->input('graduate_at'),
+                    'facebook_url' => $request->input('facebook_url'),
+                    'github_url' => $request->input('github_url'),
+                    'linkedin_url' => $request->input('linkedin_url'),
+                    'password' => Hash::make($request->input('newPassword'))
+                ]);
+                return response()->json(['success' => 'Profile updated successfully', 'user' => $authenticatedUser]);
+            } else {
+                return response()->json(['error' => 'Current password is invalid'], 422);
+            }
+        }
+        if(!$request->filled('newPassword')){
+            $authenticatedUser->update([
+                'firstname' => $request->input('firstname'),
+                'lastname' => $request->input('lastname'),
+                'phone' => $request->input('phone'),
+                'designation' => $request->input('designation'),
+                'graduation_university' => $request->input('graduation_university'),
+                'graduate_at' => $request->input('graduate_at'),
+                'facebook_url' => $request->input('facebook_url'),
+                'github_url' => $request->input('github_url'),
+                'linkedin_url' => $request->input('linkedin_url'),
+            ]);
+            return response()->json(['success' => 'Profil updated successfully', 'user' => $authenticatedUser]);
+        }
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Une erreur est survenue lors de la mise à jour du profil', 'details' => $e->getMessage()], 500);
     }
+}
+
 }
