@@ -36,11 +36,14 @@ export function Home() {
   const {projects , loader}= ProjectsTabledata()
   const { authorsTableData, dataLoaded } = AuthorsTableData();
   const [filter,setfilter]=React.useState('');
-  var projectsdatanew=projects.filter(project=>project.name.toLowerCase().includes(filter.toLowerCase()))
   
-  const CompletedProjects=projects.filter(project=>project.status==="completed").length;
+  const CompletedProjectstotal=projects.filter(project=>project.status==="completed").length;
   const InProgressProjects=projects.filter(project=>project.status==="in_progress").length;
   const TotalUsers=authorsTableData.length;
+  const Totalgrps=projects.length;
+  const CompletedProjects=projects.filter(project=>project.status==="completed")
+
+  var projectsdatanew=CompletedProjects.filter(project=>project.name.toLowerCase().includes(filter.toLowerCase()))
 
   const statisticsCardsData = [
     {
@@ -51,7 +54,7 @@ export function Home() {
     {
       icon: CheckCircleIcon,
       title: "Completed Projects",
-      value:CompletedProjects ,
+      value:CompletedProjectstotal ,
     },
     {
       icon: ClockIcon,
@@ -61,7 +64,7 @@ export function Home() {
     {
       icon: UserGroupIcon,
       title: "Total Groups",
-      value: "23",
+      value: Totalgrps,
     },
   ];
   
@@ -96,12 +99,16 @@ export function Home() {
               </Typography>
             </div>
             <div className="flex items-center justify-between mr-5 gap-4">
-            <Input label="Search By Name"/>
-            <Link to=".">
-                <IconButton variant="gradient" color="black">
-                  <MagnifyingGlassIcon className="h-5 w-5 text-white" />
-                </IconButton>
-            </Link>
+              <Input 
+                  label="Search By Name" 
+                  value={filter}
+                  onChange={e=>setfilter(e.target.value)}
+                      />
+              <Link to=".">
+                  <IconButton variant="gradient" color="black">
+                    <MagnifyingGlassIcon className="h-5 w-5 text-white" />
+                  </IconButton>
+              </Link>
             </div>
           </CardHeader>
          
@@ -127,7 +134,7 @@ export function Home() {
                 </tr>
               </thead>
               <tbody>
-                {projectsdatanew.filter(project=>project.status==="completed")
+                {projectsdatanew
                 .map(
                   ({id ,name , datestart , dateend ,status,users }) => {
                     const className = `py-4 px-5`;
