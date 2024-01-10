@@ -35,6 +35,13 @@ export function ProjectTable() {
   const [filter,setfilter]=React.useState('');
   var projectsdatanew=projects.filter(project=>project.name.toLowerCase().includes(filter.toLowerCase()))
 
+  function statuscolor({status}){
+    if(status==="completed") return "green"
+    if(status==="in progress") return "blue-gray"
+    if(status==="pending") return "red"
+    if(status==="not started") return "blue"
+  }
+
 if(loader) return <Loading />
 return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
@@ -97,15 +104,9 @@ return (
                 {projectsdatanew.map(
                   ({id ,name, category  , datestart , dateend ,status,users }) => {
                     const className = `py-4 px-5`;
-                    // const start = new Date(datestart);
-                    // const end = new Date(dateend);
-                    // const difference = end - start;
-                    // const week = Math.floor(difference / (7*24*60*60*1000));
                     const reversedstartDate = datestart.split("-").reverse().join("-");
                     const reversedendDate = dateend.split("-").reverse().join("-");
 
-                    // const reversedstartDate = parts.reverse().join("-"); 
-                    // const reversedendDate = parts.reverse().join("-"); 
 
                     return (
                       <tr>
@@ -166,20 +167,10 @@ return (
                           </Typography>
                         </td>
 
-                        {/* <td className={className}>
-                          <Typography
-                            variant="small"
-                            className="text-xs font-medium text-blue-gray-600"
-                          >
-                            {week} week
-                          </Typography>
-                        </td> */}
-
-
                         <td className={className}>
                         <Chip
                           variant="gradient"
-                          color={status=="completed" ?  "green" : "blue-gray"}
+                          color={statuscolor({status})}
                           value={status}
                           className="py-0.5 px-2 text-[11px] font-medium w-fit"
                         />
@@ -194,7 +185,7 @@ return (
                               </IconButton>
                             </MenuHandler>
                             <MenuList className="w-max border-0">
-                                <Link to="../projects/show">
+                                <Link to={`../projects/show/{id}`}>
                                   <MenuItem className="flex items-center gap-3">
                                       <EyeIcon className="h-5 w-5 text-blue-gray-500" />
                                     <div>
