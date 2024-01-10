@@ -14,7 +14,6 @@ import {
 import {
   statisticsCardsData,
   statisticsChartsData,
-  projectsTableData,
   ordersOverviewData,
 } from "@/data";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon  } from "@heroicons/react/24/solid";
@@ -99,14 +98,15 @@ export function EditProject() {
                   </div>
 
                   <div class="col-span-6 sm:col-span-3">
-                    <Typography variant="h6" color="blue-gray" className="mb-3">
-                      Status
-                    </Typography>
-                    <Select size="md" >
-                      <Option>Pending</Option>
-                      <Option>Completed</Option>
-                    </Select>
-                  </div>
+                      <Typography variant="h6" color="blue-gray" className="mb-3">
+                        Status
+                      </Typography>
+                      <Select size="md" >
+                        <Option>In Progress</Option>
+                        <Option>On Hold</Option>
+                        <Option>Completed</Option>
+                      </Select>
+                    </div>
 
                 </div>
                 <Typography variant="h6" color="blue-gray" className="mb-3 mt-4">
@@ -126,4 +126,3 @@ export function EditProject() {
 
   )
 }
-

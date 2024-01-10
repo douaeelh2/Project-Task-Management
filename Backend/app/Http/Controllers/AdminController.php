@@ -82,7 +82,6 @@ class AdminController extends Controller
         ];
         
         foreach ($UsersData as $userData) {
-            // Créer un nouvel utilisateur avec les données fournies
             $user = new User([
                 'img' => $userData['img'],
                 'firstname' => $userData['firstname'],
@@ -145,7 +144,6 @@ class AdminController extends Controller
     ];
 
     foreach ($projectsData as $projectData) {
-        // Create a new project with the provided data
         $project = new Project([
             'name' => $projectData['name'],
             'category' => $projectData['category'],
@@ -163,13 +161,13 @@ class AdminController extends Controller
     return response()->json(['message' => 'Fictional computer projects created successfully'], 201);
 }
 
-    public function listUsers()
+public function listUsers()
 {
     $loggedInUser = Auth::user();
 
-    $users = User::where('id', '!=', $loggedInUser->id)->get();
+    $users = User::where('id', '!=', $loggedInUser->id)->paginate(10); // 10 éléments par page (modifiable selon vos besoins)
 
-    return response()->json(['users' => $users]);
+    return response()->json($users);
 }
 
 public function create(UserRequest $request)
@@ -201,6 +199,6 @@ public function create(UserRequest $request)
         $user = User::findOrFail($id);
         $user->delete();
 
-        return response()->json(['message' => 'User deleted successfully']);
+        return response()->json(['success' => 'User Deleted Successfully']);
     }
 }

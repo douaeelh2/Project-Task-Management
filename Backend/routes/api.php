@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProjectController;
+
 
 
 /*
@@ -36,6 +38,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Routes spécifiques à l'administration (utilisant le middleware 'admin')
     Route::middleware('admin')->group(function () {
+        //Users
         // Admin peut lister tous les utilisateurs
         Route::get('/admin/users', [AdminController::class, 'listUsers']);
 
@@ -47,6 +50,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Admin peut supprimer un utilisateur
         Route::delete('/admin/user/delete/{id}', [AdminController::class, 'delete']);
+
+        //projects
+
+        Route::get('admin/projects',[ProjectController::class,'index']);
+
+        Route::get('admin/project/show/{id}',[ProjectController::class,'show']);
+
+        // Route::post('admin/projects',[ProjectController::class,'store']);
+        Route::delete('admin/projects/delete/{id}',[ProjectController::class,'destroy']);
+
+        Route::put('admin/projects/{id}',[ProjectController::class,'update']);
 
 });
 

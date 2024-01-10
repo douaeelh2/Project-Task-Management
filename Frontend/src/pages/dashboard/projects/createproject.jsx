@@ -14,13 +14,66 @@ import {
 import {
   statisticsCardsData,
   statisticsChartsData,
-  projectsTableData,
   ordersOverviewData,
+  projectsData,
 } from "@/data";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon  } from "@heroicons/react/24/solid";
+import axios from "axios";
+import AuthorsTableData from "@/data/authors-table-data";
 
 
 export function CreateProject() {
+  const { authorsTableData, dataLoaded } = AuthorsTableData();
+  const [Projectdata,setProjectdata]=React.useState({
+    name:'',
+    enddate:'',
+    startdate:'',
+    members: [
+      { id: '', name: '' }, // member1
+      { id: '', name: '' }, // member2
+      { id: '', name: '' }, // member3
+    ],
+    description:''
+  })
+
+  const handlechanges=(e)=>{
+    const {name,value}=e.target
+    console.log(value)
+    const updatedMembers = [...prevProjectdata.members];
+      updatedMembers[index] = {
+        id: selectedUser.id,
+        name: `${selectedUser.firstname} ${selectedUser.lastname}`,
+      };
+    setProjectdata({
+      ...Projectdata,
+      [name]:value
+    })
+  }
+  const handlechangeselect=(e,index)=>{
+    setProjectdata({
+      ...Projectdata,
+      [name]:value
+    })
+  }
+
+  const handleMemberChange=(selectedUserId,index)=>{
+    const selectedUser = authorsTableData.find(user => user.id === selectedUserId);
+    setProjectdata((prevProjectdata) => {
+      const updatedMembers = [...prevProjectdata.members];
+      updatedMembers[index] = {
+        id: selectedUser.id,
+        name: `${selectedUser.firstname} ${selectedUser.lastname}`,
+      };
+      return({
+        ...Projectdata,
+        members:updatedMembers
+      })
+    })
+  console.log(Projectdata.members[0].id); // Assurez-vous que la valeur est correcte ici
+  
+  }
+
+ 
   return (
 
   <div className="mt-12 mb-8 flex flex-col gap-12">
@@ -48,6 +101,9 @@ export function CreateProject() {
                         Name
                       </Typography>
                       <Input
+                        name="name"
+                        value={Projectdata.name}
+                        onChange={handlechanges}
                         size="sm"
                         placeholder="Project Name"
                         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -56,57 +112,96 @@ export function CreateProject() {
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
-                      <Typography variant="h6" color="blue-gray" className="mb-3">
-                        Start Date
-                      </Typography>
-                      <Input
-                        size="md"
-                        type="date"
-                        placeholder="Date"
-                        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-                        
-                      />
-                    </div>
-                    
+                    <Typography variant="h6" color="blue-gray" className="mb-3">
+                      Start Date
+                    </Typography>
+                    <Input
+                      name="startdate"
+                      value={Projectdata.startdate}
+                      onChange={handlechanges}
+                      size="md"
+                      type="date"
+                      placeholder="name@mail.com"
+                      className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+                      labelProps={{
+                        className: "before:content-none after:content-none",
+                      }}
+                    />
+                  </div>
+
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
                         End Date
                       </Typography>
                       <Input
+                        name="enddate"
+                        value={Projectdata.enddate}
+                        onChange={handlechanges}
                         size="md"
                         type="date"
                         placeholder="Date"
                         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-                        
                       />
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
-                        Team
+                        member 1
                       </Typography>
-                      <Select size="md" >
-                        <Option>Font-end Team</Option>
-                        <Option>Back-end Team</Option>
-                        <Option>API Team</Option>
+                      <Select 
+                        name="member1"
+                        size="md" 
+                        value={Projectdata.members[0].firstname}
+                        onChange={(e) => handlechangeselect(e, 0)}
+                        >
+                        { authorsTableData.map(user => 
+                          <Option key={user.id} value={user.id}>{user.firstname} {user.lastname}</Option>)}
                       </Select>
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
-                        Status
+                      member 2
                       </Typography>
-                      <Select size="md" >
-                        <Option>Pending</Option>
-                        <Option>Completed</Option>
+                       <Select 
+                        name="member2"
+                        size="md" 
+                        value={Projectdata.members[1].name}
+                        onChange={(e) => handleMemberChange(e, 1)}
+                        >
+                        {authorsTableData.map(user=>
+                          <Option value={user.id}>{user.firstname} {user.lastname}</Option>
+                          )}
                       </Select>
                     </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                      <Typography variant="h6" color="blue-gray" className="mb-3">
+                      member 3
+                      </Typography>
+                      <Select 
+                        name="member3"
+                        size="md" 
+                        value={Projectdata.members[2].name}
+                        onChange={(e) => handleMemberChange(e, 2)}
+                        >
+                        {authorsTableData.map(user=>
+                          <Option value={user.id}>{user.firstname} {user.lastname}</Option>
+                          )}
+                      </Select>
+                    </div>
+
 
                   </div>
                   <Typography variant="h6" color="blue-gray" className="mb-3 mt-6">
                        Description
                   </Typography>             
-                  <Textarea label="Project Description" /> 
+                  <Textarea 
+                    name="description"
+                    label="Project Description" 
+                    value={Projectdata.description}
+                    onChange={handlechanges}
+                    /> 
                   <div class="col-span-6 sm:col-full ml-4 mt-4 mb-4">
                     <Button variant="gradient" color="black" >
                       Create Project

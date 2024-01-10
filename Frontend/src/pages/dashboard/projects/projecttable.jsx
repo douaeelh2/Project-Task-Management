@@ -20,19 +20,23 @@ import {
   EllipsisVerticalIcon,
   ArrowUpIcon,
 } from "@heroicons/react/24/outline";
-import {
-  projectsTableData,
-} from "@/data";
+import ProjectsTabledata from "@/data/projects-table-data";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import react from "@heroicons/react";
-
+import axios from "axios";
+import Loading from "@/layouts/loading";
+import AuthorsTableData from "@/data/authors-table-data";
+import { StatisticsCard } from "@/widgets/cards";
 
 export function ProjectTable() {
+  const {projects , loader}= ProjectsTabledata()
+  const { authorsTableData, dataLoaded } = AuthorsTableData();
   const [filter,setfilter]=React.useState('');
-  var projectsdatanew=projectsTableData.filter(project=>project.project.toLowerCase().includes(filter.toLowerCase()))
-  return (
+  var projectsdatanew=projects.filter(project=>project.name.toLowerCase().includes(filter.toLowerCase()))
 
+if(loader) return <Loading />
+return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
         <div class="flex justify-end mr-5">
           <Link to="../projects/create" class="ml-2">
@@ -72,7 +76,7 @@ export function ProjectTable() {
           <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
-                  {["Projects","Category", "Members", "Duration", "Status" , "Manage"].map(
+                  {["Projects","Category", "Members", "Date Start" , "Date End" , "Status"].map(
                     (el) => (
                       <th
                         key={el}
@@ -91,15 +95,20 @@ export function ProjectTable() {
               </thead>
               <tbody>
                 {projectsdatanew.map(
-                  ({project, category , members, duration, status , manage }, key) => {
-                    const className = `py-4 px-5 ${
-                      key === projectsdatanew.length - 1
-                        ? ""
-                        : "border-b border-blue-gray-50"
-                    }`;
+                  ({id ,name, category  , datestart , dateend ,status,users }) => {
+                    const className = `py-4 px-5`;
+                    // const start = new Date(datestart);
+                    // const end = new Date(dateend);
+                    // const difference = end - start;
+                    // const week = Math.floor(difference / (7*24*60*60*1000));
+                    const reversedstartDate = datestart.split("-").reverse().join("-");
+                    const reversedendDate = dateend.split("-").reverse().join("-");
+
+                    // const reversedstartDate = parts.reverse().join("-"); 
+                    // const reversedendDate = parts.reverse().join("-"); 
 
                     return (
-                      <tr key={project}>
+                      <tr>
                         <td className={className}>
                           <div className="flex items-center gap-4">
                             <Typography
@@ -107,10 +116,11 @@ export function ProjectTable() {
                               color="blue-gray"
                               className="font-bold"
                             >
-                              {project}
+                              {name}
                             </Typography>
                           </div>
                         </td>
+
                         <td className={className}>
                           <Typography
                             variant="h4"
@@ -119,38 +129,62 @@ export function ProjectTable() {
                             {category}
                           </Typography>
                         </td>
-                        
-                        <td className={className}>
-                          {members.map(({ img, name }, key) => (
-                            <Tooltip key={project} content={project}>
-                              <Avatar
-                                src={img}
-                                alt={project}
-                                size="xs"
-                                variant="circular"
-                                className={`cursor-pointer border-2 border-white ${
-                                  key === 0 ? "" : "-ml-2.5"
-                                }`}
-                              />
-                            </Tooltip>
-                          ))}
+                   
+                        <td className="py-4 px-5">
+                          {users
+                                .map(({ id,img, firstname,lastname }, key) => (
+                                  <Tooltip key={id} content={`${firstname} ${lastname}`}>
+                                    <Avatar
+                                      key={id}
+                                      src={img}
+                                      alt={`${firstname} ${lastname}`}
+                                      size="xs"
+                                      variant="circular"
+                                      className={`cursor-pointer border-2 border-white ${
+                                        "-ml-2.5"
+                                      }`}
+                                    />
+                                  </Tooltip>
+                            ))}
                         </td>
+                                          
                         <td className={className}>
                           <Typography
                             variant="small"
                             className="text-xs font-medium text-blue-gray-600"
                           >
-                            {duration}
+                            {reversedstartDate} 
                           </Typography>
                         </td>
+                  
+                        <td className={className}>
+                          <Typography
+                            variant="small"
+                            className="text-xs font-medium text-blue-gray-600"
+                          >
+                            {reversedendDate} 
+                          </Typography>
+                        </td>
+
+                        {/* <td className={className}>
+                          <Typography
+                            variant="small"
+                            className="text-xs font-medium text-blue-gray-600"
+                          >
+                            {week} week
+                          </Typography>
+                        </td> */}
+
+
                         <td className={className}>
                         <Chip
                           variant="gradient"
-                          color={status ? "green" : "blue-gray"}
-                          value={status ? "Completed" : "In Progress"}
+                          color={status=="completed" ?  "green" : "blue-gray"}
+                          value={status}
                           className="py-0.5 px-2 text-[11px] font-medium w-fit"
                         />
                       </td>
+                      
                       <td className={className}>
                         
                           <Menu placement="bottom">
@@ -221,7 +255,6 @@ export function ProjectTable() {
         
       </div>
 
-      
   );
 }
 

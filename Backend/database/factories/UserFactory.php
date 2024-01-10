@@ -24,7 +24,6 @@ class UserFactory extends Factory
             'password' => bcrypt('password'),
             'graduation_university' => $this->faker->company,
             'graduate_at' => $this->faker->date,
-            'employed_at' => $this->faker->date,
             'facebook_url' => $this->faker->url,
             'linkedin_url' => $this->faker->url,
             'github_url' => $this->faker->url,

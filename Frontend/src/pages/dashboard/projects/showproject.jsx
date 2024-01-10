@@ -13,42 +13,42 @@ import{
 } from "@/widgets/layout/ShowDetails";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
-import {
-  projectsTableData,
-} from "@/data";
+// import {
+//   projectsTableData,
+// } from "@/data";
 
-const projectItem = projectsTableData.find(Project => Project.project === "Material XD Version");
-const ProjectName = projectItem.project;
-const Members = () => {
-  return (
-    <div className='w-full'>
-      <ul className='flex flex-wrap justify-between p-1'>
-        {projectItem.members.map(member => (
-          <li key={member.project} className='flex flex-col my-2'>
-            <Avatar
-                  src={member.img} 
-                  alt={member.project}
-                  size="lg"
-                  variant="circular"
-                  className='m-2 justify-center'
-                />
-            <span>{member.project}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}; 
-const category = projectItem.category;
-const Description = projectItem.description;
-const duration = projectItem.duration;
+// const projectItem = projectsTableData.find(Project => Project.project === "Material XD Version");
+// const ProjectName = projectItem.project;
+// const Members = () => {
+//   return (
+//     <div className='w-full'>
+//       <ul className='flex flex-wrap justify-between p-1'>
+//         {projectItem.members.map(member => (
+//           <li key={member.project} className='flex flex-col my-2'>
+//             <Avatar
+//                   src={member.img} 
+//                   alt={member.project}
+//                   size="lg"
+//                   variant="circular"
+//                   className='m-2 justify-center'
+//                 />
+//             <span>{member.project}</span>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }; 
+// const category = projectItem.category;
+// const Description = projectItem.description;
+// const duration = projectItem.duration;
 
 
 
 export function ShowProject() {
   return (
     <div className="mt-10 mb-8 flex flex-col gap-12">  
-    <Card>
+    {/* <Card>
         <CardHeader
         floated={false}
         shadow={false}
@@ -89,7 +89,7 @@ export function ShowProject() {
         <ShowDetails title={"UpdatedAt"} taskdata={"UpdatedAt"} className="w-1/4 mt-4 mb-1 px-3 py-3"/>
       </div>
       </CardBody>
-    </Card>
+    </Card> */}
     
   </div>
   )
