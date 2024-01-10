@@ -22,11 +22,9 @@ class User extends Authenticatable
     protected $fillable = [
         'img', 'firstname', 'lastname', 'designation', 'email', 'phone', 'password',
         'graduation_university', 'graduate_at', 'employed_at', 'facebook_url', 'linkedin_url', 'github_url',
-        'role',
+        'role'
     ];
     
-
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -37,10 +35,10 @@ class User extends Authenticatable
     ];
 
 
-    // public function projects()
-    // {
-    //     return $this->belongsToMany(Project::class);
-    // }
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
 
     // public function tasks()
     // {

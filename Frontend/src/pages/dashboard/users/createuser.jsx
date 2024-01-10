@@ -19,11 +19,11 @@ export function CreateUser() {
     phone: '',
     password: '',
   });
-
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(value)
     setUserData({
       ...userData,
       [name]: value,

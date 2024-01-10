@@ -21,7 +21,7 @@ class AuthController extends Controller
             'email.email' => 'Invalid email format.',
             'password.required' => 'Password is required.',
         ]);
-    
+
         if (!Auth::attempt($validatedData)) {
             $errors = $validator->errors()->all();
             
@@ -29,18 +29,18 @@ class AuthController extends Controller
                 'error' => 'Email or Password Invalid',
             ], 422);
         }
-    
+
         $user = Auth::user();
-    
+
         $token = $user->createToken('token')->plainTextToken;
-    
+
         $cookie = cookie('jwt', $token, 60 * 24); // 1 day
-    
+
         return response()->json([
             'success' => $token
         ])->withCookie($cookie);
     }
-    
+
 
     public function user()
     {

@@ -32,7 +32,7 @@ public function up()
         $table->string('role')->default('user');
         $table->timestamps();
     });
-    
+
 }
 
 

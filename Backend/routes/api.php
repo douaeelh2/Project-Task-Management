@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,8 +49,14 @@ Route::middleware('auth:sanctum')->group(function () {
         // Admin peut supprimer un utilisateur
         Route::delete('/admin/user/delete/{id}', [AdminController::class, 'delete']);
 
-});
+        Route::get('admin/projects',[ProjectController::class,'index']);
+        Route::get('admin/project/show/{id}',[ProjectController::class,'show']);
+        // Route::post('admin/projects',[ProjectController::class,'store']);
+        Route::delete('admin/projects/delete/{id}',[ProjectController::class,'destroy']);
+        Route::put('admin/projects/{id}',[ProjectController::class,'update']);
+
 
 });
 
+});
 

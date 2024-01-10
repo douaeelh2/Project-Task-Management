@@ -30,8 +30,18 @@ import {
 } from "@/data";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import AuthorsTableData from "@/data/authors-table-data";
+import ProjectsTabledata from "@/data/projects-table-data";
+import Loading from "@/layouts/loading";
 
 export function Home() {
+  const {projects , loader}= ProjectsTabledata()
+  const { authorsTableData, dataLoaded } = AuthorsTableData();
+  const [filter,setfilter]=React.useState('');
+  var projectsdatanew=projects.filter(project=>project.name.toLowerCase().includes(filter.toLowerCase()))
+
+  if(loader) return <Loading />
+
   return (
     <div className="mt-12">
 
@@ -59,7 +69,7 @@ export function Home() {
           >
             <div className="flex items-center justify-between gap-4">
               <Typography variant="h5" color="blue-gray" className="mb-1">
-                In Progress Projects
+                Completed Projects
               </Typography>
             </div>
             <div className="flex items-center justify-between mr-5 gap-4">
@@ -72,7 +82,7 @@ export function Home() {
             </div>
             
           </CardHeader>
-          <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+          {/* <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
           <table className="w-full min-w-[640px] table-auto">
               <thead>
                 <tr>
@@ -115,6 +125,7 @@ export function Home() {
                             </Typography>
                           </div>
                         </td>
+
                         <td className={className}>
                           {members.map(({ img, name }, key) => (
                             <Tooltip key={project} content={project}>
@@ -130,6 +141,7 @@ export function Home() {
                             </Tooltip>
                           ))}
                         </td>
+
                         <td className={className}>
                           <Typography
                             variant="small"
@@ -146,6 +158,113 @@ export function Home() {
                           className="py-0.5 px-2 text-[11px] font-medium w-fit"
                         />
                       </td>
+                      
+                      <td className={className}>
+                      <Link to="../projects/show">
+
+                            <IconButton variant="text" color="blue-gray">
+                            <EyeIcon className="h-5 w-5 text-black" />
+                            </IconButton>
+                      </Link>
+                    </td>
+                        
+                      </tr>
+                      
+                    );
+                  }
+                )}
+              </tbody>
+            </table>
+          </CardBody> */}
+
+        <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
+          <table className="w-full min-w-[640px] table-auto">
+              <thead>
+                <tr>
+                  {["Projects", "Members", "Date Start" , "Date End" , "Status" , "show"].map(
+                    (el) => (
+                      <th
+                        key={el}
+                        className="border-b border-blue-gray-50 py-3 px-6 text-left"
+                      >
+                        <Typography
+                          variant="small"
+                          className="text-[11px] font-medium uppercase text-blue-gray-400"
+                        >
+                          {el}
+                        </Typography>
+                      </th>
+                    )
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {projectsdatanew.filter(project=>project.status==="completed")
+                .map(
+                  ({id ,name , datestart , dateend ,status,users }) => {
+                    const className = `py-4 px-5`;
+                    const reversedstartDate = datestart.split("-").reverse().join("-");
+                    const reversedendDate = dateend.split("-").reverse().join("-");
+
+                    return (
+                      <tr>
+                        <td className={className}>
+                          <div className="flex items-center gap-4">
+                            <Typography
+                              variant="small"
+                              color="blue-gray"
+                              className="font-bold"
+                            >
+                              {name}
+                            </Typography>
+                          </div>
+                        </td>
+
+                        <td className="py-4 px-5">
+                          {users
+                                .map(({ id,img, firstname,lastname }, key) => (
+                                  <Tooltip key={id} content={`${firstname} ${lastname}`}>
+                                    <Avatar
+                                      key={id}
+                                      src={img}
+                                      alt={`${firstname} ${lastname}`}
+                                      size="xs"
+                                      variant="circular"
+                                      className={`cursor-pointer border-2 border-white ${
+                                        "-ml-2.5"
+                                      }`}
+                                    />
+                                  </Tooltip>
+                            ))}
+                        </td>
+                                          
+                        <td className={className}>
+                          <Typography
+                            variant="small"
+                            className="text-xs font-medium text-blue-gray-600"
+                          >
+                            {reversedstartDate} 
+                          </Typography>
+                        </td>
+                  
+                        <td className={className}>
+                          <Typography
+                            variant="small"
+                            className="text-xs font-medium text-blue-gray-600"
+                          >
+                            {reversedendDate} 
+                          </Typography>
+                        </td>
+
+                        <td className={className}>
+                        <Chip
+                          variant="gradient"
+                          color={status=="completed" ?  "green" : "blue-gray"}
+                          value={status}
+                          className="py-0.5 px-2 text-[11px] font-medium w-fit"
+                        />
+                      </td>
+                      
                       <td className={className}>
                       <Link to="../projects/show">
 
