@@ -9,7 +9,17 @@ import {
    CheckCircleIcon, 
    TagIcon
 } from "@heroicons/react/24/solid";
+import AuthorsTableData from "@/data/authors-table-data";
+import ProjectsTabledata from "@/data/projects-table-data";
+// let CompletedProjects = 0;
 
+// function calcul (){
+//   const {projects , loader}= ProjectsTabledata()
+//   const { authorsTableData, dataLoaded } = AuthorsTableData();
+//   CompletedProjects=projects.filter(project=>project.status==="completed").length;
+
+// }
+// calcul();
 export const statisticsCardsData = [
   
   {
@@ -22,7 +32,7 @@ export const statisticsCardsData = [
     color: "gray",
     icon: CheckCircleIcon,
     title: "Completed Projects",
-    value: "43",
+    value: "CompletedProjects",
   },
   {
     color: "gray",
