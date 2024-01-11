@@ -28,50 +28,54 @@ export function CreateProject() {
     name:'',
     enddate:'',
     startdate:'',
-    members: [
-      { id: '', name: '' }, // member1
-      { id: '', name: '' }, // member2
-      { id: '', name: '' }, // member3
-    ],
+    // members: [
+    //   { id: '', name: '' },
+    //   { id: '', name: '' }, 
+    //   { id: '', name: '' }, 
+    // ],
     description:''
   })
-
+  const members=[
+    "salma",
+    "wiame",
+    "reda"
+  ]
   const handlechanges=(e)=>{
     const {name,value}=e.target
     console.log(value)
-    const updatedMembers = [...prevProjectdata.members];
-      updatedMembers[index] = {
-        id: selectedUser.id,
-        name: `${selectedUser.firstname} ${selectedUser.lastname}`,
-      };
+    // const updatedMembers = [...prevProjectdata.members];
+    // updatedMembers[index] = {
+    //     id: selectedUser.id,
+    //     name: `${selectedUser.firstname} ${selectedUser.lastname}`,
+    //   };
     setProjectdata({
       ...Projectdata,
       [name]:value
     })
   }
-  const handlechangeselect=(e,index)=>{
-    setProjectdata({
-      ...Projectdata,
-      [name]:value
-    })
-  }
+  // const handlechangeselect=(e,index)=>{
+  //   setProjectdata({
+  //     ...Projectdata,
+  //     [name]:value
+  //   })
+  // }
 
-  const handleMemberChange=(selectedUserId,index)=>{
-    const selectedUser = authorsTableData.find(user => user.id === selectedUserId);
-    setProjectdata((prevProjectdata) => {
-      const updatedMembers = [...prevProjectdata.members];
-      updatedMembers[index] = {
-        id: selectedUser.id,
-        name: `${selectedUser.firstname} ${selectedUser.lastname}`,
-      };
-      return({
-        ...Projectdata,
-        members:updatedMembers
-      })
-    })
-  console.log(Projectdata.members[0].id); // Assurez-vous que la valeur est correcte ici
+  // const handleMemberChange=(selectedUserId,index)=>{
+  //   const selectedUser = authorsTableData.find(user => user.id === selectedUserId);
+  //   setProjectdata((prevProjectdata) => {
+  //     const updatedMembers = [...prevProjectdata.members];
+  //     updatedMembers[index] = {
+  //       id: selectedUser.id,
+  //       name: `${selectedUser.firstname} ${selectedUser.lastname}`,
+  //     };
+  //     return({
+  //       ...Projectdata,
+  //       members:updatedMembers
+  //     })
+  //   })
+  // console.log(Projectdata.members[0].id); // Assurez-vous que la valeur est correcte ici
   
-  }
+  // }
 
  
   return (
@@ -107,7 +111,6 @@ export function CreateProject() {
                         size="sm"
                         placeholder="Project Name"
                         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
-                        
                       />
                     </div>
 
@@ -151,11 +154,11 @@ export function CreateProject() {
                       <Select 
                         name="member1"
                         size="md" 
-                        value={Projectdata.members[0].firstname}
-                        onChange={(e) => handlechangeselect(e, 0)}
+                        // value={Projectdata.members[0].firstname}
+                        // onChange={(e) => handlechangeselect(e, 0)}
                         >
-                        { authorsTableData.map(user => 
-                          <Option key={user.id} value={user.id}>{user.firstname} {user.lastname}</Option>)}
+                        { members.map(user => 
+                          <Option key={user} value={user}>{user}</Option>)}
                       </Select>
                     </div>
 
@@ -163,23 +166,23 @@ export function CreateProject() {
                       <Typography variant="h6" color="blue-gray" className="mb-3">
                       member 2
                       </Typography>
-                       <Select 
+                       {/* <Select 
                         name="member2"
                         size="md" 
-                        value={Projectdata.members[1].name}
-                        onChange={(e) => handleMemberChange(e, 1)}
+                        // value={Projectdata.members[1].name}
+                        // onChange={(e) => handleMemberChange(e, 1)}
                         >
-                        {authorsTableData.map(user=>
-                          <Option value={user.id}>{user.firstname} {user.lastname}</Option>
+                        {members.map(user=>
+                          <Option value={user}>{user}</Option>
                           )}
-                      </Select>
+                      </Select> */}
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
                       member 3
                       </Typography>
-                      <Select 
+                      {/* <Select 
                         name="member3"
                         size="md" 
                         value={Projectdata.members[2].name}
@@ -188,9 +191,24 @@ export function CreateProject() {
                         {authorsTableData.map(user=>
                           <Option value={user.id}>{user.firstname} {user.lastname}</Option>
                           )}
-                      </Select>
+                      </Select> */}
                     </div>
 
+                    <div class="col-span-6 sm:col-span-3">
+                      <Typography variant="h6" color="blue-gray" className="mb-3">
+                      member 4
+                      </Typography>
+                      {/* <Select 
+                        name="member3"
+                        size="md" 
+                        value={Projectdata.members[2].name}
+                        onChange={(e) => handleMemberChange(e, 2)}
+                        >
+                        {authorsTableData.map(user=>
+                          <Option value={user.id}>{user.firstname} {user.lastname}</Option>
+                          )}
+                      </Select> */}
+                    </div>
 
                   </div>
                   <Typography variant="h6" color="blue-gray" className="mb-3 mt-6">
