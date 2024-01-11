@@ -38,7 +38,7 @@ export function Home() {
   const [filter,setfilter]=React.useState('');
   
   const CompletedProjectstotal=projects.filter(project=>project.status==="completed").length;
-  const InProgressProjects=projects.filter(project=>project.status==="in_progress").length;
+  const InProgressProjects=projects.filter(project=>project.status==="in progress").length;
   const TotalUsers=authorsTableData.length;
   const Totalgrps=projects.length;
   const CompletedProjects=projects.filter(project=>project.status==="completed")
@@ -201,8 +201,7 @@ export function Home() {
                       </td>
                       
                       <td className={className}>
-                      <Link to="../projects/show">
-
+                      <Link to={`../projects/show/${id}`}>
                             <IconButton variant="text" color="blue-gray">
                             <EyeIcon className="h-5 w-5 text-black" />
                             </IconButton>

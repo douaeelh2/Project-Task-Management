@@ -185,7 +185,7 @@ return (
                               </IconButton>
                             </MenuHandler>
                             <MenuList className="w-max border-0">
-                                <Link to={`../projects/show/{id}`}>
+                                <Link to={`../projects/show/${id}`}>
                                   <MenuItem className="flex items-center gap-3">
                                       <EyeIcon className="h-5 w-5 text-blue-gray-500" />
                                     <div>
