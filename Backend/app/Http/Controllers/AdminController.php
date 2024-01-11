@@ -161,11 +161,21 @@ class AdminController extends Controller
     return response()->json(['message' => 'Fictional computer projects created successfully'], 201);
 }
 
+public function index()
+{
+    $loggedInUser = Auth::user();
+
+    $users = User::where('id', '!=', $loggedInUser->id)->get();
+
+    return response()->json($users);
+}
+
+
 public function listUsers()
 {
     $loggedInUser = Auth::user();
 
-    $users = User::where('id', '!=', $loggedInUser->id)->paginate(10); // 10 éléments par page (modifiable selon vos besoins)
+    $users = User::where('id', '!=', $loggedInUser->id)->paginate(10);
 
     return response()->json($users);
 }

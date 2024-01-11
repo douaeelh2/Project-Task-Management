@@ -37,17 +37,17 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Routes spécifiques à l'administration (utilisant le middleware 'admin')
     Route::middleware('admin')->group(function () {
-        //Users
-        // Admin peut lister tous les utilisateurs
-        Route::get('/admin/users', [AdminController::class, 'listUsers']);
 
-        // Admin peut créer un utilisateur
+        //Users
+
+        Route::get('/admin/users', [AdminController::class, 'index']);
+
+        Route::get('/admin/users/pagination', [AdminController::class, 'listUsers']);
+
         Route::post('/admin/user/create', [AdminController::class, 'create']);
 
-        // Admin peut afficher un utilisateur par son ID
         Route::get('/admin/user/show/{id}', [AdminController::class, 'show']);
 
-        // Admin peut supprimer un utilisateur
         Route::delete('/admin/user/delete/{id}', [AdminController::class, 'delete']);
 
         //projects

@@ -11,7 +11,7 @@ export default function AuthorsTableData() {
   useEffect(() => {
     const fetchUsersData = async () => {
       try {
-        const response = await fetchTableData("users", currentPage);
+        const response = await fetchTableData(`users/pagination?page=${currentPage}`);
         setAuthorsTableData(response.data);
         setTotalPages(response.last_page);
         setTotalUsers(response.total);
