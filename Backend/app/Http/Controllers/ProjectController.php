@@ -39,7 +39,6 @@ class ProjectController extends Controller
         $project=new Project;
         $project->name=$request->name;
         $project->category=$request->category;
-        $project->members=$request->members;
         $project->datestart=$request->datestart;
         $project->dateend=$request->dateend;
         $project->description=$request->description;
@@ -99,9 +98,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         $project=Project::findOrFail($id);
+        $project->users()->detach();
         $project->delete();
         return response()->json($project);
     }
