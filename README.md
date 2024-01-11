@@ -14,18 +14,18 @@ With a user-friendly interface, our site aims to simplify project planning, task
 
 ### Technologies Used
 Project-Task-Management is developed using the following technologies:
-- **React:** A modern JavaScript library for building interactive user interfaces.
-- **Laravel:** An elegant PHP framework for rapid web development and building robust applications.
-- **REST API:** Utilized for seamless communication and data exchange between the front-end and back-end.
-- **Tailwind CSS:** A utility-first CSS framework that makes it easy to create modern and responsive designs.
-- **Material-UI:** A React component library that implements Material Design for React.
+- *React:* A modern JavaScript library for building interactive user interfaces.
+- *Laravel:* An elegant PHP framework for rapid web development and building robust applications.
+- *REST API:* Utilized for seamless communication and data exchange between the front-end and back-end.
+- *Tailwind CSS:* A utility-first CSS framework that makes it easy to create modern and responsive designs.
+- *Material-UI:* A React component library that implements Material Design for React.
 
 ## Authors
--**EL HILA Douae** 
+-*EL HILA Douae* 
 
--**EL HASSNAOUI Salma** 
+-*EL HASSNAOUI Salma* 
 
--**REZOUKI Badr**  
+-*REZOUKI Badr*  
 
 ## Installation 
 ### Run the following commands to install all dependencies
@@ -39,9 +39,11 @@ npm install
 ```
 
 Install Laravel Composer command in your second terminal : 
+
 ```
 cd Backend
 ```
+
 ```
 composer install
 ```
@@ -52,8 +54,9 @@ cp .env.example .env
 ```
 
 Configure your database settings in the .env file:
+
 ```
-DB_DATABASE=laravel
+DB_DATABASE=db_Project_Task_Management
 DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
@@ -65,12 +68,14 @@ php artisan migrate
 ```
 
 Start running the server command in your second terminal :
-``` 
+
+ ```
 php artisan serve
 ```
 
 Compiles and reloads front-end resources command in your first terminal : 
-``` 
+
+ ```
 npm run dev
 ```
 
@@ -218,5 +223,3 @@ Only the admin has the ability to create a task.
 
 ### Show , Edit and Delete Task Pages
  The admin can also view the details of a task and has the authority to delete or edit it.
- 
- 

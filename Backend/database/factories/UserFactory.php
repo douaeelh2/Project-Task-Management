@@ -2,7 +2,10 @@
 
 namespace Database\Factories;
 
+<<<<<<< HEAD
 use App\Models\Project;
+=======
+>>>>>>> 554640930a0ba3d76728401e795a89e677b45a5b
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

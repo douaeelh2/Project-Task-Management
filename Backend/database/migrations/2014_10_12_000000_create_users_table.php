@@ -25,14 +25,12 @@ public function up()
         $table->string('password');
         $table->string('graduation_university');
         $table->date('graduate_at');
-
         $table->string('facebook_url')->nullable();
         $table->string('linkedin_url')->nullable();
         $table->string('github_url')->nullable();
         $table->string('role')->default('user');
         $table->timestamps();
     });
-
 }
 
 

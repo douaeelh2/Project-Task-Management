@@ -45,7 +45,6 @@ class AuthController extends Controller
         ])->withCookie($cookie);
     }
 
-
     public function user()
     {
         return Auth::user();
@@ -65,23 +64,17 @@ class AuthController extends Controller
     try {
         $authenticatedUser = Auth::user();
 
-        if ($request->file('img')) {
+        if ($request->hasFile('img')) {
             try {
                 $uploadedFile = $request->file('img');
                 $fileName = $uploadedFile->getClientOriginalName();
-
                 $uploadedFile->storeAs('public/img', $fileName);
-
-                $authenticatedUser->update(['img' => '/storage/img/'.$fileName]);
-
-                return response()->json(['success' => 'Image updated successfully', 'user' => $authenticatedUser]);
+                $authenticatedUser->update(['img' => '/storage/img/' . $fileName]);
+                return response()->json(['success' => 'image updated successfully']);
             } catch (\Exception $e) {
                 return response()->json(['error' => 'An error occurred during profile image update', 'details' => $e->getMessage()], 500);
             }
         }
-
-
-
         if ($request->filled('newPassword') && $request->input('newPassword') !== $request->input('confirmPassword')) {
             return response()->json(['error' => 'New password and confirm password do not match'], 422);
         }

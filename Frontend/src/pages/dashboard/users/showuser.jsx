@@ -160,7 +160,6 @@ export function ShowUser() {
                   <Typography variant="p"  className="mb-4 ">
                     {userData.graduate_at}
                   </Typography>
-                  
             </div>
             
         </div>

@@ -23,7 +23,6 @@ export function CreateUser() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(value)
     setUserData({
       ...userData,
       [name]: value,
