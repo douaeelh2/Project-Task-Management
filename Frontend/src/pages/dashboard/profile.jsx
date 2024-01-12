@@ -27,6 +27,7 @@ export function Profile({ isAuthenticated, user, isAdmin }) {
     const [userImage, setUserImage] = useState(user?.img);
 
 
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         setSelectedFile(file);
@@ -35,11 +36,26 @@ export function Profile({ isAuthenticated, user, isAdmin }) {
         setUserImage(imageURL);
       };
 
-
+      const [Data, setData] = useState({
+        firstname: user.firstname,
+          lastname: user.lastname,
+          email: user.email,
+          phone: user.phone,
+          designation: user.designation,
+          facebook_url: user.facebook_url,
+          github_url: user.github_url,
+          linkedin_url: user.linkedin_url,
+          graduation_university : user.graduation_university,
+          graduate_at: user.graduate_at,
+          currentPassword: "",
+          newPassword: "",
+          confirmPassword: ""
+      });
 
         const [formData, setFormData] = useState({
           firstname: user.firstname,
           lastname: user.lastname,
+          email: user.email,
           phone: user.phone,
           designation: user.designation,
           facebook_url: user.facebook_url,
@@ -83,8 +99,7 @@ export function Profile({ isAuthenticated, user, isAdmin }) {
                 },
               });
               if(response.data.success){
-                
-                console.log(response.data.success);
+                setData(formData);
                 setError(null);
                 setSuccess(response.data.success);
               }
@@ -116,10 +131,10 @@ export function Profile({ isAuthenticated, user, isAdmin }) {
                   <img class="relative mb-2 rounded-full w-48 h-48 sm:mb-0 xl:mb-4 2xl:mb-0" src={userImage} alt="user img"/>
                   <div class="text-center mt-4">
                   <Typography variant="h5" color="blue-gray" >
-                  {user?.firstname}{' '} {user?.lastname}
+                  {Data.firstname}{' '} {Data.lastname}
                 </Typography>   
                 <Typography variant="paragraph" class="text-gray-700">
-                {user?.designation}
+                {Data.designation}
                 </Typography>                         
                   </div>
               </div>
@@ -128,23 +143,23 @@ export function Profile({ isAuthenticated, user, isAdmin }) {
             <div className=" items-center gap-2 ">
             <div className="text-center flex items-center gap-6 mb-3">
                 <FaPhone className="text-md" style={{ transform: 'scaleX(-1)', color: 'gray' }} />
-                <a href={`tel:${user?.phone}`}>{user?.phone}</a>
+                <p>{Data.phone}</p>
             </div>
 
                 
                 <div className="text-center fl flex gap-6 items-center mb-3">
                     <FaEnvelope className="text-md" style={{ color: 'gray' }} />
-                    <a href={`mailto:${user?.email}`}>{user?.email}</a>
+                    <p>{Data.email}</p>
                 </div>
 
                 <div className="text-center  fl flex gap-6 items-center mb-3 ">
                     <FaBriefcase className="text-md " style={{ color: 'gray' }}/>
-                    <p>{user?.graduate_at}</p>
+                    <p>{Data.graduate_at}</p>
                 </div>    
                 
                 <div className="text-center  fl flex gap-6 items-center mb-3 ">
                     <FaGraduationCap className="text-xl " style={{ color: 'gray' }}/>
-                    <p>{user?.graduation_university} </p>                    
+                    <p>{Data.graduation_university} </p>                    
                 </div>
                 
                            
@@ -153,13 +168,13 @@ export function Profile({ isAuthenticated, user, isAdmin }) {
           </div>
           <div class="p-4 mb-4 bg-white border border-gray-200 rounded-lg shadow-sm 2xl:col-span-2 dark:border-gray-700 sm:p-6 dark:bg-gray-800">
           <div class="flex space-x-4 gap-6 justify-center">
-                      <a  href={`${user?.facebook_url}`} target="_blank" class="text-gray-600 hover:text-gray-800">
+                      <a  href={`${Data.facebook_url}`} target="_blank" class="text-gray-600 hover:text-gray-800">
                           <i class="fab fa-facebook fa-2x"></i>
                       </a>
-                      <a href={`${user?.github_url}`} target="_blank" class="text-gray-600 hover:text-gray-800">
+                      <a href={`${Data.github_url}`} target="_blank" class="text-gray-600 hover:text-gray-800">
                           <i class="fab fa-github fa-2x"></i>
                       </a>
-                      <a  href={`${user?.linkedin_url}`} target="_blank" class="text-gray-600 hover:text-gray-800">
+                      <a  href={`${Data.linkedin_url}`} target="_blank" class="text-gray-600 hover:text-gray-800">
                           <i class="fab fa-linkedin fa-2x"></i>
                       </a>
                   </div>

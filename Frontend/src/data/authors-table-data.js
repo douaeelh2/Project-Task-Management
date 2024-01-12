@@ -34,5 +34,5 @@ export default function AuthorsTableData() {
     return { authorsTableData: {}, dataLoaded: false, handlePageChange };
   }
 
-  return { authorsTableData, dataLoaded, handlePageChange, currentPage, totalPages,totalUsers };
+  return { authorsTableData, setAuthorsTableData, dataLoaded, handlePageChange, currentPage, totalPages,totalUsers };
 }
