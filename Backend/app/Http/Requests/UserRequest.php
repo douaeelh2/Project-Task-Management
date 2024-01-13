@@ -32,7 +32,7 @@ class UserRequest extends FormRequest
             'phone' => ['required', 'string', 'regex:/^(\d{10}|\+?\d{11})$/'],
             'password' => 'required|string|min:6',
             'graduation_university' => 'nullable|string|max:25',
-            'graduate_at' => 'date',
+            'graduate_at' => 'nullable|date',
             'facebook_url' => 'nullable|string|url',
             'linkedin_url' => 'nullable|string|url',
             'github_url' => 'nullable|string|url',

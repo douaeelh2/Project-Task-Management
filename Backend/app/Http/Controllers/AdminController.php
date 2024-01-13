@@ -193,7 +193,7 @@ public function create(UserRequest $request)
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
 
-        return response()->json(['message' => 'User created successfully', 'user' => $user]);
+        return response()->json(['success' => 'User created successfully', 'user' => $user]);
     }
 }
 
