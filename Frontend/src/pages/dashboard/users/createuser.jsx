@@ -9,6 +9,7 @@ import {
   Alert,
 } from "@material-tailwind/react";
 import CreateData from '@/api/CreateData';
+import { useNavigate } from 'react-router-dom';
 
 export function CreateUser() {
   const [userData, setUserData] = useState({
@@ -20,6 +21,9 @@ export function CreateUser() {
     password: '',
   });
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,11 +36,18 @@ export function CreateUser() {
   const handleCreateUser = async () => {
     try {
       const createdUser = await CreateData(userData, 'user');
-      console.log('User created successfully:', createdUser);
+      setSuccess(createdUser.success);
+      setError(null);
+
+      setTimeout(() => {
+        navigate('/admin/users/table');
+      }, 2000);
+
     } catch (error) {
       if (error.response && error.response.data && error.response.data.errors) {
         const errorMessages = Object.values(error.response.data.errors);
         setError(errorMessages[0]);
+        setSuccess(null);
         console.log(errorMessages[0]);
       } else {
         console.error('Failed to create user:', error);
@@ -72,6 +83,14 @@ export function CreateUser() {
               </Alert>
               </div>
               )}
+              {success && (
+              <div className="col-span-6 sm:col-full mt-4 mb-4">
+              <Alert variant="ghost" className="bg-green-500 bg-opacity-20 text-green-700">
+              <span>{success}</span>
+              </Alert>
+              </div>
+              )}
+              
                 <div className="col-span-6 sm:col-span-3">
                   
                   <Typography variant="h6" color="blue-gray" className="mb-3">

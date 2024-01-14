@@ -16,7 +16,7 @@ import {
   Alert
 } from "@material-tailwind/react";
 import { EyeIcon, TrashIcon, MagnifyingGlassIcon, Cog6ToothIcon } from "@heroicons/react/24/solid";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import AuthorsTableData from "@/data/authors-table-data";
 import Loading from "@/layouts/loading";
 import DeleteData from "@/api/DeleteData";
@@ -108,16 +108,16 @@ export function UserTable() {
 
     return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
-         
-            <div class="flex justify-end mr-5">
             {success && (
+            <div class="flex justify-end mr-5">
             <div>
             <Alert variant="ghost" className="bg-green-500 bg-opacity-20 text-green-700">
             <span>{success}</span>
             </Alert>
             </div>
-            )}
-            </div>
+            </div> 
+             )}
+
         <div class="flex justify-end mr-5">
           <Link to="../users/create" class="ml-2">
               <Button variant="gradient" color="black">

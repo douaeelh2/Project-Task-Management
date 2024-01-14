@@ -8,76 +8,40 @@ import {
   Button,
 } from "@material-tailwind/react";
 
-import { Link } from "react-router-dom";
-import { usersTableData, } from "@/data";
 import fetchShowData from '@/api/fetchShowData';
 import { useParams } from 'react-router-dom';
 import { useState , useEffect } from 'react';
 import Loading from '@/layouts/loading';
 
 
-// const UserItem = usersTableData.find(User => User.name === "John Michael");
-// const userName = UserItem.name;
-// const userImg = UserItem.img;
-// const UserProjects = () => {
-//   return (
-//     <div className='w-full'>
-//       <ol className='list-decimal '>
-//         {UserItem.project.map(project => (
-//           <li key={project.id} className='flex flex-col mb-2'>
-//             <span>{project.projectName}</span>
-//           </li>
-//         ))}
-//       </ol>
-//     </div>
-//   );
-// };
-// const UserTasks = () => {
-//   return (
-//     <div className='w-full'>
-//       <ul className='list-decimal '>
-//         {UserItem.task.map(task => (
-//           <li key={task.id} className='flex flex-col mb-2'>
-//             <span>{task.taskName}</span>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-// const userEmail = UserItem.email;
-// const userJob = UserItem.job;
-// const userDate = UserItem.date;
 export function ShowUser() {
 
-//   const [dataLoaded, setDataLoaded] = useState(false);
-//   const { id } = useParams();
-//   const [userData, setUserData] = useState(null);
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const { id } = useParams();
+  const [userData, setUserData] = useState(null);
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const data = await fetchShowData( id  ,'user');
-//         setUserData(data.user); 
-//         setDataLoaded(true);
-//       } catch (error) {
-//         console.error('Error fetching user data', error);
-//         setDataLoaded(true);
-//       }
-//     };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchShowData( id  ,'user');
+        setUserData(data.user); 
+        setDataLoaded(true);
+      } catch (error) {
+        console.error('Error fetching user data', error);
+        setDataLoaded(true);
+      }
+    };
 
-//     fetchData();
-//   }, [id]);
+    fetchData();
+  }, [id]);
 
-//   if (!dataLoaded) {
-//     return <Loading />;
-//   }
-
-//   console.log(userData);
+  if (!dataLoaded) {
+    return <Loading />;
+  }
 
   return (
     <>
-    {/* <div className='mt-6'>
+     <div className='mt-6'>
         <div class="2xl:col-span-2 dark:border-gray-700 sm:p-3 dark:bg-gray-800 ml-4 mr-4">
         <Typography variant="h5" color="blue-gray" >
                 User Informations
@@ -92,9 +56,6 @@ export function ShowUser() {
                   <div class="text-center mt-6">
                   <Typography variant="h5" color="blue-gray" >
                   {userData.firstname+' '+userData.lastname}
-                </Typography>   
-                <Typography variant="paragraph" class="text-gray-700">
-                  { userJob}
                 </Typography>                         
                   </div>
               </div>
@@ -134,20 +95,6 @@ export function ShowUser() {
                   </Typography>
 
                   <Typography variant="h6" color="blue-gray" className="mb-4 " >
-                    User Projects
-                  </Typography>
-                  <Typography variant="p"  className="mb-4 ">
-                    <UserProjects/>
-                  </Typography>
-
-                  <Typography variant="h6" color="blue-gray" className="mb-4 " >
-                    User Tasks
-                  </Typography>
-                  <Typography variant="p"  className="mb-4 ">
-                    <UserTasks />
-                  </Typography>
-
-                  <Typography variant="h6" color="blue-gray" className="mb-4 " >
                     Graduated University
                   </Typography>
                   <Typography variant="p"  className="mb-4 ">
@@ -165,6 +112,6 @@ export function ShowUser() {
         </div>
         
       </div>
-    </div> */}
+    </div> 
 </>
   )}
