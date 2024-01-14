@@ -10,7 +10,6 @@ const fetchTableData = async (object) => {
           Authorization: `Bearer ${jwtCookie}`,
         },
       });
-
       return response.data; 
     } 
   } catch (error) {

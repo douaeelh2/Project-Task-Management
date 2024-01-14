@@ -12,6 +12,7 @@ import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,Magnifyi
 import { Link, useParams } from "react-router-dom";
 import ProjectData from "@/data/project-data";
 import Loading from "@/layouts/loading";
+import DeleteData from "@/api/DeleteData";
 
 
 export function ShowProject() {
@@ -19,6 +20,7 @@ export function ShowProject() {
   const {projectdata,loader}=ProjectData(id);
   const datecreatedat = new Date(projectdata.created_at).toLocaleDateString();
   const dateupdatedat = new Date(projectdata.updated_at).toLocaleDateString();
+  const [success,setSuccess] = React.useState(null);
 
   var infosproject=[
     {
@@ -48,6 +50,16 @@ export function ShowProject() {
    
     
   ];
+
+  const handleDeleteProject = async (id) => {
+    try {
+      const response = await DeleteData(id,'project');
+      setSuccess(response.success);
+      console.log("salma")
+    } catch (error) {
+      console.error('Error deleting project', error);
+    }
+  };
 
   const Members = () => {
     return (
@@ -94,8 +106,11 @@ export function ShowProject() {
                 Edit
               </Button>
               </Link>
-              <Link to="../projects/delete" className="ml-2">
-                <Button variant="gradient" color="red">
+              <Link to="../projects/table" className="ml-2">
+                <Button 
+                  variant="gradient" 
+                  color="red"
+                  onClick={() => handleDeleteProject(id)}>
                   Delete
                 </Button>
               </Link>

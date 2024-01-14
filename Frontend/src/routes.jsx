@@ -49,15 +49,15 @@ export const routes = [
         element: <Profile />,
       },
       {
-        path: "/projects/create",
+        path: "/project/create",
         element: <CreateProject />,
       },
       {
-        path: "/projects/edit",
+        path: "/project/edit/:id",
         element: <EditProject />,
       },
       {
-        path: "/projects/show/:id",
+        path: "/project/show/:id",
         element: <ShowProject />,
       },
 

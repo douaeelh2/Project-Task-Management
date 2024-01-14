@@ -49,17 +49,18 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/admin/user/show/{id}', [AdminController::class, 'show']);
 
         Route::delete('/admin/user/delete/{id}', [AdminController::class, 'delete']);
-        Route::delete('admin/project/delete/{id}',[ProjectController::class,'delete']);
 
         //projects
-
+        //get all projects
         Route::get('admin/projects',[ProjectController::class,'index']);
-
+        //show a project
         Route::get('admin/project/show/{id}',[ProjectController::class,'show']);
-
-        // Route::post('admin/projects',[ProjectController::class,'store']);
-
-        Route::put('admin/projects/{id}',[ProjectController::class,'update']);
+        //create project
+        Route::post('admin/project/create',[ProjectController::class,'create']);
+        //edit a project
+        Route::put('admin/project/edit/{id}',[ProjectController::class,'edit']);
+        //delete a project
+        Route::delete('admin/project/delete/{id}',[ProjectController::class,'delete']);
 
 });
 

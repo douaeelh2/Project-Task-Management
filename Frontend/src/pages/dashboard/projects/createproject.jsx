@@ -10,74 +10,65 @@ import {
   Option,
   Button,
 } from "@material-tailwind/react";
-
-import {
-  statisticsCardsData,
-  statisticsChartsData,
-  ordersOverviewData,
-  projectsData,
-} from "@/data";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon  } from "@heroicons/react/24/solid";
 import axios from "axios";
 import AuthorsTableData from "@/data/authors-table-data";
-
+import UsersTableData from "@/data/users-data";
+import Loading from "@/layouts/loading";
+import CreateData from "@/api/CreateData";
+import { Link } from "react-router-dom";
 
 export function CreateProject() {
-  const { authorsTableData, dataLoaded } = AuthorsTableData();
+
+  const { authorsTableData, dataLoaded } = UsersTableData();
   const [Projectdata,setProjectdata]=React.useState({
     name:'',
-    enddate:'',
-    startdate:'',
-    // members: [
-    //   { id: '', name: '' },
-    //   { id: '', name: '' }, 
-    //   { id: '', name: '' }, 
-    // ],
+    category:'',
+    datestart:'',
+    dateend:'',
+    id1:'',
+    id2:'',
+    id3:'',
+    id4:'',
     description:''
   })
-  const members=[
-    "salma",
-    "wiame",
-    "reda"
-  ]
+  
   const handlechanges=(e)=>{
     const {name,value}=e.target
-    console.log(value)
-    // const updatedMembers = [...prevProjectdata.members];
-    // updatedMembers[index] = {
-    //     id: selectedUser.id,
-    //     name: `${selectedUser.firstname} ${selectedUser.lastname}`,
-    //   };
     setProjectdata({
       ...Projectdata,
       [name]:value
     })
   }
-  // const handlechangeselect=(e,index)=>{
-  //   setProjectdata({
-  //     ...Projectdata,
-  //     [name]:value
-  //   })
-  // }
 
-  // const handleMemberChange=(selectedUserId,index)=>{
-  //   const selectedUser = authorsTableData.find(user => user.id === selectedUserId);
-  //   setProjectdata((prevProjectdata) => {
-  //     const updatedMembers = [...prevProjectdata.members];
-  //     updatedMembers[index] = {
-  //       id: selectedUser.id,
-  //       name: `${selectedUser.firstname} ${selectedUser.lastname}`,
-  //     };
-  //     return({
-  //       ...Projectdata,
-  //       members:updatedMembers
-  //     })
-  //   })
-  // console.log(Projectdata.members[0].id); // Assurez-vous que la valeur est correcte ici
+  const handlechangeselect=(value,index)=>{
+    const x="id"+index
+    setProjectdata({
+      ...Projectdata,
+      [x]:value
+    })
+  }
+
+  const handlecreateproject =async()=>{
+      try{
+        const project=await CreateData(Projectdata,'project')
+        console.log('project created successfully:', project)
+      }
+      catch(error){
+        if (error.response && error.response.data && error.response.data.errors) {
+          const errorMessages = Object.values(error.response.data.errors);
+          setError(errorMessages[0]);
+          console.log(errorMessages[0]);
+        } else {
+          if (!Projectdata.datestart) {
+            console.error('Error: Datestart is null');
+          }
+          console.error('Failed to create project:', error);
+        }
+      }
+  }
   
-  // }
-
- 
+ if(dataLoaded) return <Loading/>
   return (
 
   <div className="mt-12 mb-8 flex flex-col gap-12">
@@ -100,6 +91,7 @@ export function CreateProject() {
                 <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
                   <form className="mx-auto max-w-xl ">
                   <div class="grid grid-cols-6 gap-6">
+
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
                         Name
@@ -115,12 +107,26 @@ export function CreateProject() {
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
+                      <Typography variant="h6" color="blue-gray" className="mb-3">
+                        Category
+                      </Typography>
+                      <Input
+                        name="category"
+                        value={Projectdata.category}
+                        onChange={handlechanges}
+                        size="sm"
+                        placeholder="Project Name"
+                        className="!border-t-blue-gray-200 focus:!border-t-gray-900"
+                      />
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
                     <Typography variant="h6" color="blue-gray" className="mb-3">
                       Start Date
                     </Typography>
                     <Input
-                      name="startdate"
-                      value={Projectdata.startdate}
+                      name="datestart"
+                      value={Projectdata.datestart}
                       onChange={handlechanges}
                       size="md"
                       type="date"
@@ -137,8 +143,8 @@ export function CreateProject() {
                         End Date
                       </Typography>
                       <Input
-                        name="enddate"
-                        value={Projectdata.enddate}
+                        name="dateend"
+                        value={Projectdata.dateend}
                         onChange={handlechanges}
                         size="md"
                         type="date"
@@ -149,68 +155,69 @@ export function CreateProject() {
 
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
-                        member 1
+                      Choose Member 1
                       </Typography>
                       <Select 
                         name="member1"
                         size="md" 
-                        // value={Projectdata.members[0].firstname}
-                        // onChange={(e) => handlechangeselect(e, 0)}
+                        value={Projectdata.id1}
+                        onChange={e=>handlechangeselect(e,1)}
                         >
-                        { members.map(user => 
-                          <Option key={user} value={user}>{user}</Option>)}
+                        {authorsTableData
+                        .map(user => 
+                          <Option key={user.id} value={user.id}>{user.id} {user.firstname} {user.lastname}</Option>)}
                       </Select>
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
-                      member 2
+                      Choose Member 2
                       </Typography>
-                       {/* <Select 
+                      <Select 
                         name="member2"
                         size="md" 
-                        // value={Projectdata.members[1].name}
-                        // onChange={(e) => handleMemberChange(e, 1)}
+                        value={Projectdata.id2}
+                        onChange={e=>handlechangeselect(e,2)}
                         >
-                        {members.map(user=>
-                          <Option value={user}>{user}</Option>
-                          )}
-                      </Select> */}
+                        {authorsTableData
+                        .map(user => 
+                          <Option key={user.id} value={user.id}>{user.id} {user.firstname} {user.lastname}</Option>)}
+                      </Select>
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
-                      member 3
+                      Choose Member 3
                       </Typography>
-                      {/* <Select 
+                      <Select 
                         name="member3"
                         size="md" 
-                        value={Projectdata.members[2].name}
-                        onChange={(e) => handleMemberChange(e, 2)}
+                        value={Projectdata.id3}
+                        onChange={e=>handlechangeselect(e,3)}
                         >
-                        {authorsTableData.map(user=>
-                          <Option value={user.id}>{user.firstname} {user.lastname}</Option>
-                          )}
-                      </Select> */}
+                        {authorsTableData
+                        .map(user => 
+                          <Option key={user.id} value={user.id}>{user.id} {user.firstname} {user.lastname}</Option>)}
+                      </Select>
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
-                      member 4
+                      Choose Member 4
                       </Typography>
-                      {/* <Select 
-                        name="member3"
+                      <Select 
+                        name="member4"
                         size="md" 
-                        value={Projectdata.members[2].name}
-                        onChange={(e) => handleMemberChange(e, 2)}
+                        value={Projectdata.id4}
+                        onChange={e=>handlechangeselect(e,4)}
                         >
-                        {authorsTableData.map(user=>
-                          <Option value={user.id}>{user.firstname} {user.lastname}</Option>
-                          )}
-                      </Select> */}
+                        {authorsTableData
+                        .map(user => 
+                          <Option key={user.id} value={user.id}>{user.id} {user.firstname} {user.lastname}</Option>)}
+                      </Select>
                     </div>
-
                   </div>
+
                   <Typography variant="h6" color="blue-gray" className="mb-3 mt-6">
                        Description
                   </Typography>             
@@ -219,11 +226,17 @@ export function CreateProject() {
                     label="Project Description" 
                     value={Projectdata.description}
                     onChange={handlechanges}
-                    /> 
+                    />
+
                   <div class="col-span-6 sm:col-full ml-4 mt-4 mb-4">
-                    <Button variant="gradient" color="black" >
-                      Create Project
-                    </Button>          
+                    <Link to="../projects/table">
+                      <Button 
+                        variant="gradient" 
+                        color="black"
+                        onClick={handlecreateproject} >
+                        Create Project
+                      </Button>  
+                      </Link>        
                   </div>
                 </form>
                 </CardBody>
@@ -232,8 +245,6 @@ export function CreateProject() {
     </div>
 
   </div>
-
-      
   );
 }
 
