@@ -16,7 +16,6 @@ const CreateData = async (Data , Object) => {
     }
   } catch (error) {
     console.error('Error creating user', error);
-    console.log(error.response)
     
     throw error;
   }
