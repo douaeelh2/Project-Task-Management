@@ -23,10 +23,7 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -34,19 +31,22 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $project=new Project;
         $project->name=$request->name;
         $project->category=$request->category;
-        $project->members=$request->members;
         $project->datestart=$request->datestart;
         $project->dateend=$request->dateend;
         $project->description=$request->description;
-        $project->status=$request->status;
+        $project->status="not started";
         $project->save();
-        return response()->json($project);
 
+        $userIds = [$request->id1, $request->id2, $request->id3, $request->id4];
+        if (!empty($userIds)) {
+            $project->users()->attach($userIds);
+        }
+        return response()->json($project);
     }
 
     /**
@@ -67,10 +67,6 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -79,17 +75,20 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function edit(Request $request, $id)
     {
         $project=Project::findOrFail($id);
         $project->name=$request->name;
         $project->category=$request->category;
-        $project->members=$request->members;
         $project->datestart=$request->datestart;
         $project->dateend=$request->dateend;
         $project->description=$request->description;
         $project->status=$request->status;
         $project->save();
+
+        $userIds = [$request->id1, $request->id2, $request->id3, $request->id4];
+        $project->users()->detach();
+        $project->users()->attach($userIds);
         return response()->json($project);
     }
 
@@ -99,9 +98,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         $project=Project::findOrFail($id);
+        $project->users()->detach();
         $project->delete();
         return response()->json($project);
     }

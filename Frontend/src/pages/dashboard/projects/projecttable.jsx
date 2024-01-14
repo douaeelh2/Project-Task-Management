@@ -26,14 +26,14 @@ import { Link } from "react-router-dom";
 import react from "@heroicons/react";
 import axios from "axios";
 import Loading from "@/layouts/loading";
-import AuthorsTableData from "@/data/authors-table-data";
 import { StatisticsCard } from "@/widgets/cards";
+import DeleteData from "@/api/DeleteData";
 
 export function ProjectTable() {
-  const {projects , loader}= ProjectsTabledata()
-  const { authorsTableData, dataLoaded } = AuthorsTableData();
+  const {projects , loader }= ProjectsTabledata()
   const [filter,setfilter]=React.useState('');
-  var projectsdatanew=projects.filter(project=>project.name.toLowerCase().includes(filter.toLowerCase()))
+  var projectsdatanew=projects.filter(project=>project.name.toLowerCase().startsWith(filter.toLowerCase()))
+  const [success,setSuccess] = React.useState(null);
 
   function statuscolor({status}){
     if(status==="completed") return "green"
@@ -42,11 +42,22 @@ export function ProjectTable() {
     if(status==="not started") return "blue"
   }
 
+  const handleDeleteProject = async (id) => {
+    try {
+      const response = await DeleteData(id,'project');
+      setSuccess(response.success);
+      window.location.reload(); 
+      
+    } catch (error) {
+      console.error('Error deleting project', error);
+    }
+  };
+
 if(loader) return <Loading />
 return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
         <div class="flex justify-end mr-5">
-          <Link to="../projects/create" class="ml-2">
+          <Link to="../project/create" class="ml-2">
               <Button variant="gradient" color="black">
                  + New Project 
               </Button>
@@ -185,7 +196,7 @@ return (
                               </IconButton>
                             </MenuHandler>
                             <MenuList className="w-max border-0">
-                                <Link to={`../projects/show/${id}`}>
+                                <Link to={`../project/show/${id}`}>
                                   <MenuItem className="flex items-center gap-3">
                                       <EyeIcon className="h-5 w-5 text-blue-gray-500" />
                                     <div>
@@ -200,7 +211,7 @@ return (
                                   </MenuItem>
                                 </Link>
 
-                                <Link to="../projects/edit">
+                                <Link to={`../project/edit/${id}`}>
                                 <MenuItem className="flex items-center gap-3">
                                     <PencilSquareIcon className="h-5 w-5 text-blue-gray-500" />
                                     <div>
@@ -215,8 +226,8 @@ return (
                                 </MenuItem>
                                 </Link>
 
-                                <Link to=".">
-                                  <MenuItem className="flex items-center gap-3">
+                                  <MenuItem className="flex items-center gap-3"
+                                            onClick={() => handleDeleteProject(id)}>
                                       <TrashIcon className="h-5 w-5 text-blue-gray-500" />
                                     <div>
                                       <Typography
@@ -228,23 +239,21 @@ return (
                                       </Typography>
                                     </div>
                                   </MenuItem>
-                                </Link>
                                 
                             </MenuList>
                           </Menu>
                       </td>
-                        
-                      </tr>
+
+                    </tr>
                       
-                    );
-                  }
-                )}
-              </tbody>
-            </table>
-          </CardBody>
-        </Card>
-        
-      </div>
+                  );
+                }
+              )}
+            </tbody>
+          </table>
+        </CardBody>
+      </Card>  
+    </div>
 
   );
 }

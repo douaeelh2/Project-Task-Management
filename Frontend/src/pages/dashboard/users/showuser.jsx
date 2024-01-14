@@ -41,7 +41,7 @@ export function ShowUser() {
 
   return (
     <>
-    <div className='mt-6'>
+     <div className='mt-6'>
         <div class="2xl:col-span-2 dark:border-gray-700 sm:p-3 dark:bg-gray-800 ml-4 mr-4">
         <Typography variant="h5" color="blue-gray" >
                 User Informations
@@ -112,6 +112,6 @@ export function ShowUser() {
         </div>
         
       </div>
-    </div>
+    </div> 
 </>
   )}
