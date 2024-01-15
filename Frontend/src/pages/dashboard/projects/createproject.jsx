@@ -9,6 +9,7 @@ import {
   Select,
   Option,
   Button,
+  Alert,
 } from "@material-tailwind/react";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon  } from "@heroicons/react/24/solid";
 import axios from "axios";
@@ -16,10 +17,13 @@ import AuthorsTableData from "@/data/authors-table-data";
 import UsersTableData from "@/data/users-data";
 import Loading from "@/layouts/loading";
 import CreateData from "@/api/CreateData";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function CreateProject() {
 
+  const navigate = useNavigate();
+  const [error, setError] = React.useState(null);
+  const [success, setSuccess] = React.useState(null);
   const { authorsTableData, dataLoaded } = UsersTableData();
   const [Projectdata,setProjectdata]=React.useState({
     name:'',
@@ -52,7 +56,12 @@ export function CreateProject() {
   const handlecreateproject =async()=>{
       try{
         const project=await CreateData(Projectdata,'project')
-        console.log('project created successfully:', project)
+        setError(null)
+        setSuccess(project.success)
+        setTimeout(() => {
+          navigate('/admin/projects/table');
+        }, 2000);
+
       }
       catch(error){
         if (error.response && error.response.data && error.response.data.errors) {
@@ -91,7 +100,20 @@ export function CreateProject() {
                 <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
                   <form className="mx-auto max-w-xl ">
                   <div class="grid grid-cols-6 gap-6">
-
+                    {error && (
+                    <div className="col-span-6 sm:col-full mt-4 mb-4">
+                    <Alert variant="ghost" className="bg-red-500 bg-opacity-20 text-red-700">
+                    <span>{error}</span>
+                    </Alert>
+                    </div>
+                    )}
+                    {success && (
+                    <div className="col-span-6 sm:col-full mt-4 mb-4">
+                    <Alert variant="ghost" className="bg-green-500 bg-opacity-20 text-green-700">
+                    <span>{success}</span>
+                    </Alert>
+                    </div>
+                    )}
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
                         Name
@@ -115,7 +137,7 @@ export function CreateProject() {
                         value={Projectdata.category}
                         onChange={handlechanges}
                         size="sm"
-                        placeholder="Project Name"
+                        placeholder="Project Category"
                         className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                       />
                     </div>
@@ -130,7 +152,6 @@ export function CreateProject() {
                       onChange={handlechanges}
                       size="md"
                       type="date"
-                      placeholder="name@mail.com"
                       className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                       labelProps={{
                         className: "before:content-none after:content-none",
@@ -229,14 +250,12 @@ export function CreateProject() {
                     />
 
                   <div class="col-span-6 sm:col-full ml-4 mt-4 mb-4">
-                    <Link to="../projects/table">
                       <Button 
                         variant="gradient" 
                         color="black"
                         onClick={handlecreateproject} >
                         Create Project
                       </Button>  
-                      </Link>        
                   </div>
                 </form>
                 </CardBody>
