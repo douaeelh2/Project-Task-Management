@@ -9,16 +9,20 @@ import {
   Select,
   Option,
   Button,
+  Alert,
 } from "@material-tailwind/react";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon  } from "@heroicons/react/24/solid";
 import ProjectData from "@/data/project-data"
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import UsersTableData from "@/data/users-data"
 import Loading from "@/layouts/loading";
 import EditData from "@/api/EditData";
 
 export function EditProject() {
 
+  const navigate = useNavigate();
+  const [error, setError] = React.useState(null);
+  const [success, setSuccess] = React.useState(null);
   const { authorsTableData, dataLoaded } = UsersTableData();
   const {id}=useParams()  
   const {projectdata,loader}=ProjectData(id);
@@ -68,6 +72,11 @@ export function EditProject() {
     try{
       const project=await EditData(editprojectdata,id,'project')
       console.log('project updated successfully:', project)
+      setError(null)
+      setSuccess("project updated successfully")
+      setTimeout(() => {
+        navigate('/admin/projects/table');
+      }, 2000);
     }
     catch(error){
       if (error.response && error.response.data && error.response.data.errors) {
@@ -100,7 +109,20 @@ export function EditProject() {
           <CardBody className="overflow-x-scroll px-0 pt-0 pb-2">
             <form className="mx-auto max-w-xl ">
               <div class="grid grid-cols-6 gap-6">
-
+                {error && (
+                  <div className="col-span-6 sm:col-full mt-4 mb-4">
+                    <Alert variant="ghost" className="bg-red-500 bg-opacity-20 text-red-700">
+                      <span>{error}</span>
+                    </Alert>
+                  </div>
+                )}
+                {success && (
+                  <div className="col-span-6 sm:col-full mt-4 mb-4">
+                    <Alert variant="ghost" className="bg-green-500 bg-opacity-20 text-green-700">
+                      <span>{success}</span>
+                    </Alert>
+                  </div>
+                )}
                 <div class="col-span-6 sm:col-span-3">
                   <Typography variant="h6" color="blue-gray" className="mb-3">
                     Name
@@ -252,14 +274,12 @@ export function EditProject() {
                 /> 
 
                 <div class="col-span-6 sm:col-full ml-4 mt-4 mb-4">
-                  <Link to="../projects/table">
                     <Button 
                       variant="gradient" 
                       color="black"
                       onClick={handleeditproject} >
                       Update Project
                     </Button>   
-                  </Link>       
                 </div>
 
               </form>
