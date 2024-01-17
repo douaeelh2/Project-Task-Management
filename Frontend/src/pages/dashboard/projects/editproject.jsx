@@ -126,6 +126,16 @@ export function EditProject() {
       }
     }
 }
+
+const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isFocused ? '#DDDDDE ' : 'white',
+    color:'gray',
+    outline: 'none',
+  }),
+};
+
   if(dataLoaded) return <Loading />
   return (
     <div className="mt-10 mb-8 flex flex-col gap-12">
@@ -197,6 +207,7 @@ export function EditProject() {
                   name="status"
                   size="md" 
                   placeholder="Choose a status..."
+                  styles={customStyles}
                   value={statusoptions.find(option => option.value === editprojectdata.status)}
                   isSearchable={true}
                   onChange={handlestatuschange}
@@ -211,7 +222,6 @@ export function EditProject() {
                   <Input
                     name="datestart"
                     value={editprojectdata.datestart}
-                    onChange={handlechanges}
                     size="md"
                     type="date"
                     className="!border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -239,6 +249,7 @@ export function EditProject() {
                       Choose  Four Members 
                       </Typography>
                       <Select
+                      styles={customStyles}
                       value={list.filter(user => 
                         [editprojectdata.id1, 
                           editprojectdata.id2, 
