@@ -63,11 +63,11 @@ class ProjectRequest extends FormRequest
             'category.required' => 'The category of the project is requiered.',
             'datestart.required' => 'The start date of the project is requiered.',
             'dateend.required' => 'The end date of the project is requiered.',
-            'description.required' => 'The description of the project is requiered.',
             'id1.required' => 'The first member is required.',
             'id2.required' => 'The second member is required.',
             'id3.required' => 'The third member is required.',
             'id4.required' => 'The fourth member is required.',
+            'description.required' => 'The description of the project is requiered.',
 
             'id2.different' => 'The second member must be different from the other members.',
             'id3.different' => 'The third member must be different from the other members.',

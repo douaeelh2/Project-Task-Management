@@ -6,11 +6,11 @@ import {
   CardBody,
   Input,
   Textarea,
-  Select,
   Option,
   Button,
   Alert,
 } from "@material-tailwind/react";
+import Select from 'react-select';
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon  } from "@heroicons/react/24/solid";
 import ProjectData from "@/data/project-data"
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -19,15 +19,28 @@ import Loading from "@/layouts/loading";
 import EditData from "@/api/EditData";
 
 export function EditProject() {
-
+  
   const navigate = useNavigate();
   const [error, setError] = React.useState(null);
   const [success, setSuccess] = React.useState(null);
   const { authorsTableData, dataLoaded } = UsersTableData();
   const {id}=useParams()  
   const {projectdata,loader}=ProjectData(id);
+
   const [editprojectdata,setEditprojectdata]=React.useState([])
-  
+  const list=authorsTableData.map(user => ({
+    value: user.id,  // Use a unique identifier as the value
+    label: `${user.firstname} ${user.lastname}`
+  }))
+  const [iddata,setiddata]=React.useState([])
+
+  const statusoptions=[
+    {value:"not started" ,label:"Not Started"},
+    {value:"in progress" ,label:"In Progress"},
+    {value:"pending" ,label:"Pending"},
+    {value:"completed" ,label:"Completed"}
+  ]
+
   React.useEffect(() => {
     if (projectdata && !loader) {
       setEditprojectdata({
@@ -42,31 +55,56 @@ export function EditProject() {
         id4:projectdata.users[3].id,
         description:projectdata.description
       })
+      console.log(editprojectdata)
+
+      var initlist = list.filter(user => user.id==editprojectdata.id1);
+      console.log(initlist)
+      setiddata(initlist)
     }    
   }, [projectdata, loader]);
 
+  function handleidchange(selectedOptions){
+    if (selectedOptions.length <= 4) {
+      setiddata(selectedOptions)
+      const selectedIds = selectedOptions.map(option => option.value);
+      setEditprojectdata(prevState => ({
+        ...prevState,
+        id1: selectedIds[0] || '',
+        id2: selectedIds[1] || '',
+        id3: selectedIds[2] || '',
+        id4: selectedIds[3] || ''
+      }))
+    } 
+    console.log(editprojectdata)
+   }
+   
   const handlechanges=(e)=>{
-    const {name,value}=e.target
+    const {name,value}=e.currentTarget
+      setEditprojectdata({
+        ...editprojectdata,
+        [name]:value
+      })  
+      console.log(name)
+    console.log(editprojectdata.datestart)
+
+  }
+
+  const handledatechanges=(e)=>{
+    const {name,value}=e.currentTarget
+    const formattedDate = new Date(value).toLocaleDateString('en-GB');
     setEditprojectdata({
       ...editprojectdata,
-      [name]:value
+      [name]:formattedDate
     })
   }
   const handlestatuschange=(e)=>{
     setEditprojectdata({
       ...editprojectdata,
-      status:e
+      status:e.value
     })
+    console.log(e)
   }
-  const handlechangeselect=(value,index)=>{
-    const x="id"+index
-    setEditprojectdata({
-      ...editprojectdata,
-      [x]:value
-    })
-    console.log(editprojectdata)
 
-  }
 
   const handleeditproject =async()=>{
     try{
@@ -158,14 +196,12 @@ export function EditProject() {
                   <Select
                   name="status"
                   size="md" 
-                  value={editprojectdata.status}
+                  placeholder="Choose a status..."
+                  value={statusoptions.find(option => option.value === editprojectdata.status)}
+                  isSearchable={true}
                   onChange={handlestatuschange}
-                  >
-                    <Option value="not started">Not Started</Option>
-                    <Option value="in progress">In Progress</Option>
-                    <Option value="pending">Pending</Option>
-                    <Option value="completed">Completed</Option>
-                  </Select>
+                  options={statusoptions}
+                  /> 
                 </div>
 
                 <div class="col-span-6 sm:col-span-3">
@@ -173,12 +209,11 @@ export function EditProject() {
                     Start Date
                   </Typography>
                   <Input
-                    name="startdate"
+                    name="datestart"
                     value={editprojectdata.datestart}
                     onChange={handlechanges}
                     size="md"
                     type="date"
-                    placeholder="Date"
                     className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                   />
                 </div>
@@ -188,79 +223,34 @@ export function EditProject() {
                     End Date
                   </Typography>
                   <Input
-                    name="enddate"
+                    name="dateend"
                     value={editprojectdata.dateend}
                     onChange={handlechanges}
                     size="md"
                     type="date"
-                    placeholder="Date"
                     className="!border-t-blue-gray-200 focus:!border-t-gray-900"
                   />
                 </div>
 
-                <div class="col-span-6 sm:col-span-3">
-                  <Typography variant="h6" color="blue-gray" className="mb-3">
-                    member 1
-                  </Typography>
-                  <Select 
-                    name="member1"
-                    size="md" 
-                    value={editprojectdata.id1}
-                    onChange={e=>handlechangeselect(e,1)}
-                    >
-                    {authorsTableData
-                    .map(user => 
-                      <Option key={user.id} value={user.id}>{user.id} {user.firstname} {user.lastname}</Option>)}
-                  </Select>
+              
                 </div>
-
                 <div class="col-span-6 sm:col-span-3">
-                  <Typography variant="h6" color="blue-gray" className="mb-3">
-                  member 2
-                  </Typography>
-                  <Select 
-                    name="member2"
-                    size="md" 
-                    value={editprojectdata.id2}
-                    onChange={e=>handlechangeselect(e,2)}
-                    >
-                    {authorsTableData
-                    .map(user => 
-                      <Option key={user.id} value={user.id}>{user.id} {user.firstname} {user.lastname}</Option>)}
-                  </Select>
-                </div>
-
-                <div class="col-span-6 sm:col-span-3">
-                  <Typography variant="h6" color="blue-gray" className="mb-3">
-                  member 3
-                  </Typography>
-                  <Select 
-                    name="member3"
-                    size="md" 
-                    value={editprojectdata.id3}
-                    onChange={e=>handlechangeselect(e,3)}
-                    >
-                    {authorsTableData
-                    .map(user => 
-                      <Option key={user.id} value={user.id}>{user.id} {user.firstname} {user.lastname}</Option>)}
-                  </Select>
-                </div>
-
-                <div class="col-span-6 sm:col-span-3">
-                  <Typography variant="h6" color="blue-gray" className="mb-3">
-                  member 4
-                  </Typography>
-                  <Select 
-                    name="member4"
-                    size="md" 
-                    value={editprojectdata.id4}
-                    onChange={e=>handlechangeselect(e,4)}
-                    >
-                    {authorsTableData
-                    .map(user => 
-                      <Option key={user.id} value={user.id}>{user.id} {user.firstname} {user.lastname}</Option>)}
-                  </Select>
-                </div>
+                      <Typography variant="h6" color="blue-gray" className="mb-3 mt-6">
+                      Choose  Four Members 
+                      </Typography>
+                      <Select
+                      value={list.filter(user => 
+                        [editprojectdata.id1, 
+                          editprojectdata.id2, 
+                          editprojectdata.id3, 
+                          editprojectdata.id4]
+                        .includes(user.value))}
+                      onChange={handleidchange}
+                        options={list}
+                        isSearchable={true}
+                        isMulti={true}
+                        placeholder="Search for a member..."
+                      />
                 </div>
 
                 <Typography variant="h6" color="blue-gray" className="mb-3 mt-6">
