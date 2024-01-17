@@ -9,13 +9,14 @@ import {
 } from "@material-tailwind/react";
 import{ShowDetails} from "@/widgets/layout/ShowDetails";
 import { CheckCircleIcon, ClockIcon,PencilSquareIcon,EyeIcon ,TrashIcon,MagnifyingGlassIcon,Cog6ToothIcon  } from "@heroicons/react/24/solid";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ProjectData from "@/data/project-data";
 import Loading from "@/layouts/loading";
 import DeleteData from "@/api/DeleteData";
 
 
 export function ShowProject() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const {projectdata,loader}=ProjectData(id);
   const datecreatedat = new Date(projectdata.created_at).toLocaleDateString();
@@ -55,11 +56,13 @@ export function ShowProject() {
     try {
       const response = await DeleteData(id,'project');
       setSuccess(response.success);
-      console.log("salma")
+      navigate(-1);
+      
     } catch (error) {
       console.error('Error deleting project', error);
     }
   };
+
 
   const Members = () => {
     return (
@@ -101,19 +104,20 @@ export function ShowProject() {
           </Typography>   
           <div className="flex items-center">
             <div className="ml-auto">
-              <Link to="../projects/edit" className="ml-2">
-              <Button variant="gradient" color="black">
-                Edit
-              </Button>
-              </Link>
-              <Link to="../projects/table" className="ml-2">
-                <Button 
-                  variant="gradient" 
-                  color="red"
-                  onClick={() => handleDeleteProject(id)}>
-                  Delete
+              <Link to={`../project/edit/${id}`} className="mx-3">
+                <Button variant="gradient" color="black">
+                  Edit
                 </Button>
               </Link>
+              
+              <Button 
+                onClick={() => handleDeleteProject(id)}
+                variant="gradient" 
+                color="red"
+              >                  
+                Delete
+              </Button>
+              
             </div>
           </div>   
         </div>      
