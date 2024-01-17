@@ -43,7 +43,7 @@ export function Home() {
   const Totalgrps=projects.length;
   const CompletedProjects=projects.filter(project=>project.status==="completed")
 
-  var projectsdatanew=CompletedProjects.filter(project=>project.name.toLowerCase().includes(filter.toLowerCase()))
+  var projectsdatanew=CompletedProjects.filter(project=>project.name.toLowerCase().startsWith(filter.toLowerCase()))
 
   const statisticsCardsData = [
     {

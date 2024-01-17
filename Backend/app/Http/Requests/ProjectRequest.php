@@ -23,37 +23,42 @@ class ProjectRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => 'required|max:255|unique:projects,name,' . $this->route('id'),
-            'category'=>'required|max:15',
-            'datestart'=>[
+            'category' => 'required|max:15',
+            'datestart' => [
                 'required',
                 'date',
-                'after_or_equal:' . now()->toDateString(),
             ],
-            'dateend'=>[
+            'dateend' => [
                 'required',
                 'date',
                 'after:datestart',
             ],
-            'description'=>'required',
-            'id1'=>[
+            'description' => 'required',
+            'id1' => 'required',
+            'id2' => [
                 'required',
+                'different:id1',
             ],
-            'id2'=>[
+            'id3' => [
                 'required',
-                'different:id1'
+                'different:id1,id2',
             ],
-            'id3'=>[
+            'id4' => [
                 'required',
-                'different:id1,id2'
-            ],
-            'id4'=>[
-                'required',
-                'different:id1,id2,id3'
+                'different:id1,id2,id3',
             ],
         ];
+
+        // Ajoutez la règle de validation spécifique pour 'datestart' uniquement lors de l'ajout d'un projet
+        if ($this->isMethod('post')) {
+            $rules['datestart'][] = 'after_or_equal:' . now()->toDateString();
+        }
+
+        return $rules;
     }
+
 
     public function messages()
     {
@@ -62,18 +67,17 @@ class ProjectRequest extends FormRequest
             'name.unique'=>'The name of the project should be unique',
             'category.required' => 'The category of the project is requiered.',
             'datestart.required' => 'The start date of the project is requiered.',
+            'datestart.after_or_equal' => 'The start date must be equal to or later than today.',
             'dateend.required' => 'The end date of the project is requiered.',
+            'dateend.after' => 'The end date must be later than start date.',
             'id1.required' => 'The first member is required.',
             'id2.required' => 'The second member is required.',
-            'id3.required' => 'The third member is required.',
-            'id4.required' => 'The fourth member is required.',
-            'description.required' => 'The description of the project is requiered.',
-
             'id2.different' => 'The second member must be different from the other members.',
+            'id3.required' => 'The third member is required.',
             'id3.different' => 'The third member must be different from the other members.',
+            'id4.required' => 'The fourth member is required.',
             'id4.different' => 'The fourth member must be different from the other members.',
-            'datestart.after_or_equal' => 'The start date must be equal to or later than today.',
-            'dateend.after' => 'The end date must be later than start date.',
+            'description.required' => 'The description of the project is requiered.',
         ];
     }
 }
