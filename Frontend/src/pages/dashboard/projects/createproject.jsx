@@ -6,7 +6,6 @@ import {
   CardBody,
   Input,
   Textarea,
-  Select,
   Option,
   Button,
   Alert,
@@ -18,13 +17,18 @@ import UsersTableData from "@/data/users-data";
 import Loading from "@/layouts/loading";
 import CreateData from "@/api/CreateData";
 import { Link, useNavigate } from "react-router-dom";
+import Select from 'react-select';
 
 export function CreateProject() {
-
+  
   const navigate = useNavigate();
   const [error, setError] = React.useState(null);
   const [success, setSuccess] = React.useState(null);
   const { authorsTableData, dataLoaded } = UsersTableData();
+  const list=authorsTableData.map(user => ({
+    value: user.id,  // Use a unique identifier as the value
+    label: `${user.firstname} ${user.lastname}`
+  }))
   const [Projectdata,setProjectdata]=React.useState({
     name:'',
     category:'',
@@ -36,13 +40,31 @@ export function CreateProject() {
     id4:'',
     description:''
   })
-  
+  const [iddata,setiddata]=React.useState([])
+
+ function handleidchange(selectedOptions){
+
+  if (selectedOptions.length <= 4) {
+
+    setiddata(selectedOptions)
+    const selectedIds = selectedOptions.map(option => option.value);
+    setProjectdata(prevState => ({
+      ...prevState,
+      id1: selectedIds[0] || '',
+      id2: selectedIds[1] || '',
+      id3: selectedIds[2] || '',
+      id4: selectedIds[3] || ''
+    }))
+  } 
+  console.log(Projectdata)
+ }
   const handlechanges=(e)=>{
     const {name,value}=e.target
     setProjectdata({
       ...Projectdata,
       [name]:value
     })
+    console.log(value)
   }
 
   const handlechangeselect=(value,index)=>{
@@ -174,71 +196,22 @@ export function CreateProject() {
                       />
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3">
-                      <Typography variant="h6" color="blue-gray" className="mb-3">
-                      Choose Member 1
-                      </Typography>
-                      <Select 
-                        name="member1"
-                        size="md" 
-                        value={Projectdata.id1}
-                        onChange={e=>handlechangeselect(e,1)}
-                        >
-                        {authorsTableData
-                        .map(user => 
-                          <Option key={user.id} value={user.id}>{user.id} {user.firstname} {user.lastname}</Option>)}
-                      </Select>
-                    </div>
-
-                    <div class="col-span-6 sm:col-span-3">
-                      <Typography variant="h6" color="blue-gray" className="mb-3">
-                      Choose Member 2
-                      </Typography>
-                      <Select 
-                        name="member2"
-                        size="md" 
-                        value={Projectdata.id2}
-                        onChange={e=>handlechangeselect(e,2)}
-                        >
-                        {authorsTableData
-                        .map(user => 
-                          <Option key={user.id} value={user.id}>{user.id} {user.firstname} {user.lastname}</Option>)}
-                      </Select>
-                    </div>
-
-                    <div class="col-span-6 sm:col-span-3">
-                      <Typography variant="h6" color="blue-gray" className="mb-3">
-                      Choose Member 3
-                      </Typography>
-                      <Select 
-                        name="member3"
-                        size="md" 
-                        value={Projectdata.id3}
-                        onChange={e=>handlechangeselect(e,3)}
-                        >
-                        {authorsTableData
-                        .map(user => 
-                          <Option key={user.id} value={user.id}>{user.id} {user.firstname} {user.lastname}</Option>)}
-                      </Select>
-                    </div>
-
-                    <div class="col-span-6 sm:col-span-3">
-                      <Typography variant="h6" color="blue-gray" className="mb-3">
-                      Choose Member 4
-                      </Typography>
-                      <Select 
-                        name="member4"
-                        size="md" 
-                        value={Projectdata.id4}
-                        onChange={e=>handlechangeselect(e,4)}
-                        >
-                        {authorsTableData
-                        .map(user => 
-                          <Option key={user.id} value={user.id}>{user.id} {user.firstname} {user.lastname}</Option>)}
-                      </Select>
-                    </div>
                   </div>
 
+                  <div class="col-span-6 sm:col-span-3">
+                      <Typography variant="h6" color="blue-gray" className="mb-3 mt-6">
+                      Choose  Four Members 
+                      </Typography>
+                     
+                      <Select
+                        value={iddata}
+                        onChange={handleidchange}
+                        options={list}
+                        isSearchable={true}
+                        isMulti={true}
+                        placeholder="Search for a member..."
+                      />
+                    </div>
                   <Typography variant="h6" color="blue-gray" className="mb-3 mt-6">
                        Description
                   </Typography>             
