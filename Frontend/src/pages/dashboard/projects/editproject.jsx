@@ -113,7 +113,7 @@ export function EditProject() {
       setError(null)
       setSuccess("project updated successfully")
       setTimeout(() => {
-        navigate('/admin/projects/table');
+        navigate(-1);
       }, 2000);
     }
     catch(error){
