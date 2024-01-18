@@ -78,6 +78,11 @@ Compiles and reloads front-end resources command in your first terminal :
  ```
 npm run dev
 ```
+To use the react select, run the following command : 
+
+ ```
+npm install react-select
+```
 
 # Usage
    ## Sign In and Home Screenshots

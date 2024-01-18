@@ -99,6 +99,15 @@ export function CreateProject() {
       }
   }
   
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? '#DDDDDE ' : 'white',
+      color:'gray',
+      outline: 'none',
+    }),
+  };
+
  if(dataLoaded) return <Loading/>
   return (
 
@@ -204,6 +213,7 @@ export function CreateProject() {
                       </Typography>
                      
                       <Select
+                        styles={customStyles}
                         value={iddata}
                         onChange={handleidchange}
                         options={list}

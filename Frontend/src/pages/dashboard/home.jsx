@@ -201,7 +201,7 @@ export function Home() {
                       </td>
                       
                       <td className={className}>
-                      <Link to={`../projects/show/${id}`}>
+                      <Link to={`../project/show/${id}`}>
                             <IconButton variant="text" color="blue-gray">
                             <EyeIcon className="h-5 w-5 text-black" />
                             </IconButton>
