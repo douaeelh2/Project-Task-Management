@@ -76,7 +76,7 @@ function App() {
           ) : isAdmin ? (
             <Navigate to="/admin/home" />
           ) : (
-            <Navigate to="/user/tasks/table" />
+            <Navigate to="/user/tasks" />
           )
         }
       />

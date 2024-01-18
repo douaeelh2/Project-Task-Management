@@ -9,7 +9,8 @@ import {
     UsersIcon,
     ClipboardDocumentListIcon 
   } from "@heroicons/react/24/solid";
-  import { Profile, TaskTable,EditTask , ShowTask } from "@/pages/dashboard";
+  import { Profile, EditTask , ShowTask} from "@/pages/dashboard";
+  import UserTasks from "./pages/dashboard/tasks/usertasks";
   
   const icon = {
     className: "w-5 h-5 text-inherit",
@@ -22,8 +23,8 @@ import {
         {
           icon: <ClipboardDocumentListIcon  {...icon} />,
           name: "tasks",
-          path: "/tasks/table",
-          element: <TaskTable />,
+          path: "/tasks",
+          element: <UserTasks />,
         },
         {
           icon: <UserCircleIcon {...icon} />,

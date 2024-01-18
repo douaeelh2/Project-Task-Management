@@ -27,7 +27,7 @@ export function SignIn() {
         if (isAdmin && isAuthenticated) {
           navigate("/admin/home", { replace: true });
         } else if (!isAdmin && isAuthenticated) {
-          navigate("/user/tasks/table", { replace: true });
+          navigate("/user/tasks", { replace: true });
         }
       }
     } catch (error) {

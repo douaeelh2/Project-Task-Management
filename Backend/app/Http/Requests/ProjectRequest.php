@@ -25,7 +25,7 @@ class ProjectRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|max:255|unique:projects,name,' . $this->route('id'),
-            'category' => 'required|max:15',
+            'category' => 'required',
             'datestart' => [
                 'required',
                 'date',
@@ -65,10 +65,10 @@ class ProjectRequest extends FormRequest
         return [
             'name.required' => 'The name of the project is required.',
             'name.unique'=>'The name of the project should be unique',
-            'category.required' => 'The category of the project is requiered.',
-            'datestart.required' => 'The start date of the project is requiered.',
+            'category.required' => 'The category of the project is required.',
+            'datestart.required' => 'The start date of the project is required.',
             'datestart.after_or_equal' => 'The start date must be equal to or later than today.',
-            'dateend.required' => 'The end date of the project is requiered.',
+            'dateend.required' => 'The end date of the project is required.',
             'dateend.after' => 'The end date must be later than start date.',
             'id1.required' => 'The first member is required.',
             'id2.required' => 'The second member is required.',
@@ -77,7 +77,7 @@ class ProjectRequest extends FormRequest
             'id3.different' => 'The third member must be different from the other members.',
             'id4.required' => 'The fourth member is required.',
             'id4.different' => 'The fourth member must be different from the other members.',
-            'description.required' => 'The description of the project is requiered.',
+            'description.required' => 'The description of the project is required.',
         ];
     }
 }
