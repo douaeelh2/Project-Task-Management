@@ -40,7 +40,7 @@ export function CreateUser() {
       setError(null);
 
       setTimeout(() => {
-        navigate('/admin/users/table');
+        navigate('/admin/users');
       }, 2000);
 
     } catch (error) {

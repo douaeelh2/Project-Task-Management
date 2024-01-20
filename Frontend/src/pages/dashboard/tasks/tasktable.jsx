@@ -27,7 +27,7 @@ console.log(tasksdatanew)
     <div className="mt-12 mb-8 flex flex-col gap-12">
       {isAdmin && (
         <div className="flex justify-end mr-5">
-          <Link to="../tasks/create" className="ml-2">
+          <Link to="../task/create" className="ml-2">
             <Button variant="gradient" color="black">
               + New Task
             </Button>
@@ -129,7 +129,7 @@ console.log(tasksdatanew)
                             </IconButton>
                           </MenuHandler>
                           <MenuList className="w-max border-0">
-                          <Link to="../tasks/show">
+                          <Link to="../task/show">
                             <MenuItem className="flex items-center gap-3">
                                 <EyeIcon className="h-5 w-5 text-blue-gray-500" />
                               <div>
@@ -143,7 +143,7 @@ console.log(tasksdatanew)
                               </div>
                             </MenuItem>
                             </Link>
-                            <Link to="../tasks/edit">
+                            <Link to="../task/edit">
                             <MenuItem className="flex items-center gap-3">
                                 <PencilSquareIcon className="h-5 w-5 text-blue-gray-500" />
                               <div>

@@ -119,7 +119,7 @@ export function UserTable() {
              )}
 
         <div class="flex justify-end mr-5">
-          <Link to="../users/create" class="ml-2">
+          <Link to="../user/create" class="ml-2">
               <Button variant="gradient" color="black">
                  + New User 
               </Button>
@@ -208,7 +208,7 @@ export function UserTable() {
                               </IconButton>
                             </MenuHandler>
                             <MenuList className="w-max border-0">
-                            <Link to={`../users/show/${user.id}`}>
+                            <Link to={`../user/show/${user.id}`}>
                               <MenuItem className="flex items-center gap-3">
                                 <EyeIcon className="h-5 w-5 text-blue-gray-500" />
                                 <div>

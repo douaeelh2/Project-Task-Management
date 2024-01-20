@@ -27,19 +27,19 @@ export const routes = [
       {
         icon: <TableCellsIcon {...icon} />,
         name: "projects",
-        path: "/projects/table",
+        path: "/projects",
         element: <ProjectTable />,
       },
       {
         icon: <ClipboardDocumentListIcon  {...icon} />,
         name: "tasks",
-        path: "/tasks/table",
+        path: "/tasks",
         element: <TaskTable />,
       },
       {
         icon: <UsersIcon {...icon} />,
         name: "users",
-        path: "/users/table",
+        path: "/users",
         element: <UserTable />,
       },
       {
@@ -62,23 +62,23 @@ export const routes = [
       },
 
       {
-        path: "/tasks/create",
+        path: "/task/create",
         element: <CreateTask />,
       },
       {
-        path: "/tasks/edit",
+        path: "/task/edit",
         element: <EditTask />,
       },
       {
-        path: "/tasks/show/:id",
+        path: "/task/show/:id",
         element: <ShowTask />,
       },
       {
-        path: "/users/create",
+        path: "/user/create",
         element: <CreateUser />,
       },
       {
-        path: "/users/show/:id",
+        path: "/user/show/:id",
         element: <ShowUser />,
       },
     ],
