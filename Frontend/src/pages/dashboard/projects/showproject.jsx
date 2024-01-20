@@ -13,7 +13,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import ProjectData from "@/data/project-data";
 import Loading from "@/layouts/loading";
 import DeleteData from "@/api/DeleteData";
-
+import SuccessPopup from '@/layouts/SuccessPopup';
+import PermissionPopup from '@/layouts/PermissionPopup';
 
 export function ShowProject() {
   const navigate = useNavigate();
@@ -21,8 +22,14 @@ export function ShowProject() {
   const {projectdata,loader}=ProjectData(id);
   const datecreatedat = new Date(projectdata.created_at).toLocaleDateString();
   const dateupdatedat = new Date(projectdata.updated_at).toLocaleDateString();
-  const [success,setSuccess] = React.useState(null);
-
+  const [success,setSuccess] = React.useState({
+    value:false,
+    message:null
+  });
+  const [showDeletePopup, setShowDeletePopup] = React.useState({
+    value:false,
+    idvalue:null
+  }); 
   var infosproject=[
     {
       title:"Project Name",
@@ -55,14 +62,37 @@ export function ShowProject() {
   const handleDeleteProject = async (id) => {
     try {
       const response = await DeleteData(id,'project');
-      setSuccess(response.success);
-      navigate(-1);
+      setSuccess({
+        value:true,
+        message:'Successfully removed project.'
+      });
+      setShowDeletePopup({
+        value:false,
+        idvalue:null
+      })
       
     } catch (error) {
       console.error('Error deleting project', error);
     }
   };
 
+  const deleteclick=(id)=>{
+    setShowDeletePopup({
+      value:true,
+      idvalue:id
+    })
+  }
+  const closesuccesspopup=()=>{
+    setShowDeletePopup({
+      showDeletePopup,
+      value:false
+    })
+    success.value && navigate(-1)
+    setSuccess({
+      value:false,
+      message:null
+    })
+  }
 
   const Members = () => {
     return (
@@ -91,6 +121,8 @@ export function ShowProject() {
   if (loader===true) return <Loading />
   return (
     <div className="mt-10 mb-8 flex flex-col gap-12">  
+    {showDeletePopup.value && <PermissionPopup id={showDeletePopup.idvalue} closepopup={closesuccesspopup} handleactionDeleteProject={handleDeleteProject} object="project"/>}
+    {success.value && <SuccessPopup closepopup={closesuccesspopup} message={success.message}/>}
     <Card>
         <CardHeader
         floated={false}
@@ -111,7 +143,7 @@ export function ShowProject() {
               </Link>
               
               <Button 
-                onClick={() => handleDeleteProject(id)}
+                onClick={e=>deleteclick(id)}
                 variant="gradient" 
                 color="red"
               >                  

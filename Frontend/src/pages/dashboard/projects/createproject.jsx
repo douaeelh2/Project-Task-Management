@@ -18,12 +18,15 @@ import Loading from "@/layouts/loading";
 import CreateData from "@/api/CreateData";
 import { Link, useNavigate } from "react-router-dom";
 import Select from 'react-select';
-
+import SuccessPopup from "@/layouts/SuccessPopup";
 export function CreateProject() {
   
   const navigate = useNavigate();
   const [error, setError] = React.useState(null);
-  const [success, setSuccess] = React.useState(null);
+  const [success, setSuccess] = React.useState({
+    value:false,
+    message:null
+  });
   const { authorsTableData, dataLoaded } = UsersTableData();
   const list=authorsTableData.map(user => ({
     value: user.id,  // Use a unique identifier as the value
@@ -79,12 +82,12 @@ export function CreateProject() {
       try{
         const project=await CreateData(Projectdata,'project')
         setError(null)
-        setSuccess(project.success)
-        setTimeout(() => {
-          navigate('/admin/projects/table');
-        }, 2000);
-
+        setSuccess({
+          value:true,
+          message:'Successfully added project.'
+        }) 
       }
+
       catch(error){
         if (error.response && error.response.data && error.response.data.errors) {
           const errorMessages = Object.values(error.response.data.errors);
@@ -107,6 +110,10 @@ export function CreateProject() {
       outline: 'none',
     }),
   };
+
+  const closesuccesspopup=()=>{
+      navigate('/admin/projects/table');
+  }
 
  if(dataLoaded) return <Loading/>
   return (
@@ -138,13 +145,7 @@ export function CreateProject() {
                     </Alert>
                     </div>
                     )}
-                    {success && (
-                    <div className="col-span-6 sm:col-full mt-4 mb-4">
-                    <Alert variant="ghost" className="bg-green-500 bg-opacity-20 text-green-700">
-                    <span>{success}</span>
-                    </Alert>
-                    </div>
-                    )}
+                    {success.value && <SuccessPopup closepopup={closesuccesspopup} message={success.message}/>}
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
                         Name
