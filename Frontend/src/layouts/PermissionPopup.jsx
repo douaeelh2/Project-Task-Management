@@ -1,3 +1,4 @@
+import { Button } from "@material-tailwind/react";
 const PermissionPopup=({id,closepopup,handleactionDeleteProject,object})=>{
     return(
       <div id="modelConfirm" className="fixed  z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
@@ -20,21 +21,22 @@ const PermissionPopup=({id,closepopup,handleactionDeleteProject,object})=>{
               </div>
 
               <div className="p-6 pt-0 text-center">
-                  <svg className="w-20 h-20 text-red-700 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  <svg className="w-20 h-20 text-red-400 mx-auto " fill="none" stroke="currentColor" viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                           d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
                   <h3 className="text-xl font-normal text-gray-500 mt-5 mb-6">Are you sure you want to delete this {object}?</h3>
-                  <button  onClick={e=>handleactionDeleteProject(id)}
-                      className="text-white bg-red-700 hover:bg-red-400 focus:ring-2 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
+                  <div className="flex justify-center gap-3">
+                  <Button  onClick={e=>handleactionDeleteProject(id)} variant="gradient" color="red">
                       Yes, I'm sure
-                  </button>
-                  <button onClick={closepopup}
-                      className="text-gray-900 bg-white hover:bg-gray-100 focus:ring-2 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center"
-                      data-modal-toggle="delete-user-modal">
+                  </Button>
+                  <Button onClick={closepopup}
+                      data-modal-toggle="delete-user-modal" variant="gradient" color="white">
                       No, cancel
-                  </button>
+                  </Button>
+                  </div>
+                  
               </div>
           </div>
       </div>

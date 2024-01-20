@@ -1,3 +1,4 @@
+import { Button } from "@material-tailwind/react";
 const SuccessPopup=({closepopup,message})=>{
     return(
       <div id="successModal" className="fixed  z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
@@ -13,10 +14,10 @@ const SuccessPopup=({closepopup,message})=>{
                       <span className="sr-only">Success</span>
                   </div>
                   <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">{message}</p>
-                  <button data-modal-toggle="successModal" type="button" className="py-2 px-3 text-sm font-medium text-center text-white rounded-lg bg-green-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-900"
+                  <Button data-modal-toggle="successModal" type="button" color="green" variant="gradient"
                           onClick={closepopup}>
                       back
-                  </button>
+                  </Button>
               </div>
           </div>
       </div>
