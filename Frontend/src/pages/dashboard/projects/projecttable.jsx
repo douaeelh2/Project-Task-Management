@@ -28,36 +28,75 @@ import axios from "axios";
 import Loading from "@/layouts/loading";
 import { StatisticsCard } from "@/widgets/cards";
 import DeleteData from "@/api/DeleteData";
+import PermissionPopup from '@/layouts/PermissionPopup';
+import SuccessPopup from '@/layouts/SuccessPopup';
 
 export function ProjectTable() {
+  const [showDeletePopup, setShowDeletePopup] = React.useState({
+    value:false,
+    idvalue:null
+  }); 
+  const [showSuccessPopup, setShowSuccessPopup] = React.useState(false)
   const {projects , loader }= ProjectsTabledata()
   const [filter,setfilter]=React.useState('');
   var projectsdatanew=projects.filter(project=>project.name.toLowerCase().startsWith(filter.toLowerCase()))
   const [success,setSuccess] = React.useState(null);
+  const [projectslist,setprojetslist]=React.useState([])
 
+  React.useEffect(()=>{
+    setprojetslist(projectsdatanew)
+  },[projects])
+
+  console.log(projectslist)
   function statuscolor({status}){
     if(status==="completed") return "green"
-    if(status==="in progress") return "blue-gray"
+    if(status==="in progress") return "blue"
     if(status==="pending") return "red"
-    if(status==="not started") return "blue"
+    if(status==="not started") return "blue-gray"
+  }
+
+  const deleteclick=(id)=>{
+    setShowDeletePopup({
+      value:true,
+      idvalue:id
+    })
+  }
+
+  const closesuccesspopup=()=>{
+    setShowDeletePopup({
+      ...showDeletePopup,
+      value:false
+    })
+    setShowSuccessPopup(false)
   }
 
   const handleDeleteProject = async (id) => {
     try {
+    console.log(showDeletePopup)
+
       const response = await DeleteData(id,'project');
-      setSuccess(response.success);
-      window.location.reload(); 
-      
+      setSuccess(
+        'Successfully removed project.'
+      );
+      setprojetslist((prevProjects) => prevProjects.filter(project => project.id !== id));
+      closesuccesspopup()
+      setShowSuccessPopup(true)
+      console.log(showSuccessPopup)
     } catch (error) {
       console.error('Error deleting project', error);
     }
   };
 
+  
 if(loader) return <Loading />
+
 return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
-        <div class="flex justify-end mr-5">
-          <Link to="../project/create" class="ml-2">
+        {showDeletePopup.value &&<PermissionPopup id={showDeletePopup.idvalue} closepopup={closesuccesspopup} handleactionDeleteProject={handleDeleteProject} object="project" />}
+        {showSuccessPopup &&<SuccessPopup closepopup={closesuccesspopup} message={success}/>}
+
+        <div className="flex justify-end mr-5">
+          <Link to="../project/create" className="ml-2">
               <Button variant="gradient" color="black">
                  + New Project 
               </Button>
@@ -112,7 +151,7 @@ return (
                 </tr>
               </thead>
               <tbody>
-                {projectsdatanew.map(
+                {projectslist.map(
                   ({id ,name, category  , datestart , dateend ,status,users }) => {
                     const className = `py-4 px-5`;
                     const reversedstartDate = datestart.split("-").reverse().join("-");
@@ -227,7 +266,7 @@ return (
                                 </Link>
 
                                   <MenuItem className="flex items-center gap-3"
-                                            onClick={() => handleDeleteProject(id)}>
+                                            onClick={e=>deleteclick(id)}>
                                       <TrashIcon className="h-5 w-5 text-blue-gray-500" />
                                     <div>
                                       <Typography
