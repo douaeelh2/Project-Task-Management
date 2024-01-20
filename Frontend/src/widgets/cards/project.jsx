@@ -89,7 +89,7 @@ export function Project({ id , name , description , status }) {
   }
 
   return (
-    <div class=" bg-white/20 p-6 rounded-md shadow-sm border-2 border-gray-100 hover:border-black hover:border-1 transition-colors duration-300">
+    <div class=" bg-white p-6 rounded-md shadow-xl mb-6 border-2 border-gray-100 hover:border-black hover:border-1 transition-colors duration-300">
       <div class="flex items-start justify-start space-x-2 mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-event text-gray-600" viewBox="0 0 16 16">
                                 <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
@@ -102,7 +102,7 @@ export function Project({ id , name , description , status }) {
                         
         </div>
       <div class="flex justify-between items-center">
-        <div class="text-xl font-semibold text-gray-900">{name}</div>
+        <div class="text-lg font-semibold text-gray-900">{name}</div>
         
       </div>
     
