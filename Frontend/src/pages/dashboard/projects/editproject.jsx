@@ -16,13 +16,17 @@ import ProjectData from "@/data/project-data"
 import { Link, useNavigate, useParams } from "react-router-dom";
 import UsersTableData from "@/data/users-data"
 import Loading from "@/layouts/loading";
+import SuccessPopup  from "@/layouts/SuccessPopup";
 import EditData from "@/api/EditData";
 
 export function EditProject() {
   
   const navigate = useNavigate();
   const [error, setError] = React.useState(null);
-  const [success, setSuccess] = React.useState(null);
+  const [success, setSuccess] = React.useState({
+    value:false,
+    message:null
+  });
   const { authorsTableData, dataLoaded } = UsersTableData();
   const {id}=useParams()  
   const {projectdata,loader}=ProjectData(id);
@@ -111,10 +115,11 @@ export function EditProject() {
       const project=await EditData(editprojectdata,id,'project')
       console.log('project updated successfully:', project)
       setError(null)
-      setSuccess("project updated successfully")
-      setTimeout(() => {
-        navigate(-1);
-      }, 2000);
+      setSuccess({
+        value:true,
+        message:'Successfully edited project.'
+      })
+      
     }
     catch(error){
       if (error.response && error.response.data && error.response.data.errors) {
@@ -136,6 +141,9 @@ const customStyles = {
   }),
 };
 
+const closesuccesspopup=()=>{
+    navigate(-1);
+}
   if(dataLoaded) return <Loading />
   return (
     <div className="mt-10 mb-8 flex flex-col gap-12">
@@ -164,13 +172,8 @@ const customStyles = {
                     </Alert>
                   </div>
                 )}
-                {success && (
-                  <div className="col-span-6 sm:col-full mt-4 mb-4">
-                    <Alert variant="ghost" className="bg-green-500 bg-opacity-20 text-green-700">
-                      <span>{success}</span>
-                    </Alert>
-                  </div>
-                )}
+                {success.value && <SuccessPopup closepopup={closesuccesspopup} message={success.message}/>}
+                
                 <div class="col-span-6 sm:col-span-3">
                   <Typography variant="h6" color="blue-gray" className="mb-3">
                     Name
