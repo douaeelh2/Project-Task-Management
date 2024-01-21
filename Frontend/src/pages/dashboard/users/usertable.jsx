@@ -20,22 +20,48 @@ import { Link, Navigate } from "react-router-dom";
 import AuthorsTableData from "@/data/authors-table-data";
 import Loading from "@/layouts/loading";
 import DeleteData from "@/api/DeleteData";
+import PermissionPopup from "@/layouts/PermissionPopup";
+import SuccessPopup from "@/layouts/SuccessPopup";
 
 export function UserTable() {
   const [filter,setfilter]=React.useState('');
-  const [success,setSuccess] = useState(null);
-  
+  const [showDeletePopup, setShowDeletePopup] = React.useState({
+    value:false,
+    idvalue:null
+  }); 
+  const [showSuccessPopup, setShowSuccessPopup] = React.useState({
+    value:false,
+    message:null
+  })
   
 
   const handleDeleteUser = async (id) => {
     try {
       const response = await DeleteData(id, 'user');
-      setSuccess(response.success);
+      setShowSuccessPopup({
+        value:true,
+        message:'Successfully removed user.'
+      });
+      setShowDeletePopup({
+        value:false,
+        message:null
+      })
+
     } catch (error) {
       console.error('Error deleting user', error);
     }
   };
-  
+
+  const closepopup=()=>{
+    setShowDeletePopup({
+      ...showDeletePopup,
+      value:false
+    })
+    setShowSuccessPopup({
+      ...showSuccessPopup,
+      value:false
+    });
+  }
 
   const {
     authorsTableData,
@@ -95,6 +121,12 @@ export function UserTable() {
     );
   };
   
+  const deleteclick=(id)=>{
+    setShowDeletePopup({
+      value:true,
+      idvalue:id
+    })
+  }
 
   if (!dataLoaded) {
     return <Loading />;
@@ -108,15 +140,8 @@ export function UserTable() {
 
     return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
-            {success && (
-            <div class="flex justify-end mr-5">
-            <div>
-            <Alert variant="ghost" className="bg-green-500 bg-opacity-20 text-green-700">
-            <span>{success}</span>
-            </Alert>
-            </div>
-            </div> 
-             )}
+        {showDeletePopup.value &&<PermissionPopup id={showDeletePopup.idvalue} closepopup={closepopup} handleDelete={handleDeleteUser} object="user" />}
+        {showSuccessPopup.value &&<SuccessPopup closepopup={closepopup} message={showSuccessPopup.message}/>}
 
         <div class="flex justify-end mr-5">
           <Link to="../user/create" class="ml-2">
@@ -223,7 +248,7 @@ export function UserTable() {
                               </MenuItem>
                             </Link>
                               <MenuItem className="flex items-center gap-3"
-                                  onClick={() => handleDeleteUser(user.id)}
+                                  onClick={() => deleteclick(user.id)}
 
                               >
                                   <TrashIcon className="h-5 w-5 text-blue-gray-500" />
