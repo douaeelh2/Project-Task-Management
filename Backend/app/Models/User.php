@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Project;
+use App\Models;
 
 class User extends Authenticatable
 {
@@ -38,14 +38,13 @@ class User extends Authenticatable
     ];
 
 
-     public function projects()
-    {
-        return $this->belongsToMany(Project::class);
+    public function projects() {
+        return $this->belongsToMany(Project::class, 'project_task_user', 'user_id', 'project_id')
+            ->withPivot('task_id');
     }
 
-    // public function tasks()
-    // {
-    //     return $this->hasMany(Task::class);
-    // }
-
+    public function tasks() {
+        return $this->belongsToMany(Task::class, 'project_task_user', 'user_id', 'task_id')
+            ->withPivot('project_id');
+    }
 }

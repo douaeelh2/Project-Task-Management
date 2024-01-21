@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Project;
+use App\Models\Task;
+
 
 
 class AdminController extends Controller
@@ -115,7 +117,7 @@ class AdminController extends Controller
             "datestart" => "2022-02-15",
             "dateend" => "2022-08-30",
             "description" => "Develop a feature-rich e-commerce platform with secure payment integration.",
-            "status" => "In Progress",
+            "status" => "in progress",
         ],
         [
             "name" => "Mobile App Redesign",
@@ -123,7 +125,7 @@ class AdminController extends Controller
             "datestart" => "2022-03-10",
             "dateend" => "2022-06-30",
             "description" => "Redesign the user interface and improve performance for our mobile app.",
-            "status" => "Completed",
+            "status" => "completed",
         ],
         [
             "name" => "Database Optimization",
@@ -131,7 +133,7 @@ class AdminController extends Controller
             "datestart" => "2022-01-05",
             "dateend" => "2022-04-15",
             "description" => "Optimize and improve the efficiency of our database system.",
-            "status" => "Pending",
+            "status" => "pending",
         ],
         [
             "name" => "AI Chatbot Integration",
@@ -139,7 +141,7 @@ class AdminController extends Controller
             "datestart" => "2022-04-20",
             "dateend" => "2022-09-30",
             "description" => "Integrate an AI-powered chatbot to enhance customer support.",
-            "status" => "Planned",
+            "status" => "not started",
         ],
     ];
 
@@ -154,22 +156,71 @@ class AdminController extends Controller
         ]);
 
         $project->save();
-         $users = User::inRandomOrder()->take(3)->get();
-         $project->users()->attach($users);
+
     }
+
+    
 
     return response()->json(['message' => 'Fictional computer projects created successfully'], 201);
 }
 
-public function index()
+public function createTasks(Request $request)
 {
-    $loggedInUser = Auth::user();
+    $tasksData = [
+        [
+            "name" => "Implement User Authentication",
+            "description" => "Implement a secure user authentication system for the application.",
+            "datestart" => "2022-02-15",
+            "dateend" => "2022-03-15",
+            "status" => "in progress",
+        ],
+        [
+            "name" => "Optimize Database Queries",
+            "description" => "Optimize database queries for improved performance.",
+            "datestart" => "2022-03-20",
+            "dateend" => "2022-04-15",
+            "status" => "completed",
+        ],
+        [
+            "name" => "Design Landing Page",
+            "description" => "Create an attractive and user-friendly landing page for the website.",
+            "datestart" => "2022-04-01",
+            "dateend" => "2022-05-01",
+            "status" => "pending",
+        ],
+        [
+            "name" => "Integration Testing",
+            "description" => "Perform thorough integration testing to ensure application stability.",
+            "datestart" => "2022-05-10",
+            "dateend" => "2022-06-10",
+            "status" => "not started",
+        ],
+    ];
 
-    $users = User::where('id', '!=', $loggedInUser->id)->get();
+    foreach ($tasksData as $taskData) {
+        $task = new Task([
+            'name' => $taskData['name'],
+            'description' => $taskData['description'],
+            'datestart' => $taskData['datestart'],
+            'dateend' => $taskData['dateend'],
+            'status' => $taskData['status'],
+        ]);
 
-    return response()->json($users);
+        $task->save();
+
+    }
+
+    return response()->json(['message' => 'Fictional tasks created successfully'], 201);
 }
 
+public function index()
+{
+    // Récupérer la liste des utilisateurs avec leurs projets et tâches
+    $users = User::with(['projects.tasks'])->get();
+
+    // Retourner les utilisateurs avec leurs projets et tâches
+    return response()->json($users);
+}
 
 public function listUsers()
 {
