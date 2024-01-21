@@ -111,8 +111,8 @@ export function CreateProject() {
     }),
   };
 
-  const closesuccesspopup=()=>{
-      navigate('/admin/projects/table');
+  const closepopup=()=>{
+      navigate('/admin/projects');
   }
 
  if(dataLoaded) return <Loading/>
@@ -145,7 +145,7 @@ export function CreateProject() {
                     </Alert>
                     </div>
                     )}
-                    {success.value && <SuccessPopup closepopup={closesuccesspopup} message={success.message}/>}
+                    {success.value && <SuccessPopup closepopup={closepopup} message={success.message}/>}
                     <div class="col-span-6 sm:col-span-3">
                       <Typography variant="h6" color="blue-gray" className="mb-3">
                         Name

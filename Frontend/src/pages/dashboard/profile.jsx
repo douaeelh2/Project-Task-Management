@@ -20,6 +20,7 @@ import { FaPhone, FaEnvelope, FaMapMarker,FaGraduationCap,FaBriefcase } from 're
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useState } from "react";
+import SuccessPopup from "@/layouts/SuccessPopup";
 
 export function Profile({ isAuthenticated, user, isAdmin }) {
 
@@ -69,8 +70,17 @@ export function Profile({ isAuthenticated, user, isAdmin }) {
         });
 
         const [error, setError] = useState(null);
-        const [success, setSuccess] = useState(null);
+        const [success, setSuccess] = useState({
+            value:false,
+            message:null
+        });
 
+        const closepopup=()=>{
+            setSuccess({
+                value:false,
+                message:null
+            })
+        }
               
 
         const handleChange = (e) => {
@@ -101,12 +111,18 @@ export function Profile({ isAuthenticated, user, isAdmin }) {
               if(response.data.success){
                 setData(formData);
                 setError(null);
-                setSuccess(response.data.success);
+                setSuccess({
+                    value:true,
+                    message:'Successfully edited user.'
+                });
               }
             } 
           } catch (error) {
             setError(error.response.data.error);
-            setSuccess(null);
+            setSuccess({
+                value:false,
+                message:null
+            });
             console.error('Erreur lors de la mise à jour du profil:', error);
           }
         };
@@ -193,13 +209,7 @@ export function Profile({ isAuthenticated, user, isAdmin }) {
             </Alert>
             </div>
             )}
-             {success && (
-            <div className="mb-4">
-            <Alert variant="ghost" className="bg-green-500 bg-opacity-20 text-green-700">
-            <span>{success}</span>
-            </Alert>
-            </div>
-            )}
+            {success.value && <SuccessPopup message={success.message} closepopup={closepopup}/>}
                   <div class="grid grid-cols-6 gap-6">
 
                         <div class="col-span-6 sm:col-span-3">

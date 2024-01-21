@@ -36,11 +36,13 @@ export function ProjectTable() {
     value:false,
     idvalue:null
   }); 
-  const [showSuccessPopup, setShowSuccessPopup] = React.useState(false)
+  const [showSuccessPopup, setShowSuccessPopup] = React.useState({
+    value:false,
+    message:null
+  })
   const {projects , loader }= ProjectsTabledata()
   const [filter,setfilter]=React.useState('');
   var projectsdatanew=projects.filter(project=>project.name.toLowerCase().startsWith(filter.toLowerCase()))
-  const [success,setSuccess] = React.useState(null);
   const [projectslist,setprojetslist]=React.useState([])
 
   React.useEffect(()=>{
@@ -55,6 +57,7 @@ export function ProjectTable() {
     if(status==="not started") return "blue-gray"
   }
 
+  //apres le click sur delete
   const deleteclick=(id)=>{
     setShowDeletePopup({
       value:true,
@@ -62,26 +65,27 @@ export function ProjectTable() {
     })
   }
 
-  const closesuccesspopup=()=>{
+  //fermer une popup
+  const closepopup=()=>{
     setShowDeletePopup({
       ...showDeletePopup,
       value:false
     })
-    setShowSuccessPopup(false)
+    setShowSuccessPopup({
+      ...showSuccessPopup,
+      value:false
+    })
   }
 
   const handleDeleteProject = async (id) => {
     try {
-    console.log(showDeletePopup)
-
       const response = await DeleteData(id,'project');
-      setSuccess(
-        'Successfully removed project.'
-      );
       setprojetslist((prevProjects) => prevProjects.filter(project => project.id !== id));
-      closesuccesspopup()
-      setShowSuccessPopup(true)
-      console.log(showSuccessPopup)
+      closepopup()
+      setShowSuccessPopup({
+        value:true,
+        message:'Successfully removed project.'
+      })
     } catch (error) {
       console.error('Error deleting project', error);
     }
@@ -92,8 +96,8 @@ if(loader) return <Loading />
 
 return (
       <div className="mt-12 mb-8 flex flex-col gap-12">
-        {showDeletePopup.value &&<PermissionPopup id={showDeletePopup.idvalue} closepopup={closesuccesspopup} handleactionDeleteProject={handleDeleteProject} object="project" />}
-        {showSuccessPopup &&<SuccessPopup closepopup={closesuccesspopup} message={success}/>}
+        {showDeletePopup.value &&<PermissionPopup id={showDeletePopup.idvalue} closepopup={closepopup} handleDelete={handleDeleteProject} object="project" />}
+        {showSuccessPopup.value &&<SuccessPopup closepopup={closepopup} message={showSuccessPopup.message}/>}
 
         <div className="flex justify-end mr-5">
           <Link to="../project/create" className="ml-2">

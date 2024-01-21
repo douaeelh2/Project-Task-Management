@@ -141,7 +141,7 @@ const customStyles = {
   }),
 };
 
-const closesuccesspopup=()=>{
+const closepopup=()=>{
     navigate(-1);
 }
   if(dataLoaded) return <Loading />
@@ -172,7 +172,7 @@ const closesuccesspopup=()=>{
                     </Alert>
                   </div>
                 )}
-                {success.value && <SuccessPopup closepopup={closesuccesspopup} message={success.message}/>}
+                {success.value && <SuccessPopup closepopup={closepopup} message={success.message}/>}
                 
                 <div class="col-span-6 sm:col-span-3">
                   <Typography variant="h6" color="blue-gray" className="mb-3">

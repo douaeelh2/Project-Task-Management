@@ -10,6 +10,7 @@ import {
 } from "@material-tailwind/react";
 import CreateData from '@/api/CreateData';
 import { useNavigate } from 'react-router-dom';
+import SuccessPopup from '@/layouts/SuccessPopup';
 
 export function CreateUser() {
   const [userData, setUserData] = useState({
@@ -21,7 +22,10 @@ export function CreateUser() {
     password: '',
   });
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+  const [success, setSuccess] = useState({
+    value:false, 
+    message:null
+  });
   const navigate = useNavigate();
 
 
@@ -33,10 +37,17 @@ export function CreateUser() {
     });
   };
 
+  const closepopup=()=>{
+    navigate('/admin/users');
+  }
+
   const handleCreateUser = async () => {
     try {
       const createdUser = await CreateData(userData, 'user');
-      setSuccess(createdUser.success);
+      setSuccess({
+        value:true,
+        message:'Successfully added user.'
+      });
       setError(null);
 
       setTimeout(() => {
@@ -83,13 +94,8 @@ export function CreateUser() {
               </Alert>
               </div>
               )}
-              {success && (
-              <div className="col-span-6 sm:col-full mt-4 mb-4">
-              <Alert variant="ghost" className="bg-green-500 bg-opacity-20 text-green-700">
-              <span>{success}</span>
-              </Alert>
-              </div>
-              )}
+              {success.value && <SuccessPopup closepopup={closepopup} message={success.message}/>}
+
               
                 <div className="col-span-6 sm:col-span-3">
                   

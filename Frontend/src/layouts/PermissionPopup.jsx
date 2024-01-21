@@ -1,9 +1,9 @@
 import { Button } from "@material-tailwind/react";
-const PermissionPopup=({id,closepopup,handleactionDeleteProject,object})=>{
+const PermissionPopup=({id,closepopup,handleDelete,object})=>{
     return(
       <div id="modelConfirm" className="fixed  z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
           <div className="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
-
+            
               <div className="flex justify-end p-2">
                 <button
                   onClick={closepopup}
@@ -28,7 +28,7 @@ const PermissionPopup=({id,closepopup,handleactionDeleteProject,object})=>{
                   </svg>
                   <h3 className="text-xl font-normal text-gray-500 mt-5 mb-6">Are you sure you want to delete this {object}?</h3>
                   <div className="flex justify-center gap-3">
-                  <Button  onClick={e=>handleactionDeleteProject(id)} variant="gradient" color="red">
+                  <Button  onClick={e=>handleDelete(id)} variant="gradient" color="red">
                       Yes, I'm sure
                   </Button>
                   <Button onClick={closepopup}
